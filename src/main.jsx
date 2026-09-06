@@ -121,9 +121,18 @@ function App(){
 
     <main className="shell">
       <section className="hero">
-        <div>
+        <div className="heroMain">
+          <span className="heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
           <h1>Understand why<br/><em>products win.</em></h1>
           <p className="heroCopy">Explore how products are built, why they work, what drives their growth, and what a PM could improve.</p>
+          <button className="heroExplore" onClick={()=>document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}>Explore the library <span>↓</span></button>
+        </div>
+        <div className="heroCanvas" aria-hidden="true">
+          <div className="heroOrb orbOne"></div><div className="heroOrb orbTwo"></div>
+          <div className="heroCanvasLabel labelOne">01 · PRODUCT</div>
+          <div className="heroCanvasLabel labelTwo">WHY IT WINS</div>
+          <div className="heroCanvasWord">CASE<br/><i>CRAFT</i></div>
+          <div className="heroCanvasLine"></div>
         </div>
       </section>
 
