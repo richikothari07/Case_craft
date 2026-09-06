@@ -155,7 +155,7 @@ function App(){
         </div>
         <div className="marqueeViewport">
           <div className="marqueeTrack">
-            {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
+            {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}} onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
               <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>
               <div className="marqueeText"><strong>{c.name}</strong><span>{c.tag}</span></div>
               <span className="marqueeArrow">↗</span>

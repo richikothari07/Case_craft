@@ -290,3 +290,40 @@ footer{color:#777;border-color:#dedede}
 .marqueeArrow{color:var(--case-accent,#fff)!important}
 .cardLogo img{width:auto;height:30px;max-width:120px;object-fit:contain;filter:none!important}
 .cardLogo span{width:34px;height:34px;border-radius:10px;background:#111;color:#fff;display:grid;place-items:center;font-family:"DM Serif Display",Georgia,serif;font-size:20px}
+
+
+/* Final homepage treatment: dark canvas + colorful product cards */
+body{background:#0b0b0b;color:#fff}
+.topbar{background:rgba(11,11,11,.94);border-bottom-color:#262626;color:#fff}
+.wordmarkCase{color:#fff!important}.wordmarkCraft{color:#aaa!important;opacity:1}
+.back{color:#fff}
+.shell{background:#0b0b0b}
+.heroEyebrow,.eyebrow{color:#fff!important}
+.hero h1{color:#fff}.hero h1 em{color:#a8a8a8}
+.heroCopy,.exploreHint{color:#b8b8b8}
+.heroExplore,.searchButton{background:#fff;color:#111}
+.controls{background:#151515;border-color:#2d2d2d;box-shadow:none;color:#fff}
+.explorePrompt{color:#fff}.selectRow label>span{color:#aaa!important}
+.selectRow select{background:#101010;color:#fff;border-color:#363636}
+.selectRow select option{background:#101010;color:#fff}
+.sectionHead h2{color:#fff}.muted{color:#8e8e8e}
+.quickSuggestions{color:#fff}.suggestionChip{background:#151515;border-color:#303030;color:#fff}
+.results .card{background:#151515;color:#fff;border-color:#2d2d2d;box-shadow:none}
+.results .card h3,.cardFoot{color:#fff}.card p:not(.tagline){color:#aaa}.sector{color:#8f8f8f}.tagline{color:#fff!important}
+.cardFoot{border-color:#303030}
+
+.popularMarquee{background:#0b0b0b!important;color:#fff!important;border-top:1px solid #222;border-bottom:1px solid #222}
+.marqueeHeader .eyebrow{color:#fff!important}.marqueeHint{color:#8f8f8f!important}
+.marqueeTrack{gap:16px}
+.marqueeCard{background:var(--case-accent,#ffffff)!important;color:#111!important;border:1px solid rgba(255,255,255,.16)!important;min-height:158px;box-shadow:none;transition:transform .25s ease,filter .25s ease,box-shadow .25s ease}
+.marqueeCard:before{display:none}
+.marqueeCard:hover{background:var(--case-accent,#ffffff)!important;filter:brightness(.96);box-shadow:0 16px 30px rgba(0,0,0,.35);transform:translateY(-5px)}
+.marqueeLogo{background:rgba(255,255,255,.88)!important;border:1px solid rgba(0,0,0,.08)}
+.marqueeLogo img{filter:none!important}
+.marqueeLogo span{color:#111!important}
+.marqueeText strong{color:#111!important}.marqueeText span{color:rgba(17,17,17,.68)!important}.marqueeArrow{color:#111!important}
+
+/* keep case-study pages readable; the dark treatment is for the landing page */
+.caseShell{background:#fff;color:#111}
+.caseShell .wordmarkCase{color:#111!important}.caseShell .wordmarkCraft{color:#111!important;opacity:.58}
+footer{background:#0b0b0b;color:#888;border-color:#262626}
