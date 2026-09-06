@@ -1,4 +1,4 @@
-# CaseCraft — 100 Product Intelligence
+# ProdCraft — 100 Product Intelligence
 
 Batch 01 + 02 + 03 + 04 + 05 contain 50 deep dives:
 Blinkit, Zepto, Swiggy, Zomato, PhonePe, Groww, Zerodha, CRED, Meesho, Razorpay.
