@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root{--bg:#f7f7f3;--paper:#fff;--ink:#161616;--muted:#73736d;--line:#deded7;--accent:#3158d8;--soft:#eef2ff;--max:1180px}
 *{box-sizing:border-box}
@@ -8,7 +8,7 @@ button,input,select{font:inherit}
 button,select{cursor:pointer}
 
 .topbar{height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:rgba(247,247,243,.94);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
-.brand{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;gap:10px;cursor:pointer;letter-spacing:-.02em}
+.brand{display:flex;align-items:center;cursor:pointer;line-height:1}
 .brandmark{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-size:14px}
 .topmeta,.muted{color:var(--muted);font-size:12px}
 .back{border:0;background:transparent;color:var(--ink);font-weight:600;padding:8px 0}
@@ -108,3 +108,11 @@ footer{text-align:center;color:#85857e;font-size:10px;padding:28px;border-top:1p
 .brandmark .mark-back{fill:#e9e6d8}
 .brandmark .mark-mid{fill:#aebca8}
 .brandmark .mark-front{fill:#315f4e}
+
+
+/* CaseCraft wordmark — Option 1: modern editorial */
+.wordmark{font-family:"DM Serif Display",Georgia,serif;font-size:30px;letter-spacing:-.045em;white-space:nowrap;display:inline-flex;align-items:baseline}
+.wordmarkCase{color:#173b31}
+.wordmarkCraft{color:#829986}
+.brand:hover .wordmarkCraft{color:#6f8b77}
+@media(max-width:600px){.wordmark{font-size:27px}}
