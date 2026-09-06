@@ -43,7 +43,7 @@ h2{font-family:"Inter",Arial,sans-serif;font-weight:700;font-size:28px;line-heig
 .sector{font-size:10px;color:var(--muted);text-align:right}
 .card h3{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:30px;line-height:1.05;margin:34px 0 6px;letter-spacing:-.045em}
 .tagline{margin:0 0 13px!important;font-size:11px!important;color:var(--accent)!important;font-weight:700!important}
-.card p:not(.tagline){color:#595953;line-height:1.55;font-size:13px;margin:0}
+.card p:not(.tagline){color:#595953;line-height:1.55;font-size:14px;margin:0}
 .cardFoot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:auto;padding-top:14px;font-size:11px;font-weight:700}
 .cardFoot span:last-child{font-size:17px;transition:transform .18s ease}.card:hover .cardFoot span:last-child{transform:translateX(3px)}
 
