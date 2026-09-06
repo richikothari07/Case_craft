@@ -7,19 +7,11 @@ const CASES = [{"name": "Blinkit", "sector": "Quick Commerce", "tag": "Instant c
 function Badge({children, tone=""}){ return <span className={"badge "+tone}>{children}</span> }
 
 function App(){
-  const [query,setQuery]=useState("");
   const [sector,setSector]=useState("All");
   const [selected,setSelected]=useState(null);
   const [selectedProduct,setSelectedProduct]=useState("All products");
-  const [submitted,setSubmitted]=useState(false);
   const sectors=["All",...Array.from(new Set(CASES.map(c=>c.sector)))];
-  const filtered=useMemo(()=>CASES.filter(c=>(sector==="All"||c.sector===sector)&&
-    (c.name+" "+c.sector+" "+c.summary).toLowerCase().includes(query.toLowerCase())),[query,sector]);
-
-  const submitSearch=(e)=>{
-    e?.preventDefault();
-    setSubmitted(true);
-  };
+  const filtered=useMemo(()=>CASES.filter(c=>sector==="All"||c.sector===sector),[sector]);
 
   if(selected){
     return <CaseView c={selected} back={()=>setSelected(null)} />;
@@ -27,52 +19,48 @@ function App(){
 
   return <div>
     <header className="topbar">
-      <div className="brand" onClick={()=>{setSelected(null);setSubmitted(false);setQuery("")}}><span className="brandmark">C</span> CaseCraft</div>
+      <div className="brand" onClick={()=>setSelected(null)}><span className="brandmark">C</span> CaseCraft</div>
       <div className="topmeta">Indian Product Intelligence</div>
     </header>
 
-    <main className="shell homeShell">
+    <main className="shell">
       <section className="hero">
         <div>
-          <div className="heroKicker">PRODUCT INTELLIGENCE</div>
           <h1>Understand why<br/><em>products win.</em></h1>
-          <p className="heroCopy">Practical product teardowns of India's most interesting products — focused on the decisions, mechanics and metrics behind them.</p>
+          <p className="heroCopy">Explore how products are built, why they work, what drives their growth, and what a PM could improve.</p>
         </div>
       </section>
 
-      <section className="searchStage">
-        <div className="searchIntro">
-          <span className="eyebrow">EXPLORE</span>
-          <h2>Explore a product</h2>
-          <p>Search for a product or filter by sector. Results appear when you hit Enter.</p>
+      <section className="controls">
+        <p className="explorePrompt">Explore a product</p>
+        <p className="exploreHint">Choose a product or browse by sector.</p>
+        <div className="selectRow">
+          <label><span>SECTOR</span><select value={sector} onChange={e=>{setSector(e.target.value);setSelectedProduct("All products");setShowResults(false)}}><option>All</option>{sectors.slice(1).map(s=><option key={s}>{s}</option>)}</select></label>
+          <label><span>PRODUCT</span><select value={selectedProduct} onChange={e=>{setSelectedProduct(e.target.value);setShowResults(false)}}><option>All products</option>{filtered.map(c=><option key={c.name}>{c.name}</option>)}</select></label>
+          <button className="searchButton" onClick={()=>{
+            setShowResults(true);
+            if(selectedProduct !== "All products"){
+              const found=CASES.find(c=>c.name===selectedProduct);
+              if(found)setSelected(found);
+            }
+          }}>Search</button>
         </div>
-        <form className="searchPanel" onSubmit={submitSearch}>
-          <div className="searchMain">
-            <span className="searchIcon">⌕</span>
-            <input autoFocus value={query} onChange={e=>{setQuery(e.target.value);setSubmitted(false)}} placeholder="Search a product, sector or idea…" aria-label="Search products" />
-            <button type="submit">Search <span>↵</span></button>
-          </div>
-          <div className="filterRow">
-            <label><span>SECTOR</span><select value={sector} onChange={e=>{setSector(e.target.value);setSelectedProduct("All products");setSubmitted(false)}}><option>All</option>{sectors.slice(1).map(s=><option key={s}>{s}</option>)}</select></label>
-            <label><span>PRODUCT</span><select value={selectedProduct} onChange={e=>{const v=e.target.value;setSelectedProduct(v);const found=CASES.find(c=>c.name===v);if(found)setSelected(found)}}><option>All products</option>{CASES.filter(c=>sector==="All"||c.sector===sector).map(c=><option key={c.name}>{c.name}</option>)}</select></label>
-          </div>
-        </form>
       </section>
 
-      {submitted && <section className="resultsSection">
+      {showResults && <section className="results">
         <div className="sectionHead">
-          <div><span className="eyebrow">RESULTS</span><h2>{filtered.length} {filtered.length===1?"match":"matches"}</h2></div>
-          <button className="clearSearch" onClick={()=>{setQuery("");setSector("All");setSelectedProduct("All products");setSubmitted(false)}}>Clear search</button>
+          <div><span className="eyebrow">RESULTS</span><h2>{selectedProduct !== "All products" ? selectedProduct : `${filtered.length} products`}</h2></div>
+          <span className="muted">Select a case study to explore</span>
         </div>
-        {filtered.length ? <div className="grid">
+        <div className="grid">
           {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>setSelected(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{c.sector}</span></div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
             <p>{c.summary}</p>
-            <div className="cardFoot"><span>Open case study</span><span>↗</span></div>
+            <div className="cardFoot"><span>Open case study</span><span>→</span></div>
           </article>)}
-        </div> : <div className="emptyState"><strong>No matches found.</strong><span>Try a different product name, sector or keyword.</span></div>}
+        </div>
       </section>}
     </main>
   </div>
@@ -86,91 +74,75 @@ function CaseView({c,back}){
  }));
  const growthLoops=[
    {title:"Value → frequency",body:`When the core promise works, customers have a reason to return more often. For ${c.name}, the product's repeat behaviour is tied to the problem described above: ${c.problem}`},
-   {title:"Usage → learning",body:"More successful transactions create behavioural and operational signals that can improve ranking, assortment, matching, personalisation or service quality."},
-   {title:"Density → economics",body:"As demand concentrates, the product can often improve utilisation, lower cost-to-serve and reinvest in availability, assortment or acquisition."}
+   {title:"Usage → data → better experience",body:`Every completed transaction creates behavioural information about intent, preferences, availability or service quality. The product can use that learning to improve discovery, matching, fulfilment or personalisation.`},
+   {title:"Density → economics → more value",body:`As usage becomes denser, the business can improve utilisation and economics. That can support better assortment, coverage, reliability or pricing — reinforcing the original product proposition.`}
  ];
  const tradeoffs=[
-   "Growth versus unit economics: faster acquisition can hide weak contribution or retention.",
-   "Breadth versus focus: adding use cases can increase reach while diluting the core product promise.",
-   "Automation versus trust: removing friction is valuable only when customers still understand and control important decisions.",
-   "Personalisation versus simplicity: more tailored experiences can also create cognitive load.",
-   "Speed versus quality: compressing a workflow can increase errors, cancellations or support burden."
+   `Growth vs. unit economics: the fastest path to more users or orders is not necessarily the best path to durable contribution.`,
+   `Breadth vs. simplicity: adding more categories and use cases can increase frequency, but can also make the product harder to understand.`,
+   `Automation vs. trust: reducing friction is valuable only when customers still understand important decisions, prices and outcomes.`
  ];
- const tabs=[
-   ["overview","01","Overview"],
-   ["moat","02","Why it wins"],
-   ["teardown","03","Product teardown"],
-   ["growth","04","Growth loops"],
-   ["metrics","05","Metrics"],
-   ["bets","06","PM bets"],
-   ["interview","07","Interview"],
-   ["evidence","08","Evidence"]
- ];
- const [activeTab,setActiveTab]=useState("overview");
  return <div>
-  <header className="topbar caseTopbar">
-    <button className="back" onClick={back}>← All cases</button>
-    <div className="brand"><span className="brandmark">C</span> CaseCraft</div>
-    <div className="topmeta">{c.sector}</div>
+  <header className="topbar">
+    <div className="brand" onClick={back}><span className="brandmark">C</span> CaseCraft</div>
+    <button className="back" onClick={back}>← Library</button>
   </header>
   <main className="caseShell">
-    <header className="caseHeader">
+    <div className="caseHeader">
       <Badge>{c.sector}</Badge>
       <h1>{c.name}</h1>
       <p className="caseTag">{c.summary}</p>
-      <div className="factsRow">{c.facts.slice(0,3).map((f,i)=><div className="fact" key={i}><span>FACT</span>{f}</div>)}</div>
-    </header>
-
-    <nav className="caseTabs" aria-label="Case study sections">
-      {tabs.map(([id,num,label])=><button key={id} className={activeTab===id?"active":""} onClick={()=>{setActiveTab(id);window.scrollTo({top:0,behavior:"smooth"})}}><span>{num}</span>{label}</button>)}
-    </nav>
-
-    <div className="tabContent">
-      {activeTab==="overview" && <Section title="01 · Product thesis">
-        <div className="proposition"><strong>{c.proposition}</strong></div>
-        <div className="twoCol">
-          <div><h4>Core problem</h4><p>{c.problem}</p></div>
-          <div><h4>Target users</h4><ul>{c.users.map(x=><li key={x}>{x}</li>)}</ul></div>
-        </div>
-        <div className="analysisBox"><span>PM LENS</span><p>The important product question is not simply whether people want this service. It is whether the product can repeatedly deliver the promised outcome at an attractive enough cost to create a habit and a sustainable business.</p></div>
-      </Section>}
-
-      {activeTab==="moat" && <Section title="02 · Why this product can win">
-        <div className="moatGrid">{c.moat.map((x,i)=><div className="moat" key={x}><span>0{i+1}</span><p>{x}</p></div>)}</div>
-        <div className="analysisBox"><span>MOAT TEST</span><p>For each moat above, ask: <b>Can a well-funded competitor buy this?</b> If yes, it is an advantage but not necessarily a durable moat. The strongest moats are those that compound with usage — density, proprietary data, habit, supply relationships, operational learning or ecosystem distribution.</p></div>
-      </Section>}
-
-      {activeTab==="teardown" && <Section title="03 · Product teardown — from intent to outcome">
-        <div className="teardown">{journey.map((x,i)=><div className="tear" key={x.stage}><div><h4>{String(i+1).padStart(2,"0")} · {x.stage}</h4><span className="tearQuestion">{x.question}</span></div><div><p>{x.detail}</p><div className="tearMetric"><span>WATCH</span>{x.metric}</div></div></div>)}</div>
-      </Section>}
-
-      {activeTab==="growth" && <Section title="04 · Growth & retention loops">
-        <div className="loopGrid">{growthLoops.map((x,i)=><div className="loop" key={x.title}><span>LOOP 0{i+1}</span><h4>{x.title}</h4><p>{x.body}</p></div>)}</div>
-      </Section>}
-
-      {activeTab==="metrics" && <Section title="05 · Metrics — what a PM should actually watch">
-        <div className="metrics">{c.metrics.map(([a,b,d])=><div className="metric" key={a}><div><span className="metricType">{a}</span><h4>{b}</h4></div><p>{d}</p></div>)}</div>
-        <div className="metricTree"><span>METRIC TREE</span><p><b>Outcome:</b> Does the customer repeatedly get the promised value? → <b>Inputs:</b> activation, conversion, frequency, availability/quality → <b>Economics:</b> revenue, cost-to-serve, contribution → <b>Guardrails:</b> cancellations, complaints, fraud, quality failures.</p></div>
-      </Section>}
-
-      {activeTab==="bets" && <Section title="06 · PM improvement bets">
-        <div className="improvements">{c.improvements.map(([a,b,t],i)=><div className="improve" key={a}><div className="improveHead"><h4>{a}</h4><Badge tone="light">{t}</Badge></div><div className="improveGrid"><div><span>INSIGHT</span><p>{b}</p></div><div><span>SUCCESS METRIC</span><p>{c.metrics[i%c.metrics.length]?.[1]}</p></div><div><span>TRADE-OFF</span><p>Validate incremental value against cost, complexity and any degradation of the core product promise.</p></div></div></div>)}</div>
-        <div className="analysisBox"><span>PM VIEW</span><p>These are hypotheses to test, not claims about the company's internal roadmap.</p></div>
-      </Section>}
-
-      {activeTab==="interview" && <Section title="07 · Interview questions">
-        <div className="questions">{c.interview.map((q,i)=><div key={q}><span>{String(i+1).padStart(2,"0")}</span><p>{q}</p></div>)}</div>
-      </Section>}
-
-      {activeTab==="evidence" && <Section title="08 · Evidence & source trail">
-        <div className="evidence">
-          <div><h4>Key public facts</h4><ul>{c.facts.map(f=><li key={f}>{f}</li>)}</ul></div>
-          <div><h4>Sources</h4>{c.sources.map(([n,u])=><a href={u} target="_blank" rel="noreferrer" key={u}>{n}<span>↗</span></a>)}</div>
-        </div>
-        <div className="evidenceNote"><b>Reading rule:</b> Facts are presented as evidence. Recommendations and product interpretations are PM analysis, not claims about internal company strategy.</div>
-      </Section>}
+      <div className="factsRow">{c.facts.map((f,i)=><div className="fact" key={i}><span>FACT</span>{f}</div>)}</div>
     </div>
+
+    <Section title="01 · Product thesis">
+      <div className="proposition"><strong>{c.proposition}</strong></div>
+      <div className="twoCol">
+        <div><h4>Core problem</h4><p>{c.problem}</p></div>
+        <div><h4>Target users</h4><ul>{c.users.map(x=><li key={x}>{x}</li>)}</ul></div>
+      </div>
+      <div className="analysisBox"><span>PM LENS</span><p>The important product question is not simply whether people want this service. It is whether the product can repeatedly deliver the promised outcome at an attractive enough cost to create a habit and a sustainable business.</p></div>
+    </Section>
+
+    <Section title="02 · Why this product can win">
+      <div className="moatGrid">{c.moat.map((x,i)=><div className="moat" key={x}><span>0{i+1}</span><p>{x}</p></div>)}</div>
+      <div className="analysisBox"><span>MOAT TEST</span><p>For each moat above, ask: <b>Can a well-funded competitor buy this?</b> If yes, it is an advantage but not necessarily a durable moat. The strongest moats are those that compound with usage — density, proprietary data, habit, supply relationships, operational learning or ecosystem distribution.</p></div>
+    </Section>
+
+    <Section title="03 · Product teardown — from intent to outcome">
+      <div className="teardown">{journey.map((x,i)=><div className="tear" key={x.stage}><div><h4>{String(i+1).padStart(2,"0")} · {x.stage}</h4><span className="tearQuestion">{x.question}</span></div><div><p>{x.detail}</p><div className="tearMetric"><span>WATCH</span>{x.metric}</div></div></div>)}</div>
+    </Section>
+
+    <Section title="04 · Growth & retention loops">
+      <div className="loopGrid">{growthLoops.map((x,i)=><div className="loop" key={x.title}><span>LOOP 0{i+1}</span><h4>{x.title}</h4><p>{x.body}</p></div>)}</div>
+    </Section>
+
+    <Section title="05 · Metrics — what a PM should actually watch">
+      <div className="metrics">{c.metrics.map(([a,b,d])=><div className="metric" key={a}><div><span className="metricType">{a}</span><h4>{b}</h4></div><p>{d}</p></div>)}</div>
+      <div className="metricTree"><span>METRIC TREE</span><p><b>Outcome:</b> Does the customer repeatedly get the promised value? → <b>Inputs:</b> activation, conversion, frequency, availability/quality → <b>Economics:</b> revenue, cost-to-serve, contribution → <b>Guardrails:</b> cancellations, complaints, fraud, quality failures.</p></div>
+    </Section>
+
+    <Section title="06 · Product trade-offs & failure modes">
+      <div className="tradeoffGrid">{tradeoffs.map((x,i)=><div className="tradeoff" key={i}><span>0{i+1}</span><p>{x}</p></div>)}</div>
+    </Section>
+
+    <Section title="07 · PM improvement bets">
+      <div className="improvements">{c.improvements.map(([a,b,t],i)=><div className="improve" key={a}><div className="improveHead"><h4>{a}</h4><Badge tone="light">{t}</Badge></div><div className="improveGrid"><div><span>INSIGHT</span><p>{b}</p></div><div><span>SUCCESS METRIC</span><p>{c.metrics[i%c.metrics.length]?.[1]}</p></div><div><span>TRADE-OFF</span><p>Validate incremental value against cost, complexity and any degradation of the core product promise.</p></div></div></div>)}</div>
+    </Section>
+
+    <Section title="08 · Interview questions">
+      <div className="questions">{c.interview.map((q,i)=><div key={q}><span>{String(i+1).padStart(2,"0")}</span><p>{q}</p></div>)}</div>
+    </Section>
+
+    <Section title="09 · Evidence & source trail">
+      <div className="evidence">
+        <div><h4>Key public facts</h4><ul>{c.facts.map(f=><li key={f}>{f}</li>)}</ul></div>
+        <div><h4>Sources</h4>{c.sources.map(([n,u])=><a href={u} target="_blank" rel="noreferrer" key={u}>{n}<span>↗</span></a>)}</div>
+      </div>
+      <div className="evidenceNote"><b>Reading rule:</b> Facts are presented as evidence. Recommendations and product interpretations are PM analysis, not claims about internal company strategy.</div>
+    </Section>
   </main>
+  <footer>CaseCraft · 50 evidence-led product case studies · September 2026</footer>
  </div>
 }
 
