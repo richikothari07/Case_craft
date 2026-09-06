@@ -448,3 +448,12 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
   .caseProgress{top:60px!important}
   .caseTabs{top:102px!important}
 }
+
+/* Compact creator footer */
+.footerInner{align-items:flex-end!important}
+.footerBrand,.footerAbout{display:flex;flex-direction:column;gap:6px}
+.footerAbout{min-width:180px}
+.footerAbout strong{font-size:22px!important}
+.footerLabel{font-size:8px!important;letter-spacing:.14em;font-weight:800}
+.footerAbout span:last-child{font-size:10px!important;opacity:.72!important}
+@media(max-width:700px){.footerInner{display:grid!important;grid-template-columns:1fr;gap:24px}.footerInner nav{margin-top:0!important}}
