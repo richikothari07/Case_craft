@@ -103,9 +103,12 @@ function App(){
     const members=sectorGroups[sector]||[];
     return CASES.filter(c=>members.includes(c.sector));
   },[sector]);
+  const popularCases=["Blinkit","PhonePe","Groww","Zepto","CRED"]
+    .map(name=>CASES.find(c=>c.name===name)).filter(Boolean);
+  const sectorSuggestions=sector!=="All" ? filtered.slice(0,5) : [];
 
   if(selected){
-    return <CaseView c={selected} back={goHome} />;
+    return <CaseView c={selected} back={goHome} next={(nc)=>openCase(nc)} />;
   }
 
   return <div>
@@ -140,13 +143,41 @@ function App(){
         </div>
       </section>
 
+      {sector !== "All" && !showResults && (
+        <section className="quickSuggestions">
+          <div className="sectionHead compactHead">
+            <div><span className="eyebrow">IN THIS SECTOR</span><h2>Start with a case</h2></div>
+            <span className="muted">{filtered.length} products</span>
+          </div>
+          <div className="suggestionRow">
+            {sectorSuggestions.map(c=><button key={c.name} className="suggestionChip" onClick={()=>openCase(c)}>
+              <span>{c.name}</span><span>→</span>
+            </button>)}
+          </div>
+        </section>
+      )}
+
+      {!showResults && sector === "All" && (
+        <section className="quickSuggestions">
+          <div className="sectionHead compactHead">
+            <div><span className="eyebrow">START HERE</span><h2>Popular cases</h2></div>
+            <span className="muted">Pick a product to begin</span>
+          </div>
+          <div className="suggestionRow">
+            {popularCases.map(c=><button key={c.name} className="suggestionChip" onClick={()=>openCase(c)}>
+              <span>{c.name}</span><span>→</span>
+            </button>)}
+          </div>
+        </section>
+      )}
+
       {showResults && <section className="results">
         <div className="sectionHead">
           <div><span className="eyebrow">RESULTS</span><h2>{selectedProduct !== "All products" ? selectedProduct : `Product results`}</h2></div>
           <span className="muted">Select a case study to explore</span>
         </div>
         <div className="grid">
-          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>setSelected(c)}>
+          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
@@ -159,8 +190,11 @@ function App(){
   </div>
 }
 
-function CaseView({c,back}){
+function CaseView({c,back,next}){
  const [activeTab,setActiveTab]=useState("Overview");
+ const tabs=["Overview","Why it wins","Product teardown","Growth loops","Metrics","PM bets","Interview","Evidence"];
+ const activeIndex=tabs.indexOf(activeTab);
+ const progress=Math.round(((activeIndex+1)/tabs.length)*100);
  const journey=c.teardown.map(([stage,detail],i)=>({
    stage,detail,
    question:`What must be true for the ${stage.toLowerCase()} step to work?`,
@@ -176,7 +210,8 @@ function CaseView({c,back}){
    `Breadth vs. simplicity: adding more categories and use cases can increase frequency, but can also make the product harder to understand.`,
    `Automation vs. trust: reducing friction is valuable only when customers still understand important decisions, prices and outcomes.`
  ];
- const tabs=["Overview","Why it wins","Product teardown","Growth loops","Metrics","PM bets","Interview","Evidence"];
+ const currentIndex=CASES.findIndex(x=>x.name===c.name);
+ const nextCase=CASES[(currentIndex+1)%CASES.length];
  return <div>
   <header className="topbar">
     <div className="brand" onClick={back} aria-label="CaseCraft home">
@@ -195,6 +230,10 @@ function CaseView({c,back}){
     <nav className="caseTabs" aria-label="Case study sections">
       {tabs.map(tab=><button key={tab} className={activeTab===tab?"active":""} onClick={()=>setActiveTab(tab)}>{tab}</button>)}
     </nav>
+    <div className="caseProgress" aria-label={`Case progress: ${progress}%`}>
+      <div className="progressMeta"><span>CASE PROGRESS</span><span>{activeIndex+1} / {tabs.length}</span></div>
+      <div className="progressTrack"><div className="progressFill" style={{width:`${progress}%`}} /></div>
+    </div>
 
     <div className="caseContent">
       {activeTab==="Overview" && <Section title="01 · Product thesis">
@@ -237,6 +276,17 @@ function CaseView({c,back}){
         <div className="evidence"><div><h4>Key public facts</h4><ul>{c.facts.map(f=><li key={f}>{f}</li>)}</ul></div><div><h4>Sources</h4>{c.sources.map(([n,u])=><a href={u} target="_blank" rel="noreferrer" key={u}>{n}<span>↗</span></a>)}</div></div>
         <div className="evidenceNote"><b>Reading rule:</b> Facts are presented as evidence. Recommendations and product interpretations are PM analysis, not claims about internal company strategy.</div>
       </Section>}
+    </div>
+
+    <div className="caseEndNav">
+      <div>
+        <span className="eyebrow">END OF CASE</span>
+        <h3>Ready for another product?</h3>
+      </div>
+      <div className="caseEndActions">
+        <button className="back endBack" onClick={back}>← Explore</button>
+        <button className="nextCase" onClick={()=>next(nextCase)}>Next case: {nextCase.name} →</button>
+      </div>
     </div>
   </main>
   <footer>CaseCraft · Evidence-led product case studies · September 2026</footer>

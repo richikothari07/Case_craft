@@ -116,3 +116,29 @@ footer{text-align:center;color:#85857e;font-size:10px;padding:28px;border-top:1p
 .wordmarkCraft{color:#829986}
 .brand:hover .wordmarkCraft{color:#6f8b77}
 @media(max-width:600px){.wordmark{font-size:27px}}
+
+
+/* UX refinements */
+.compactHead{margin:0 0 14px}
+.quickSuggestions{padding:0 0 46px}
+.suggestionRow{display:flex;gap:9px;flex-wrap:wrap}
+.suggestionChip{display:flex;align-items:center;justify-content:space-between;gap:26px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:11px;padding:12px 14px;font-size:12px;font-weight:600;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.suggestionChip span:last-child{color:var(--accent);font-size:15px}
+.suggestionChip:hover{transform:translateY(-2px);border-color:#c9c9c1;box-shadow:0 10px 24px rgba(20,20,18,.06)}
+.caseProgress{margin:-12px 0 8px;padding:0 0 4px}
+.progressMeta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:8px;letter-spacing:.12em;font-weight:800;margin-bottom:7px}
+.progressTrack{height:3px;background:#e5e6df;border-radius:999px;overflow:hidden}
+.progressFill{height:100%;background:var(--accent);border-radius:999px;transition:width .25s ease}
+.caseEndNav{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:58px;padding:26px 0;border-top:1px solid var(--line)}
+.caseEndNav h3{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:25px;letter-spacing:-.025em;margin:7px 0 0}
+.caseEndActions{display:flex;align-items:center;gap:18px}
+.endBack{padding:10px 0}
+.nextCase{border:0;background:var(--ink);color:#fff;border-radius:10px;padding:12px 15px;font-weight:700;font-size:12px;transition:transform .18s ease,opacity .18s ease}
+.nextCase:hover{transform:translateY(-1px);opacity:.92}
+@media(max-width:700px){
+  .quickSuggestions{padding-bottom:34px}
+  .sectionHead.compactHead{display:flex;align-items:end}
+  .caseEndNav{display:block}
+  .caseEndActions{margin-top:18px;justify-content:space-between}
+  .nextCase{flex:1}
+}
