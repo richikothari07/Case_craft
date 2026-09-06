@@ -168,7 +168,7 @@ function App(){
                 <div className="visualShape visualShapeOne"></div>
                 <div className="visualShape visualShapeTwo"></div>
                 <div className="visualGrid"></div>
-                <span className="visualLabel">{c.name}</span>
+                
               </div>
               <div className="marqueeInfo">
                 <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>
@@ -193,6 +193,27 @@ function App(){
               if(found)openCase(found);
             }
           }}>Search</button>
+        </div>
+      </section>
+
+      <section className="thinkingSection">
+        <div className="sectionHead compactHead">
+          <div><span className="eyebrow">WHAT YOU'LL FIND</span><h2>See products through a PM lens.</h2></div>
+        </div>
+        <div className="thinkingGrid">
+          <article><span>01</span><h3>Product thinking</h3><p>Understand the problem, the user journey, and the choices that make a product work.</p></article>
+          <article><span>02</span><h3>Metrics</h3><p>Connect product behaviour to the metrics that actually matter for the business.</p></article>
+          <article><span>03</span><h3>PM bets</h3><p>Challenge the product with practical improvements, trade-offs, and measurable outcomes.</p></article>
+        </div>
+      </section>
+
+      <section className="sectorExplore">
+        <div className="sectionHead compactHead">
+          <div><span className="eyebrow">EXPLORE BY SECTOR</span><h2>Find your next case.</h2></div>
+          <span className="muted">{CASES.length} products</span>
+        </div>
+        <div className="sectorGrid">
+          {sectors.slice(1).map(s=><button key={s} onClick={()=>{setSector(s);setSelectedProduct("All products");setShowResults(true);window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})}}>{s}<span>↗</span></button>)}
         </div>
       </section>
 
@@ -348,7 +369,12 @@ function CaseView({c,back,next}){
       </div>
     </div>
   </main>
-  <footer>CaseCraft · Evidence-led product case studies · September 2026</footer>
+  <footer>
+  <div className="footerInner">
+    <div><strong>CaseCraft</strong><span>50 products. One goal: become better at seeing products through a PM lens.</span></div>
+    <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">Notion ↗</a></nav>
+  </div>
+</footer>
  </div>
 }
 
