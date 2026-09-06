@@ -72,12 +72,44 @@ footer{text-align:center;color:#85857e;font-size:10px;padding:28px;border-top:1p
 
 @media(max-width:850px){.topbar{padding:0 18px}.topmeta{display:none}.shell,.caseShell{padding:46px 18px 70px}.hero{display:block;padding:18px 0 48px}.hero h1,.caseHeader h1{font-size:50px}.heroStat{border-left:0;border-top:1px solid var(--line);padding:18px 0 0;margin-top:30px}.selectRow{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.sectionHead{display:block}.sectionHead .muted{display:block;margin-top:8px}.factsRow,.twoCol,.moatGrid,.loopGrid,.tradeoffGrid,.evidence,.questions,.improveGrid{grid-template-columns:1fr}.tear{grid-template-columns:1fr;gap:8px}.metric{grid-template-columns:1fr}.caseTag{font-size:16px}}
 
-
-/* CaseCraft search-first homepage */
-.explorePrompt{font-family:"Space Grotesk",sans-serif;font-size:22px;font-weight:700;letter-spacing:-.035em;margin:0}
-.exploreHint{font-size:13px;color:var(--muted);margin:5px 0 18px}
-.selectRow{grid-template-columns:1fr 1fr 130px}
-.searchButton{height:44px;border:0;border-radius:10px;background:var(--ink);color:#fff;font-weight:700;text-transform:none;transition:transform .18s ease,opacity .18s ease}
-.searchButton:hover{transform:translateY(-1px);opacity:.92}
-.results{padding-bottom:20px}
-@media(max-width:850px){.selectRow{grid-template-columns:1fr}.searchButton{width:100%}}
+/* CaseCraft UX refinement */
+.heroKicker{font-size:10px;letter-spacing:.18em;font-weight:800;color:var(--muted);margin-bottom:24px}
+.homeShell{padding-top:72px}
+.homeShell .hero{display:block;padding:24px 0 52px}
+.homeShell .hero h1{font-size:76px;max-width:850px}
+.searchStage{max-width:900px;padding:28px 0 10px}
+.searchIntro{margin-bottom:20px}
+.searchIntro h2{font-size:25px;margin-top:7px}
+.searchIntro p{font-size:13px;margin-top:8px;color:var(--muted)}
+.searchPanel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:0 12px 32px rgba(20,20,18,.045)}
+.searchMain{display:flex;align-items:center;gap:10px;padding:4px 5px 4px 12px;border:1px solid #d8d8d0;border-radius:12px;background:#fafaf7}
+.searchIcon{font-size:23px;line-height:1;color:#85857e;transform:rotate(-15deg);display:inline-block}
+.searchMain input{border:0;outline:0;background:transparent;flex:1;min-width:0;height:43px;font-size:15px;color:var(--ink)}
+.searchMain input::placeholder{color:#999990}
+.searchMain button{height:38px;border:0;border-radius:9px;background:var(--ink);color:#fff;padding:0 14px;font-size:12px;font-weight:700}
+.searchMain button span{opacity:.55;margin-left:7px}
+.filterRow{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 2px 1px}
+.filterRow label{display:flex;align-items:center;gap:10px;min-width:0}
+.filterRow label>span{font-size:8px;letter-spacing:.14em;font-weight:800;color:var(--muted);white-space:nowrap}
+.filterRow select{height:36px;flex:1;border:1px solid #e0e0d8;border-radius:9px;background:#fff;padding:0 10px;font-size:12px;outline:0;color:var(--ink)}
+.resultsSection{padding-top:58px}
+.resultsSection .sectionHead{margin:0 0 20px}
+.clearSearch{border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 12px;font-size:11px;color:var(--muted);font-weight:600}
+.clearSearch:hover{color:var(--ink);border-color:#c4c4bc}
+.emptyState{border:1px dashed #cfcfc7;border-radius:16px;background:#fbfbf8;padding:46px;text-align:center;display:flex;flex-direction:column;gap:7px}
+.emptyState strong{font-family:"Space Grotesk";font-size:18px}.emptyState span{font-size:12px;color:var(--muted)}
+.caseTopbar{position:sticky}
+.caseTabs{position:sticky;top:70px;z-index:15;display:flex;gap:5px;overflow-x:auto;padding:12px 0;background:rgba(247,247,243,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);scrollbar-width:none}
+.caseTabs::-webkit-scrollbar{display:none}
+.caseTabs button{flex:0 0 auto;border:1px solid transparent;background:transparent;border-radius:9px;padding:9px 11px;color:#77776f;font-size:11px;font-weight:600;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.caseTabs button span{font-family:"Space Grotesk";font-size:8px;letter-spacing:.08em;color:#aaa9a2}
+.caseTabs button:hover{background:#fff;color:var(--ink);border-color:var(--line)}
+.caseTabs button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.caseTabs button.active span{color:#aaa}
+.tabContent{min-height:460px}
+.tabContent .caseSection{padding-top:42px}
+.tabContent .sectionTitle{font-size:14px}
+@media(max-width:850px){
+  .homeShell{padding-top:44px}.homeShell .hero{padding-bottom:36px}.homeShell .hero h1{font-size:52px}
+  .filterRow{grid-template-columns:1fr}.filterRow label{display:grid;grid-template-columns:70px 1fr}.caseTabs{top:60px}.caseTopbar{height:60px}.caseTopbar .topmeta{display:none}
+}
