@@ -59,8 +59,35 @@ function App(){
     return CASES.filter(c=>members.includes(c.sector));
   },[sector]);
 
+  React.useEffect(() => {
+    const handlePopState = () => {
+      setSelected(null);
+      setShowResults(false);
+      setSelectedProduct("All products");
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const openCase = (c) => {
+    window.history.pushState({ case: c.name }, "", `#case-${encodeURIComponent(c.name.toLowerCase())}`);
+    setSelected(c);
+    setShowResults(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const goHome = () => {
+    if (window.location.hash) {
+      window.history.back();
+    } else {
+      setSelected(null);
+      setShowResults(false);
+      setSelectedProduct("All products");
+    }
+  };
+
   if(selected){
-    return <CaseView c={selected} back={()=>setSelected(null)} />;
+    return <CaseView c={selected} back={goHome} />;
   }
 
   return <div>
@@ -89,7 +116,7 @@ function App(){
             setShowResults(true);
             if(selectedProduct !== "All products"){
               const found=CASES.find(c=>c.name===selectedProduct);
-              if(found)setSelected(found);
+              if(found)openCase(found);
             }
           }}>Search</button>
         </div>
@@ -101,7 +128,7 @@ function App(){
           <span className="muted">Select a case study to explore</span>
         </div>
         <div className="grid">
-          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>setSelected(c)}>
+          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
