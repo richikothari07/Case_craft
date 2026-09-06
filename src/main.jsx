@@ -137,7 +137,6 @@ function HomePage({openCase,openSector}){
   const finderCases=finderSector==="All"?CASES:CASES.filter(c=>(sectorGroups[finderSector]||[]).includes(c.sector));
   const finderSearch=()=>{if(finderProduct!=="All products"){const c=CASES.find(x=>x.name===finderProduct);if(c)openCase(c);}else if(finderSector!=="All")openSector(finderSector);else document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})};
   const featured=["Blinkit","Zepto","Groww","CRED","PhonePe"].map(n=>CASES.find(c=>c.name===n)).filter(Boolean);
-  const caseOfWeek=featured[0]||CASES[0];
   const productVisual=(c)=>CASE_VISUALS[c?.name]||null;
   return <div className="homePage">
     <SiteNav onHome={()=>window.history.pushState({},"","#home")||window.dispatchEvent(new PopStateEvent("popstate"))}/>
@@ -145,12 +144,9 @@ function HomePage({openCase,openSector}){
       <section className="heroNew">
         <div className="heroGrid"></div>
         <div className="heroGlow heroGlowA"></div><div className="heroGlow heroGlowB"></div>
-        <div className="heroFragments" aria-hidden="true">
-          <span className="fragment fragmentA">DISCOVERY</span><span className="fragment fragmentB">METRICS ↗</span><span className="fragment fragmentC">PM BETS</span><span className="fragment fragmentD">USER → VALUE</span>
-        </div>
-        <div className="heroInner">
+                <div className="heroInner">
           <span className="eyebrow heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
-          <h1>THINK LIKE<br/><em>A PRODUCT MANAGER.</em></h1>
+          <h1><span>THINK LIKE</span><em>A PRODUCT MANAGER.</em></h1>
           <p className="heroLead">Deconstruct products. Spot opportunities. Build better solutions.</p>
           <p className="heroSub">Real-world product teardowns, frameworks and challenges designed to sharpen how you think about products.</p>
           <div className="heroActions"><button className="primaryCta" onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore Case Studies <span>→</span></button><button className="secondaryCta" onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Take a Product Challenge</button></div>
@@ -187,16 +183,7 @@ function HomePage({openCase,openSector}){
 
       <div className="proofStrip"><span>REAL PRODUCTS</span><span>EVIDENCE TRAIL</span><span>PM ANALYSIS</span><span>INTERVIEW QUESTIONS</span></div>
 
-      <section className="caseWeek sectionPad">
-        <div className="weekVisual" style={productVisual(caseOfWeek)?{backgroundImage:`linear-gradient(90deg,rgba(0,0,0,.05),rgba(0,0,0,.72)),url(${productVisual(caseOfWeek)})`}:{}}><span className="weekLabel">CASE OF THE WEEK</span><div className="weekOverlay"><span>{displaySector(caseOfWeek.sector)}</span><h2>{caseOfWeek.name}</h2><p>Why did this product win?</p><button onClick={()=>openCase(caseOfWeek)}>Read the full case <span>→</span></button></div></div>
-      </section>
-
       <section className="whySection sectionPad"><div className="whyGrid"><div><span className="eyebrow">WHY CASECRAFT?</span><h2>Not another product blog.</h2></div><div><h3>If you were the PM, what would you do?</h3><p>CaseCraft is built to make you question the product, not just consume the story.</p><div className="whyFlow"><span>OBSERVE</span><b>↓</b><span>UNDERSTAND</span><b>↓</b><span>CHALLENGE</span><b>↓</b><span>BUILD</span></div></div></div></section>
-
-      <section className="challengeTeaser sectionPad">
-        <div className="sectionHeader"><div><span className="eyebrow">PRODUCT CHALLENGES</span><h2>Think like the PM.</h2><p>Don't just read the answer. Make the decision.</p></div><button onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>All challenges <span>→</span></button></div>
-        <div className="challengeRow">{CHALLENGES.map((x,i)=><button className="challengeCard" key={x.title} onClick={()=>{window.history.pushState({challenge:i},"",`#challenge-${i+1}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}><span>0{i+1}</span><small>{x.meta}</small><h3>{x.title}</h3><p>{x.question}</p><b>Try it →</b></button>)}</div>
-      </section>
 
       <section className="frameworkStrip sectionPad">
         <div className="sectionHeader"><div><span className="eyebrow">PRODUCT FRAMEWORKS</span><h2>Tools to structure your thinking.</h2></div><button onClick={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>View frameworks <span>→</span></button></div>

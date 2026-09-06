@@ -668,3 +668,25 @@ button{color:inherit}
 .insideFlow small{display:block;color:#666;font-size:9px;margin-top:7px;line-height:1.35}.insideFlow>div{padding-bottom:18px}
 @media(max-width:900px){.finderControls{grid-template-columns:1fr 1fr}.finderControls>button{grid-column:1 / -1}.proofStrip{grid-template-columns:1fr 1fr;row-gap:13px}.proofStrip span:nth-child(2){border-right:0}.whyGrid{grid-template-columns:1fr;gap:35px}}
 @media(max-width:640px){.finderControls{grid-template-columns:1fr}.finderControls>button{grid-column:auto}.finderTop{align-items:flex-start;gap:10px;flex-direction:column}.proofStrip{width:calc(100% - 32px);grid-template-columns:1fr 1fr}.proofStrip span{border-right:0}.proofStrip span:nth-child(odd){border-right:1px solid #222}.proofStrip span:nth-child(n+3){padding-top:12px}.whyGrid h2{font-size:55px}}
+
+
+/* v9 refinement: readable hero + cleaner homepage flow */
+.heroNew{min-height:88vh!important}
+.heroInner{width:min(980px,92vw)!important;padding:80px 0 100px!important}
+.heroNew h1{font-size:clamp(58px,8.2vw,122px)!important;line-height:.92!important;letter-spacing:-.045em!important;max-width:1050px!important;margin-inline:auto!important}
+.heroNew h1 span,.heroNew h1 em{display:block!important;white-space:nowrap!important}
+.heroNew h1 em{margin-top:8px!important}
+.heroLead{font-size:clamp(18px,1.7vw,24px)!important;max-width:700px!important;line-height:1.35!important}
+.heroSub{font-size:14px!important;max-width:570px!important;color:#c4c4c0!important}
+.heroFragments{display:none!important}
+.heroBottom{color:#9a9a96!important}
+.heroGrid{opacity:.35!important}
+@media(max-width:700px){
+ .heroNew{min-height:78vh!important}
+ .heroInner{padding:58px 0 70px!important}
+ .heroNew h1{font-size:clamp(44px,12vw,74px)!important;line-height:.94!important}
+ .heroNew h1 span,.heroNew h1 em{white-space:normal!important}
+ .heroLead{font-size:18px!important}
+ .heroSub{font-size:13px!important}
+ .heroBottom{display:none!important}
+}
