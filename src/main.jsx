@@ -49,18 +49,23 @@ function displaySector(raw){
 }
 
 const LOGOS = {
-  Blinkit:"https://cdn.simpleicons.org/blinkit/173b31",
-  PhonePe:"https://cdn.simpleicons.org/phonepe/173b31",
-  Groww:"https://cdn.simpleicons.org/groww/173b31",
-  Zepto:"https://cdn.simpleicons.org/zepto/173b31",
-  CRED:"https://cdn.simpleicons.org/cred/173b31",
-  Swiggy:"https://cdn.simpleicons.org/swiggy/173b31",
-  Zomato:"https://cdn.simpleicons.org/zomato/173b31",
-  Razorpay:"https://cdn.simpleicons.org/razorpay/173b31",
-  Meesho:"https://cdn.simpleicons.org/meesho/173b31",
-  Nykaa:"https://cdn.simpleicons.org/nykaa/173b31"
+  Blinkit:"https://www.google.com/s2/favicons?domain=blinkit.com&sz=128",
+  PhonePe:"https://www.google.com/s2/favicons?domain=phonepe.com&sz=128",
+  Groww:"https://www.google.com/s2/favicons?domain=groww.in&sz=128",
+  Zepto:"https://www.google.com/s2/favicons?domain=zeptonow.com&sz=128",
+  CRED:"https://www.google.com/s2/favicons?domain=cred.club&sz=128",
+  Swiggy:"https://www.google.com/s2/favicons?domain=swiggy.com&sz=128",
+  Zomato:"https://www.google.com/s2/favicons?domain=zomato.com&sz=128",
+  Razorpay:"https://www.google.com/s2/favicons?domain=razorpay.com&sz=128",
+  Meesho:"https://www.google.com/s2/favicons?domain=meesho.com&sz=128",
+  Nykaa:"https://www.google.com/s2/favicons?domain=nykaa.com&sz=128"
 };
+const CASE_ACCENTS = {Blinkit:'#f4c400',PhonePe:'#5f259f',Groww:'#00b386',Zepto:'#8b5cf6',CRED:'#f3f3f3',Swiggy:'#ff5a30',Zomato:'#ef4f5f',Razorpay:'#3395ff',Meesho:'#e82d7a',Nykaa:'#fc2779'};
 const logoFor=(name)=>LOGOS[name]||null;
+function ProductLogo({name,className=''}){
+  const [failed,setFailed]=React.useState(false);
+  return <>{logoFor(name)&&!failed ? <img className={className} src={logoFor(name)} alt={`${name} logo`} onError={()=>setFailed(true)}/> : <span className={className}>{name.slice(0,1)}</span>}</>;
+}
 
 function App(){
   const [sector,setSector]=useState("All");
@@ -151,7 +156,7 @@ function App(){
         <div className="marqueeViewport">
           <div className="marqueeTrack">
             {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
-              <div className="marqueeLogo">{logoFor(c.name)?<img src={logoFor(c.name)} alt=""/>:<span>{c.name[0]}</span>}</div>
+              <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>
               <div className="marqueeText"><strong>{c.name}</strong><span>{c.tag}</span></div>
               <span className="marqueeArrow">↗</span>
             </button>)}
@@ -197,7 +202,7 @@ function App(){
         <div className="grid">
           {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
-            <div className="cardLogo">{logoFor(c.name)?<img src={logoFor(c.name)} alt=""/>:<span>{c.name[0]}</span>}</div>
+            <div className="cardLogo"><ProductLogo name={c.name}/></div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
             <p>{c.summary}</p>
