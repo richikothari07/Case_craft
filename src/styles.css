@@ -52,8 +52,8 @@ h2{font-family:"Inter",Arial,sans-serif;font-weight:700;font-size:28px;line-heig
 .caseHeader h1{font-size:72px;margin:18px 0 15px}
 .caseTag{font-size:17px;line-height:1.6;color:#55554f;max-width:790px;margin:0}
 .factsRow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px}
-.fact{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:12px;line-height:1.5}.fact span{display:block;color:var(--accent);font-size:8px;letter-spacing:.12em;font-weight:800;margin-bottom:7px}
-.caseSection{padding:56px 0;border-bottom:1px solid var(--line)}
+.fact{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:12px;line-height:1.5;color:#45453f}
+.caseSection{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:150px}
 .sectionTitle{font-family:"Inter",Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:-.01em;margin-bottom:23px}
 .proposition{background:var(--ink);color:#fff;border-radius:16px;padding:28px 30px;font-size:21px;line-height:1.5}
 .proposition strong{font-weight:600}
@@ -90,6 +90,7 @@ footer{text-align:center;color:#85857e;font-size:10px;padding:28px;border-top:1p
 .caseTabs button.active{background:var(--ink);color:#fff}
 .caseContent{min-height:420px}
 .caseContent .caseSection{margin-top:0}
+.caseContent .caseSection:first-child{padding-top:44px}
 @media(max-width:700px){.caseTabs{top:60px;margin-bottom:24px}.caseTabs button{padding:9px 11px;font-size:11px}.caseContent{min-height:300px}}
 
 
