@@ -82,186 +82,168 @@ function ProductLogo({name,className=''}){
   return <>{logoFor(name)&&!failed ? <img className={className} src={logoFor(name)} alt={`${name} logo`} onError={()=>setFailed(true)}/> : <span className={className}>{name.slice(0,1)}</span>}</>;
 }
 
-function App(){
-  const [sector,setSector]=useState("All");
-  const [selected,setSelected]=useState(null);
-  const [selectedSector,setSelectedSector]=useState(null);
-  const [selectedProduct,setSelectedProduct]=useState("All products");
-  const [showResults,setShowResults]=useState(false);
-
-  React.useEffect(() => {
-    const handlePopState = () => {
-      setSelected(null);
-      setSelectedSector(null);
-      setShowResults(false);
-      setSelectedProduct("All products");
-    };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
-  const openCase = (c) => {
-    window.history.pushState({ case: c.name }, "", `#case-${encodeURIComponent(c.name.toLowerCase())}`);
-    setSelected(c);
-    setSelectedSector(null);
-    setShowResults(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+function SiteNav({onHome}){
+  const [open,setOpen]=useState(false);
+  const go=(hash)=>{
+    setOpen(false);
+    window.history.pushState({},"",hash);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+    window.scrollTo({top:0,behavior:"smooth"});
   };
-
-  const goHome = () => {
-    if (window.location.hash) window.history.back();
-    else {
-      setSelected(null);
-      setSelectedSector(null);
-      setShowResults(false);
-      setSelectedProduct("All products");
-    }
+  const cases=()=>{
+    setOpen(false);
+    if(document.getElementById("home-cases")){document.getElementById("home-cases").scrollIntoView({behavior:"smooth"}); return;}
+    go("#home");
+    setTimeout(()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"}),60);
   };
-  const sectorGroups={
-    "Quick Commerce":["Quick Commerce","Quick Commerce / Grocery"],
-    "E-commerce & Marketplaces":["E-commerce","E-commerce / Grocery","Kids & Parenting"],
-    "Fashion & Beauty":["Fashion","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear"],
-    "Consumer Tech":["Consumer Electronics"],
-    "Fintech & Payments":["Fintech","Fintech / B2B SaaS","B2B Fintech","Financial Services"],
-    "Investing & Insurance":["Fintech / Brokerage","Wealthtech","Insurtech"],
-    "Food & Dining":["Food & Convenience","Food & Going Out"],
-    "Mobility & EV":["Mobility","Mobility / EV"],
-    "Travel & Hospitality":["Travel","Travel / Hospitality"],
-    "Logistics":["Logistics"],
-    "Health & Wellness":["Healthtech","Health / Fitness"],
-    "SaaS & Developer Tools":["Developer SaaS","SaaS"],
-    "B2B Marketplaces":["B2B Marketplace"],
-    "Education":["Edtech"],
-    "Media & Entertainment":["Entertainment","Media & Entertainment"],
-    "Home & Local Services":["Real Estate","Home Services","Home & Sleep"]
-  };
-  const sectors=["All",...Object.keys(sectorGroups)];
-  const filtered=useMemo(()=>{
-    if(sector==="All") return CASES;
-    const members=sectorGroups[sector]||[];
-    return CASES.filter(c=>members.includes(c.sector));
-  },[sector]);
-  const popularCases=["Blinkit","PhonePe","Groww","Zepto","CRED"]
-    .map(name=>CASES.find(c=>c.name===name)).filter(Boolean);
-  const sectorSuggestions=sector!=="All" ? filtered.slice(0,5) : [];
+  return <header className="siteNav">
+    <button className="siteBrand" onClick={()=>onHome ? onHome() : go("#home")} aria-label="CaseCraft home">
+      <span className="wordmark"><span className="wordmarkCase">Case</span><span className="wordmarkCraft">Craft</span></span>
+    </button>
+    <button className="mobileMenu" onClick={()=>setOpen(v=>!v)} aria-label="Toggle menu"><span></span><span></span></button>
+    <nav className={`siteLinks ${open?"isOpen":""}`}>
+      <button onClick={cases}>Cases</button>
+      <button onClick={()=>go("#challenges")}>Challenges</button>
+      <button onClick={()=>go("#frameworks")}>Frameworks</button>
+      <button onClick={()=>go("#about")}>About</button>
+      <button className="navCta" onClick={()=>go("#home-cases")}>Explore Cases <span>→</span></button>
+    </nav>
+  </header>
+}
 
-  const openSector = (name) => {
-    window.history.pushState({ sector: name }, "", `#sector-${encodeURIComponent(name.toLowerCase())}`);
-    setSelectedSector(name);
-    setSelected(null);
-    setSector(name);
-    setSelectedProduct("All products");
-    setShowResults(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+const CHALLENGES=[
+  {title:"Conversion has plateaued.",meta:"Product sense · Diagnosis",question:"What would you investigate first?",options:["Increase acquisition spend","Break conversion into the funnel and segment it","Redesign the entire homepage","Add more discounts"],answer:1,explain:"Start by locating the break: funnel step, segment, device, geography and cohort. Diagnose before prescribing."},
+  {title:"Retention is falling.",meta:"Metrics · Retention",question:"Which signal would you look at first?",options:["Total downloads","Cohort retention by activation behaviour","Social media followers","Average session length alone"],answer:1,explain:"Cohort retention tied to activation helps distinguish an acquisition-quality problem from a product-value problem."},
+  {title:"Growth is strong. Margins are shrinking.",meta:"Strategy · Economics",question:"What is the best first move?",options:["Immediately cut growth","Map contribution by customer, order and channel","Launch a new category","Raise prices for everyone"],answer:1,explain:"Map the economics before acting. Growth can hide mix, incentive, fulfilment or servicing problems."}
+];
 
-  if(selected){
-    return <CaseView c={selected} back={goHome} next={(nc)=>openCase(nc)} />;
-  }
+const FRAMEWORKS=[
+  ["Product Metrics","Connect user value to the metrics that matter."],["User Research","Turn observations into sharper product questions."],["Product Strategy","Choose where to play — and what not to build."],["Growth","Understand acquisition, activation, retention and loops."],["UX","Spot friction across the journey from intent to outcome."],["Prioritization","Make trade-offs explicit when everything feels important."]
+];
 
-  if(selectedSector){
-    return <SectorView
-      name={selectedSector}
-      cases={CASES.filter(c=>(sectorGroups[selectedSector]||[]).includes(c.sector))}
-      back={goHome}
-      openCase={openCase}
-    />;
-  }
+const POPULAR_SECTORS=[
+  ["Fintech & Payments",["PhonePe","Groww","Paytm"],"sector-fintech"],
+  ["E-commerce & Marketplaces",["Flipkart","Myntra","Meesho"],"sector-commerce"],
+  ["Quick Commerce",["Blinkit","Zepto"],"sector-quick"],
+  ["Food & Dining",["Swiggy","Zomato"],"sector-food"],
+  ["Consumer Tech",["boAt","Noise"],"sector-tech"],
+  ["Mobility & EV",["Ather","Rapido"],"sector-mobility"]
+];
 
-  return <div>
-    <header className="topbar">
-      <div className="brand" onClick={()=>setSelected(null)} aria-label="CaseCraft home">
-        <span className="wordmark"><span className="wordmarkCase">Case</span><span className="wordmarkCraft">Craft</span></span>
-      </div>
-      
-    </header>
+function HomePage({openCase,openSector}){
+  const [finderSector,setFinderSector]=useState("All");
+  const [finderProduct,setFinderProduct]=useState("All products");
+  const sectorGroups={"Quick Commerce":["Quick Commerce","Quick Commerce / Grocery"],"E-commerce & Marketplaces":["E-commerce","E-commerce / Grocery","Kids & Parenting"],"Fashion & Beauty":["Fashion","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear"],"Consumer Tech":["Consumer Electronics"],"Fintech & Payments":["Fintech","Fintech / B2B SaaS","B2B Fintech","Financial Services"],"Investing & Insurance":["Fintech / Brokerage","Wealthtech","Insurtech"],"Food & Dining":["Food & Convenience","Food & Going Out"],"Mobility & EV":["Mobility","Mobility / EV"],"Travel & Hospitality":["Travel","Travel / Hospitality"],"Logistics":["Logistics"],"Health & Wellness":["Healthtech","Health / Fitness"],"SaaS & Developer Tools":["Developer SaaS","SaaS"],"B2B Marketplaces":["B2B Marketplace"],"Education":["Edtech"],"Media & Entertainment":["Entertainment","Media & Entertainment"],"Home & Local Services":["Real Estate","Home Services","Home & Sleep"]};
+  const finderCases=finderSector==="All"?CASES:CASES.filter(c=>(sectorGroups[finderSector]||[]).includes(c.sector));
+  const finderSearch=()=>{if(finderProduct!=="All products"){const c=CASES.find(x=>x.name===finderProduct);if(c)openCase(c);}else if(finderSector!=="All")openSector(finderSector);else document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})};
+  const featured=["Blinkit","Zepto","Groww","CRED","PhonePe"].map(n=>CASES.find(c=>c.name===n)).filter(Boolean);
+  const caseOfWeek=featured[0]||CASES[0];
+  const productVisual=(c)=>CASE_VISUALS[c?.name]||null;
+  return <div className="homePage">
+    <SiteNav onHome={()=>window.history.pushState({},"","#home")||window.dispatchEvent(new PopStateEvent("popstate"))}/>
+    <main>
+      <section className="heroNew">
+        <div className="heroGrid"></div>
+        <div className="heroGlow heroGlowA"></div><div className="heroGlow heroGlowB"></div>
+        <div className="heroFragments" aria-hidden="true">
+          <span className="fragment fragmentA">DISCOVERY</span><span className="fragment fragmentB">METRICS ↗</span><span className="fragment fragmentC">PM BETS</span><span className="fragment fragmentD">USER → VALUE</span>
+        </div>
+        <div className="heroInner">
+          <span className="eyebrow heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
+          <h1>THINK LIKE<br/><em>A PRODUCT MANAGER.</em></h1>
+          <p className="heroLead">Deconstruct products. Spot opportunities. Build better solutions.</p>
+          <p className="heroSub">Real-world product teardowns, frameworks and challenges designed to sharpen how you think about products.</p>
+          <div className="heroActions"><button className="primaryCta" onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore Case Studies <span>→</span></button><button className="secondaryCta" onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Take a Product Challenge</button></div>
+        </div>
+        <div className="heroBottom"><span>REAL PRODUCTS</span><span>PM ANALYSIS</span><span>EVIDENCE-LED</span><span>INTERVIEW READY</span></div>
+      </section>
 
-    <main className="shell">
-      <section className="hero heroCentered">
-        <div className="heroMain">
-          <span className="heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
-          <h1>Understand why<br/><em>products win.</em></h1>
-          <p className="heroCopy">In-depth case studies on the products shaping India.</p>
-          <button className="heroExplore" onClick={()=>document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}>Explore cases <span>↓</span></button>
+      <section className="caseFinder sectionPad" aria-label="Explore cases">
+        <div className="finderTop"><span className="eyebrow">EXPLORE CASES</span><span>Pick a sector or product</span></div>
+        <div className="finderControls">
+          <label><span>SECTOR</span><select value={finderSector} onChange={e=>{setFinderSector(e.target.value);setFinderProduct("All products")}}><option>All</option>{Object.keys(sectorGroups).map(s=><option key={s}>{s}</option>)}</select></label>
+          <label><span>PRODUCT</span><select value={finderProduct} onChange={e=>setFinderProduct(e.target.value)}><option>All products</option>{finderCases.map(c=><option key={c.name}>{c.name}</option>)}</select></label>
+          <button onClick={finderSearch}>Explore <span>→</span></button>
         </div>
       </section>
 
-      <section className="popularMarquee" aria-label="Popular product cases">
-        <div className="marqueeHeader">
-          <span className="eyebrow">POPULAR CASES</span>
-          <span className="marqueeHint">Move through the products</span>
-        </div>
-        <div className="marqueeViewport">
-          <div className="marqueeTrack">
-            {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}} onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
-              <div className={`marqueeVisual visual-${c.name.toLowerCase()}`} aria-hidden="true" style={CASE_VISUALS[c.name] ? {backgroundImage:`linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.62)),url(${CASE_VISUALS[c.name]})`} : undefined}>
-                <div className="visualGlow"></div>
-                <div className="visualShape visualShapeOne"></div>
-                <div className="visualShape visualShapeTwo"></div>
-                <div className="visualGrid"></div>
-                
-              </div>
-              <div className="marqueeInfo">
-                <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>
-                <div className="marqueeText"><strong>{c.name}</strong><span>{c.tag}</span></div>
-                <span className="marqueeArrow">↗</span>
-              </div>
-            </button>)}
-          </div>
+      <section className="statementSection sectionPad">
+        <div className="statementKicker">THE CASECRAFT METHOD</div>
+        <div className="statementGrid"><h2>Great PMs don't just know frameworks.<br/><em>They know how to think.</em></h2><p>CaseCraft turns real products into practical product-thinking exercises — so you can learn how great products work, where they fall short, and what you would do differently.</p></div>
+        <div className="methodCards">
+          {[['01','DECONSTRUCT','Understand the product, users, business model and experience.'],['02','DISCOVER','Identify friction, gaps and opportunities.'],['03','DESIGN','Turn insights into product decisions and solutions.']].map(([n,t,d])=><div className="methodCard" key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div><b>↗</b></div>)}
         </div>
       </section>
 
-      <section className="controls">
-        <p className="explorePrompt">Explore a product</p>
-        <p className="exploreHint">Choose a product or browse by sector.</p>
-        <div className="selectRow">
-          <label><span>SECTOR</span><select value={sector} onChange={e=>{setSector(e.target.value);setSelectedProduct("All products");setShowResults(false)}}><option>All</option>{sectors.slice(1).map(s=><option key={s}>{s}</option>)}</select></label>
-          <label><span>PRODUCT</span><select value={selectedProduct} onChange={e=>{setSelectedProduct(e.target.value);setShowResults(false)}}><option>All products</option>{filtered.map(c=><option key={c.name}>{c.name}</option>)}</select></label>
-          <button className="searchButton" onClick={()=>{
-            if(selectedProduct !== "All products"){
-              const found=CASES.find(c=>c.name===selectedProduct);
-              if(found)openCase(found);
-            } else if(sector !== "All") {
-              openSector(sector);
-            }
-          }}>Search</button>
-        </div>
-      </section>
-
-      <section className="popularSectors" aria-label="Popular sectors">
-        <div className="popularSectorsHead"><span className="eyebrow">POPULAR SECTORS</span><span>Explore all →</span></div>
-        <div className="popularSectorGrid">
-          {[
-            ['Fintech & Payments',['PhonePe','Groww','Paytm'],'sector-fintech'],
-            ['E-commerce & Marketplaces',['Flipkart','Myntra','Meesho'],'sector-commerce'],
-            ['Quick Commerce',['Blinkit','Zepto'],'sector-quick'],
-            ['Food & Dining',['Swiggy','Zomato'],'sector-food'],
-            ['Consumer Tech',['boAt','Noise'],'sector-tech'],
-            ['Mobility & EV',['Ather','Rapido'],'sector-mobility']
-          ].map(([name,brands,cls])=><button key={name} className={`popularSector ${cls}`} onClick={()=>openSector(name)}>
-            <div className="sectorLogos">{brands.map(b=><span key={b} title={b}><ProductLogo name={b}/></span>)}</div>
-            <span>{name}</span><b>↗</b>
+      <section id="home-cases" className="featuredSection sectionPad">
+        <div className="sectionHeader"><div><span className="eyebrow">FEATURED CASE STUDIES</span><h2>See the product. Then think deeper.</h2></div><button onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore all <span>→</span></button></div>
+        <div className="featuredGrid">
+          {featured.slice(0,4).map((c,i)=><button key={c.name} className={`featuredCard ${i===0?'featuredLarge':''}`} onClick={()=>openCase(c)}>
+            <div className="featuredImage" style={productVisual(c)?{backgroundImage:`linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.72)),url(${productVisual(c)})`}:{}}><span>{displaySector(c.sector)}</span></div>
+            <div className="featuredInfo"><div><h3>{c.name}</h3><p>{c.summary}</p><small>{c.tag}</small></div><strong>Read case →</strong></div>
           </button>)}
         </div>
       </section>
 
-      <section className="caseValue" aria-label="What each case includes">
-        <div className="caseValueHead"><span className="eyebrow">INSIDE EACH CASE</span></div>
-        <div className="caseValueGrid">
-          <div><span className="valueIcon">01</span><strong>Product</strong><small>How it works</small></div>
-          <div><span className="valueIcon">02</span><strong>Metrics</strong><small>What to measure</small></div>
-          <div><span className="valueIcon">03</span><strong>PM bets</strong><small>What I'd change</small></div>
-          <div><span className="valueIcon">04</span><strong>Interview</strong><small>Questions to think through</small></div>
-        </div>
+      <div className="proofStrip"><span>REAL PRODUCTS</span><span>EVIDENCE TRAIL</span><span>PM ANALYSIS</span><span>INTERVIEW QUESTIONS</span></div>
+
+      <section className="caseWeek sectionPad">
+        <div className="weekVisual" style={productVisual(caseOfWeek)?{backgroundImage:`linear-gradient(90deg,rgba(0,0,0,.05),rgba(0,0,0,.72)),url(${productVisual(caseOfWeek)})`}:{}}><span className="weekLabel">CASE OF THE WEEK</span><div className="weekOverlay"><span>{displaySector(caseOfWeek.sector)}</span><h2>{caseOfWeek.name}</h2><p>Why did this product win?</p><button onClick={()=>openCase(caseOfWeek)}>Read the full case <span>→</span></button></div></div>
       </section>
 
-      <footer className="homeFooter">
-        <div className="homeFooterBrand"><strong>CaseCraft</strong><span>Product thinking, deconstructed.</span></div>
-        <div className="homeFooterAbout"><span className="footerLabel">ABOUT</span><strong>Richi Kothari</strong></div>
-        <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">About me ↗</a></nav>
-      </footer>
+      <section className="whySection sectionPad"><div className="whyGrid"><div><span className="eyebrow">WHY CASECRAFT?</span><h2>Not another product blog.</h2></div><div><h3>If you were the PM, what would you do?</h3><p>CaseCraft is built to make you question the product, not just consume the story.</p><div className="whyFlow"><span>OBSERVE</span><b>↓</b><span>UNDERSTAND</span><b>↓</b><span>CHALLENGE</span><b>↓</b><span>BUILD</span></div></div></div></section>
+
+      <section className="challengeTeaser sectionPad">
+        <div className="sectionHeader"><div><span className="eyebrow">PRODUCT CHALLENGES</span><h2>Think like the PM.</h2><p>Don't just read the answer. Make the decision.</p></div><button onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>All challenges <span>→</span></button></div>
+        <div className="challengeRow">{CHALLENGES.map((x,i)=><button className="challengeCard" key={x.title} onClick={()=>{window.history.pushState({challenge:i},"",`#challenge-${i+1}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}><span>0{i+1}</span><small>{x.meta}</small><h3>{x.title}</h3><p>{x.question}</p><b>Try it →</b></button>)}</div>
+      </section>
+
+      <section className="frameworkStrip sectionPad">
+        <div className="sectionHeader"><div><span className="eyebrow">PRODUCT FRAMEWORKS</span><h2>Tools to structure your thinking.</h2></div><button onClick={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>View frameworks <span>→</span></button></div>
+        <div className="frameworkGrid">{FRAMEWORKS.slice(0,6).map((f,i)=><button key={f[0]} onClick={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}><span>0{i+1}</span><strong>{f[0]}</strong><p>{f[1]}</p><b>↗</b></button>)}</div>
+      </section>
+
+      <section className="popularSectorsNew sectionPad">
+        <div className="sectionHeader"><div><span className="eyebrow">POPULAR SECTORS</span><h2>Explore by world.</h2></div></div>
+        <div className="sectorLogoGrid">{POPULAR_SECTORS.map(([name,brands,cls])=><button key={name} className={`sectorVisual ${cls}`} onClick={()=>openSector(name)}><div className="sectorLogoRow">{brands.map(b=><span key={b}><ProductLogo name={b}/></span>)}</div><div><strong>{name}</strong><small>{brands.join(" · ")}</small></div><b>↗</b></button>)}</div>
+      </section>
+
+      <section className="insideSection sectionPad"><div className="insidePanel"><span className="eyebrow">WHAT YOU GET</span><h2>Everything you need to<br/><em>think like a PM.</em></h2><div className="insideFlow">{[['01','DECONSTRUCTIONS','How the product works'],['02','METRICS','What to measure'],['03','PM BETS','What to change'],['04','INTERVIEW','Questions to pressure-test thinking']].map(([n,x,d],i)=><div key={x}><span>{n}</span><strong>{x}</strong><small>{d}</small></div>)}</div></div></section>
+
+      <section className="finalCta sectionPad"><div className="finalCtaInner"><span className="eyebrow">START THINKING</span><h2>Build your product thinking.</h2><p>Explore real products. Challenge your assumptions. Think like a PM.</p><div className="heroActions"><button className="primaryCta" onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore Case Studies <span>→</span></button><button className="secondaryCta" onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Take a Challenge</button></div></div></section>
     </main>
+    <SiteFooter/>
   </div>
+}
+
+function SiteFooter(){return <footer className="siteFooter"><div><span className="footerLogo">CaseCraft</span><p>Products. Deconstructed.</p></div><nav><button onClick={()=>{window.history.pushState({},"","#home-cases");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Cases</button><button onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Challenges</button><button onClick={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Frameworks</button><button onClick={()=>{window.history.pushState({},"","#about");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>About</button></nav><div className="footerCredit"><span>Built by Richi Kothari</span><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">About me ↗</a></div></footer>}
+
+function ChallengesPage({back,initialActive=null}){
+ const [active,setActive]=useState(initialActive); const [picked,setPicked]=useState(null);
+ const start=(i)=>{setActive(i);setPicked(null);window.history.pushState({challenge:i},"",`#challenge-${i+1}`)};
+ if(active!==null){const c=CHALLENGES[active]; return <div className="platformPage"><SiteNav onHome={back}/><main className="challengePage"><button className="textBack" onClick={()=>{setActive(null);window.history.pushState({},"","#challenges")}}>← Challenges</button><span className="eyebrow">CHALLENGE 0{active+1}</span><h1>{c.title}</h1><p className="pageLead">{c.question}</p><div className="answerGrid">{c.options.map((o,i)=><button className={picked===i?`answer ${i===c.answer?'correct':'wrong'}`:'answer'} onClick={()=>setPicked(i)} key={o}><span>{String.fromCharCode(65+i)}</span>{o}</button>)}</div>{picked!==null&&<div className={`answerResult ${picked===c.answer?'correct':'wrong'}`}><strong>{picked===c.answer?'Good call.':'Not quite.'}</strong><p>{c.explain}</p></div>}</main></div>}
+ return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT CHALLENGES</span><h1>Think like the PM.</h1><p className="pageLead">Don't just read the answer. Make the decision.</p><div className="challengePageGrid">{CHALLENGES.map((c,i)=><button key={c.title} onClick={()=>start(i)} className="challengePageCard"><span>0{i+1}</span><small>{c.meta}</small><h2>{c.title}</h2><p>{c.question}</p><b>Start challenge →</b></button>)}</div></main><SiteFooter/></div>
+}
+
+function FrameworksPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT FRAMEWORKS</span><h1>Tools to structure your thinking.</h1><p className="pageLead">Simple structures for sharper product conversations.</p><div className="frameworkPageGrid">{FRAMEWORKS.map((f,i)=><article key={f[0]} className="frameworkPageCard"><span>0{i+1}</span><h2>{f[0]}</h2><p>{f[1]}</p><div className="frameworkRule"></div><small>Coming into the case? Use this lens.</small></article>)}</div></main><SiteFooter/></div>}
+
+function AboutPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="aboutPage"><div className="aboutIntro"><span className="eyebrow">ABOUT</span><h1>CaseCraft is a place to practice product thinking.</h1><p>Built by Richi Kothari to turn interesting products into sharper PM questions, practical analysis and better conversations.</p></div><div className="aboutLinks"><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>↗</b></a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer"><span>More about Richi</span><b>↗</b></a></div></main><SiteFooter/></div>}
+
+function App(){
+ const [route,setRoute]=useState(window.location.hash||"#home");
+ const [selected,setSelected]=useState(null); const [selectedSector,setSelectedSector]=useState(null);
+ const sectorGroups={"Quick Commerce":["Quick Commerce","Quick Commerce / Grocery"],"E-commerce & Marketplaces":["E-commerce","E-commerce / Grocery","Kids & Parenting"],"Fashion & Beauty":["Fashion","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear"],"Consumer Tech":["Consumer Electronics"],"Fintech & Payments":["Fintech","Fintech / B2B SaaS","B2B Fintech","Financial Services"],"Investing & Insurance":["Fintech / Brokerage","Wealthtech","Insurtech"],"Food & Dining":["Food & Convenience","Food & Going Out"],"Mobility & EV":["Mobility","Mobility / EV"],"Travel & Hospitality":["Travel","Travel / Hospitality"],"Logistics":["Logistics"],"Health & Wellness":["Healthtech","Health / Fitness"],"SaaS & Developer Tools":["Developer SaaS","SaaS"],"B2B Marketplaces":["B2B Marketplace"],"Education":["Edtech"],"Media & Entertainment":["Entertainment","Media & Entertainment"],"Home & Local Services":["Real Estate","Home Services","Home & Sleep"]};
+ const goHome=()=>{setSelected(null);setSelectedSector(null);window.history.pushState({},"","#home");setRoute("#home");window.scrollTo({top:0})};
+ React.useEffect(()=>{const onPop=()=>{setRoute(window.location.hash||"#home"); if(!window.location.hash.startsWith("#case-"))setSelected(null); if(!window.location.hash.startsWith("#sector-"))setSelectedSector(null);};window.addEventListener("popstate",onPop);return()=>window.removeEventListener("popstate",onPop)},[]);
+ const openCase=(c)=>{window.history.pushState({case:c.name},"",`#case-${encodeURIComponent(c.name.toLowerCase())}`);setSelected(c);setSelectedSector(null);window.scrollTo({top:0})};
+ const openSector=(name)=>{window.history.pushState({sector:name},"",`#sector-${encodeURIComponent(name.toLowerCase())}`);setSelectedSector(name);setSelected(null);window.scrollTo({top:0})};
+ if(selected)return <CaseView c={selected} back={goHome} next={openCase}/>;
+ if(selectedSector)return <SectorView name={selectedSector} cases={CASES.filter(c=>(sectorGroups[selectedSector]||[]).includes(c.sector))} back={goHome} openCase={openCase}/>;
+ if(route.startsWith("#challenge-")){const n=parseInt(route.replace("#challenge-",""),10)-1;return <ChallengesPage back={goHome} initialActive={Number.isFinite(n)&&CHALLENGES[n]?n:null}/>;}
+ if(route==="#challenges")return <ChallengesPage back={goHome}/>;
+ if(route==="#frameworks")return <FrameworksPage back={goHome}/>;
+ if(route==="#about")return <AboutPage back={goHome}/>;
+ return <HomePage openCase={openCase} openSector={openSector}/>;
 }
 
 function SectorView({name,cases,back,openCase}){
