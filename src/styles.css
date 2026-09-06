@@ -81,3 +81,13 @@ footer{text-align:center;color:#85857e;font-size:10px;padding:28px;border-top:1p
 .searchButton:hover{transform:translateY(-1px);opacity:.92}
 .results{padding-bottom:20px}
 @media(max-width:850px){.selectRow{grid-template-columns:1fr}.searchButton{width:100%}}
+
+/* Case study tabs */
+.caseTabs{position:sticky;top:70px;z-index:15;display:flex;gap:4px;overflow-x:auto;padding:8px;background:rgba(247,247,243,.96);border-top:1px solid var(--line);border-bottom:1px solid var(--line);backdrop-filter:blur(14px);margin:0 0 34px;scrollbar-width:none}
+.caseTabs::-webkit-scrollbar{display:none}
+.caseTabs button{border:0;background:transparent;color:var(--muted);padding:10px 14px;border-radius:9px;font-size:12px;font-weight:600;white-space:nowrap;transition:.18s ease}
+.caseTabs button:hover{background:#ecece6;color:var(--ink)}
+.caseTabs button.active{background:var(--ink);color:#fff}
+.caseContent{min-height:420px}
+.caseContent .caseSection{margin-top:0}
+@media(max-width:700px){.caseTabs{top:60px;margin-bottom:24px}.caseTabs button{padding:9px 11px;font-size:11px}.caseContent{min-height:300px}}

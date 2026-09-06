@@ -68,6 +68,7 @@ function App(){
 }
 
 function CaseView({c,back}){
+ const [activeTab,setActiveTab]=useState("Overview");
  const journey=c.teardown.map(([stage,detail],i)=>({
    stage,detail,
    question:`What must be true for the ${stage.toLowerCase()} step to work?`,
@@ -83,10 +84,11 @@ function CaseView({c,back}){
    `Breadth vs. simplicity: adding more categories and use cases can increase frequency, but can also make the product harder to understand.`,
    `Automation vs. trust: reducing friction is valuable only when customers still understand important decisions, prices and outcomes.`
  ];
+ const tabs=["Overview","Why it wins","Product teardown","Growth loops","Metrics","PM bets","Interview","Evidence"];
  return <div>
   <header className="topbar">
     <div className="brand" onClick={back}><span className="brandmark">C</span> CaseCraft</div>
-    <button className="back" onClick={back}>← Library</button>
+    <button className="back" onClick={back}>← Explore</button>
   </header>
   <main className="caseShell">
     <div className="caseHeader">
@@ -96,54 +98,54 @@ function CaseView({c,back}){
       <div className="factsRow">{c.facts.map((f,i)=><div className="fact" key={i}><span>FACT</span>{f}</div>)}</div>
     </div>
 
-    <Section title="01 · Product thesis">
-      <div className="proposition"><strong>{c.proposition}</strong></div>
-      <div className="twoCol">
-        <div><h4>Core problem</h4><p>{c.problem}</p></div>
-        <div><h4>Target users</h4><ul>{c.users.map(x=><li key={x}>{x}</li>)}</ul></div>
-      </div>
-      <div className="analysisBox"><span>PM LENS</span><p>The important product question is not simply whether people want this service. It is whether the product can repeatedly deliver the promised outcome at an attractive enough cost to create a habit and a sustainable business.</p></div>
-    </Section>
+    <nav className="caseTabs" aria-label="Case study sections">
+      {tabs.map(tab=><button key={tab} className={activeTab===tab?"active":""} onClick={()=>setActiveTab(tab)}>{tab}</button>)}
+    </nav>
 
-    <Section title="02 · Why this product can win">
-      <div className="moatGrid">{c.moat.map((x,i)=><div className="moat" key={x}><span>0{i+1}</span><p>{x}</p></div>)}</div>
-      <div className="analysisBox"><span>MOAT TEST</span><p>For each moat above, ask: <b>Can a well-funded competitor buy this?</b> If yes, it is an advantage but not necessarily a durable moat. The strongest moats are those that compound with usage — density, proprietary data, habit, supply relationships, operational learning or ecosystem distribution.</p></div>
-    </Section>
+    <div className="caseContent">
+      {activeTab==="Overview" && <Section title="01 · Product thesis">
+        <div className="proposition"><strong>{c.proposition}</strong></div>
+        <div className="twoCol">
+          <div><h4>Core problem</h4><p>{c.problem}</p></div>
+          <div><h4>Target users</h4><ul>{c.users.map(x=><li key={x}>{x}</li>)}</ul></div>
+        </div>
+        <div className="analysisBox"><span>PM LENS</span><p>The important product question is not simply whether people want this service. It is whether the product can repeatedly deliver the promised outcome at an attractive enough cost to create a habit and a sustainable business.</p></div>
+      </Section>}
 
-    <Section title="03 · Product teardown — from intent to outcome">
-      <div className="teardown">{journey.map((x,i)=><div className="tear" key={x.stage}><div><h4>{String(i+1).padStart(2,"0")} · {x.stage}</h4><span className="tearQuestion">{x.question}</span></div><div><p>{x.detail}</p><div className="tearMetric"><span>WATCH</span>{x.metric}</div></div></div>)}</div>
-    </Section>
+      {activeTab==="Why it wins" && <Section title="02 · Why this product can win">
+        <div className="moatGrid">{c.moat.map((x,i)=><div className="moat" key={x}><span>0{i+1}</span><p>{x}</p></div>)}</div>
+        <div className="analysisBox"><span>MOAT TEST</span><p>For each moat above, ask: <b>Can a well-funded competitor buy this?</b> If yes, it is an advantage but not necessarily a durable moat. The strongest moats are those that compound with usage — density, proprietary data, habit, supply relationships, operational learning or ecosystem distribution.</p></div>
+      </Section>}
 
-    <Section title="04 · Growth & retention loops">
-      <div className="loopGrid">{growthLoops.map((x,i)=><div className="loop" key={x.title}><span>LOOP 0{i+1}</span><h4>{x.title}</h4><p>{x.body}</p></div>)}</div>
-    </Section>
+      {activeTab==="Product teardown" && <Section title="03 · Product teardown — from intent to outcome">
+        <div className="teardown">{journey.map((x,i)=><div className="tear" key={x.stage}><div><h4>{String(i+1).padStart(2,"0")} · {x.stage}</h4><span className="tearQuestion">{x.question}</span></div><div><p>{x.detail}</p><div className="tearMetric"><span>WATCH</span>{x.metric}</div></div></div>)}</div>
+      </Section>}
 
-    <Section title="05 · Metrics — what a PM should actually watch">
-      <div className="metrics">{c.metrics.map(([a,b,d])=><div className="metric" key={a}><div><span className="metricType">{a}</span><h4>{b}</h4></div><p>{d}</p></div>)}</div>
-      <div className="metricTree"><span>METRIC TREE</span><p><b>Outcome:</b> Does the customer repeatedly get the promised value? → <b>Inputs:</b> activation, conversion, frequency, availability/quality → <b>Economics:</b> revenue, cost-to-serve, contribution → <b>Guardrails:</b> cancellations, complaints, fraud, quality failures.</p></div>
-    </Section>
+      {activeTab==="Growth loops" && <Section title="04 · Growth & retention loops">
+        <div className="loopGrid">{growthLoops.map((x,i)=><div className="loop" key={x.title}><span>LOOP 0{i+1}</span><h4>{x.title}</h4><p>{x.body}</p></div>)}</div>
+        <div className="tradeoffGrid">{tradeoffs.map((x,i)=><div className="tradeoff" key={i}><span>0{i+1}</span><p>{x}</p></div>)}</div>
+      </Section>}
 
-    <Section title="06 · Product trade-offs & failure modes">
-      <div className="tradeoffGrid">{tradeoffs.map((x,i)=><div className="tradeoff" key={i}><span>0{i+1}</span><p>{x}</p></div>)}</div>
-    </Section>
+      {activeTab==="Metrics" && <Section title="05 · Metrics — what a PM should actually watch">
+        <div className="metrics">{c.metrics.map(([a,b,d])=><div className="metric" key={a}><div><span className="metricType">{a}</span><h4>{b}</h4></div><p>{d}</p></div>)}</div>
+        <div className="metricTree"><span>METRIC TREE</span><p><b>Outcome:</b> Does the customer repeatedly get the promised value? → <b>Inputs:</b> activation, conversion, frequency, availability/quality → <b>Economics:</b> revenue, cost-to-serve, contribution → <b>Guardrails:</b> cancellations, complaints, fraud, quality failures.</p></div>
+      </Section>}
 
-    <Section title="07 · PM improvement bets">
-      <div className="improvements">{c.improvements.map(([a,b,t],i)=><div className="improve" key={a}><div className="improveHead"><h4>{a}</h4><Badge tone="light">{t}</Badge></div><div className="improveGrid"><div><span>INSIGHT</span><p>{b}</p></div><div><span>SUCCESS METRIC</span><p>{c.metrics[i%c.metrics.length]?.[1]}</p></div><div><span>TRADE-OFF</span><p>Validate incremental value against cost, complexity and any degradation of the core product promise.</p></div></div></div>)}</div>
-    </Section>
+      {activeTab==="PM bets" && <Section title="06 · PM improvement bets">
+        <div className="improvements">{c.improvements.map(([a,b,t],i)=><div className="improve" key={a}><div className="improveHead"><h4>{a}</h4><Badge tone="light">{t}</Badge></div><div className="improveGrid"><div><span>INSIGHT</span><p>{b}</p></div><div><span>SUCCESS METRIC</span><p>{c.metrics[i%c.metrics.length]?.[1]}</p></div><div><span>TRADE-OFF</span><p>Validate incremental value against cost, complexity and any degradation of the core product promise.</p></div></div></div>)}</div>
+      </Section>}
 
-    <Section title="08 · Interview questions">
-      <div className="questions">{c.interview.map((q,i)=><div key={q}><span>{String(i+1).padStart(2,"0")}</span><p>{q}</p></div>)}</div>
-    </Section>
+      {activeTab==="Interview" && <Section title="07 · Interview questions">
+        <div className="questions">{c.interview.map((q,i)=><div key={q}><span>{String(i+1).padStart(2,"0")}</span><p>{q}</p></div>)}</div>
+      </Section>}
 
-    <Section title="09 · Evidence & source trail">
-      <div className="evidence">
-        <div><h4>Key public facts</h4><ul>{c.facts.map(f=><li key={f}>{f}</li>)}</ul></div>
-        <div><h4>Sources</h4>{c.sources.map(([n,u])=><a href={u} target="_blank" rel="noreferrer" key={u}>{n}<span>↗</span></a>)}</div>
-      </div>
-      <div className="evidenceNote"><b>Reading rule:</b> Facts are presented as evidence. Recommendations and product interpretations are PM analysis, not claims about internal company strategy.</div>
-    </Section>
+      {activeTab==="Evidence" && <Section title="08 · Evidence & source trail">
+        <div className="evidence"><div><h4>Key public facts</h4><ul>{c.facts.map(f=><li key={f}>{f}</li>)}</ul></div><div><h4>Sources</h4>{c.sources.map(([n,u])=><a href={u} target="_blank" rel="noreferrer" key={u}>{n}<span>↗</span></a>)}</div></div>
+        <div className="evidenceNote"><b>Reading rule:</b> Facts are presented as evidence. Recommendations and product interpretations are PM analysis, not claims about internal company strategy.</div>
+      </Section>}
+    </div>
   </main>
-  <footer>CaseCraft · 50 evidence-led product case studies · September 2026</footer>
+  <footer>CaseCraft · Evidence-led product case studies · September 2026</footer>
  </div>
 }
 
