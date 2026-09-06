@@ -433,7 +433,7 @@ function FrameworksPage({back}){
   </div>
 }
 
-function AboutPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="aboutPage"><div className="aboutIntro"><span className="eyebrow">ABOUT</span><h1>CaseCraft is a place to practice product thinking.</h1><p>Built by Richi Kothari to turn interesting products into sharper PM questions, practical analysis and better conversations.</p></div><div className="aboutLinks"><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>↗</b></a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer"><span>More about Richi</span><b>↗</b></a></div></main><SiteFooter/></div>}
+function AboutPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="aboutPage"><div className="aboutIntro"><span className="eyebrow">ABOUT</span><h1>CaseCraft is a place to practice product thinking.</h1><p>Built by Richi Kothari to turn interesting products into sharper PM questions, practical analysis and better conversations.</p></div><div className="aboutLinks"><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>↗</b></a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer"><span>More about Richi</span><b>↗</b></a><a href="mailto:richikothari07@gmail.com"><span>richikothari07@gmail.com</span><b>↗</b></a></div></main><SiteFooter/></div>}
 
 function App(){
  const [route,setRoute]=useState(window.location.hash||"#home");
