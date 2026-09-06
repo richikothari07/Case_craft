@@ -85,12 +85,14 @@ function ProductLogo({name,className=''}){
 function App(){
   const [sector,setSector]=useState("All");
   const [selected,setSelected]=useState(null);
+  const [selectedSector,setSelectedSector]=useState(null);
   const [selectedProduct,setSelectedProduct]=useState("All products");
   const [showResults,setShowResults]=useState(false);
 
   React.useEffect(() => {
     const handlePopState = () => {
       setSelected(null);
+      setSelectedSector(null);
       setShowResults(false);
       setSelectedProduct("All products");
     };
@@ -101,6 +103,7 @@ function App(){
   const openCase = (c) => {
     window.history.pushState({ case: c.name }, "", `#case-${encodeURIComponent(c.name.toLowerCase())}`);
     setSelected(c);
+    setSelectedSector(null);
     setShowResults(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -109,6 +112,7 @@ function App(){
     if (window.location.hash) window.history.back();
     else {
       setSelected(null);
+      setSelectedSector(null);
       setShowResults(false);
       setSelectedProduct("All products");
     }
@@ -141,8 +145,27 @@ function App(){
     .map(name=>CASES.find(c=>c.name===name)).filter(Boolean);
   const sectorSuggestions=sector!=="All" ? filtered.slice(0,5) : [];
 
+  const openSector = (name) => {
+    window.history.pushState({ sector: name }, "", `#sector-${encodeURIComponent(name.toLowerCase())}`);
+    setSelectedSector(name);
+    setSelected(null);
+    setSector(name);
+    setSelectedProduct("All products");
+    setShowResults(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   if(selected){
     return <CaseView c={selected} back={goHome} next={(nc)=>openCase(nc)} />;
+  }
+
+  if(selectedSector){
+    return <SectorView
+      name={selectedSector}
+      cases={CASES.filter(c=>(sectorGroups[selectedSector]||[]).includes(c.sector))}
+      back={goHome}
+      openCase={openCase}
+    />;
   }
 
   return <div>
@@ -195,10 +218,11 @@ function App(){
           <label><span>SECTOR</span><select value={sector} onChange={e=>{setSector(e.target.value);setSelectedProduct("All products");setShowResults(false)}}><option>All</option>{sectors.slice(1).map(s=><option key={s}>{s}</option>)}</select></label>
           <label><span>PRODUCT</span><select value={selectedProduct} onChange={e=>{setSelectedProduct(e.target.value);setShowResults(false)}}><option>All products</option>{filtered.map(c=><option key={c.name}>{c.name}</option>)}</select></label>
           <button className="searchButton" onClick={()=>{
-            setShowResults(true);
             if(selectedProduct !== "All products"){
               const found=CASES.find(c=>c.name===selectedProduct);
               if(found)openCase(found);
+            } else if(sector !== "All") {
+              openSector(sector);
             }
           }}>Search</button>
         </div>
@@ -214,7 +238,7 @@ function App(){
             ['Food & Dining',['Swiggy','Zomato'],'sector-food'],
             ['Consumer Tech',['boAt','Noise'],'sector-tech'],
             ['Mobility & EV',['Ather','Rapido'],'sector-mobility']
-          ].map(([name,brands,cls])=><button key={name} className={`popularSector ${cls}`} onClick={()=>{setSector(name);setSelectedProduct("All products");setShowResults(true);document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}}>
+          ].map(([name,brands,cls])=><button key={name} className={`popularSector ${cls}`} onClick={()=>openSector(name)}>
             <div className="sectorLogos">{brands.map(b=><span key={b} title={b}><ProductLogo name={b}/></span>)}</div>
             <span>{name}</span><b>↗</b>
           </button>)}
@@ -231,27 +255,32 @@ function App(){
         </div>
       </section>
 
-      {sector !== "All" && !showResults && (
-        <section className="quickSuggestions">
-          <div className="sectionHead compactHead">
-            <div><span className="eyebrow">IN THIS SECTOR</span><h2>Start with a case</h2></div>
-            <span className="muted">{filtered.length} products</span>
-          </div>
-          <div className="suggestionRow">
-            {sectorSuggestions.map(c=><button key={c.name} className="suggestionChip" onClick={()=>openCase(c)}>
-              <span>{c.name}</span><span>→</span>
-            </button>)}
-          </div>
-        </section>
-      )}
+      <footer className="homeFooter">
+        <div className="homeFooterBrand"><strong>CaseCraft</strong><span>Product thinking, deconstructed.</span></div>
+        <div className="homeFooterAbout"><span className="footerLabel">ABOUT</span><strong>Richi Kothari</strong></div>
+        <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">About me ↗</a></nav>
+      </footer>
+    </main>
+  </div>
+}
 
-      {showResults && <section className="results">
-        <div className="sectionHead">
-          <div><span className="eyebrow">RESULTS</span><h2>{selectedProduct !== "All products" ? selectedProduct : `Product results`}</h2></div>
-          <span className="muted">Select a case study to explore</span>
-        </div>
+function SectorView({name,cases,back,openCase}){
+  return <div className="sectorPage">
+    <header className="topbar">
+      <button className="backHome" onClick={back}>← Explore</button>
+      <div className="brand" onClick={back} aria-label="CaseCraft home">
+        <span className="wordmark"><span className="wordmarkCase">Case</span><span className="wordmarkCraft">Craft</span></span>
+      </div>
+    </header>
+    <main className="shell sectorPageShell">
+      <section className="sectorHero">
+        <span className="eyebrow">SECTOR</span>
+        <h1>{name}</h1>
+        <p>{cases.length} case studies to explore.</p>
+      </section>
+      <section className="results sectorResults">
         <div className="grid">
-          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
+          {cases.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
             <div className="cardLogo"><ProductLogo name={c.name}/></div>
             <h3>{c.name}</h3>
@@ -260,13 +289,7 @@ function App(){
             <div className="cardFoot"><span>Open case study</span><span>→</span></div>
           </article>)}
         </div>
-      </section>}
-
-      <footer className="homeFooter">
-        <div className="homeFooterBrand"><strong>CaseCraft</strong><span>Product thinking, deconstructed.</span></div>
-        <div className="homeFooterAbout"><span className="footerLabel">ABOUT</span><strong>Richi Kothari</strong></div>
-        <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">About me ↗</a></nav>
-      </footer>
+      </section>
     </main>
   </div>
 }

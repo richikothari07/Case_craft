@@ -612,3 +612,17 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
   .heroCentered{min-height:480px!important;padding:70px 0 76px!important}
   .heroCentered h1{font-size:clamp(58px,13vw,104px)!important}
 }
+
+/* Sector pages: open as a dedicated view rather than expanding results on home */
+.sectorPage{min-height:100vh;background:#000;color:#fff}
+.sectorPage .topbar{display:flex;align-items:center;justify-content:space-between}
+.backHome{border:0;background:transparent;color:#fff;font:600 12px/1 Inter,system-ui,sans-serif;cursor:pointer;padding:10px 0;order:0}
+.sectorPage .brand{order:2}
+.sectorPageShell{padding-top:70px!important}
+.sectorHero{padding:40px 0 44px;border-bottom:1px solid #242424}
+.sectorHero h1{margin:10px 0 10px;font:400 clamp(54px,8vw,104px)/.95 "DM Serif Display",Georgia,serif;color:#fff}
+.sectorHero p{margin:0;color:#fff;font-size:14px;opacity:.8}
+.sectorResults{padding:42px 0 80px!important}
+.sectorResults .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.sectorResults .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.sectorPage .topbar{padding-left:20px;padding-right:20px}.sectorPage .brand{order:0}.backHome{order:1}.sectorPageShell{padding-top:35px!important}.sectorHero{padding-top:28px}.sectorResults .grid{grid-template-columns:1fr}}
