@@ -118,140 +118,12 @@ const CHALLENGES=[
 ];
 
 const FRAMEWORKS=[
-  {
-    id:"north-star", title:"Product Metrics", framework:"North Star Metric",
-    description:"Align product teams around one measurable expression of customer value, then trace the inputs that move it.",
-    detail:"The North Star framework connects customer value to a single outcome metric and a set of product drivers. The goal is not to reduce measurement to one number. It is to create a shared direction while keeping the supporting system of inputs and guardrails visible.",
-    definition:"A good North Star Metric represents value delivered to customers, is meaningfully influenced by the product, and can act as a useful leading indicator of sustainable business performance.",
-    steps:[
-      ["01","Define the value moment","Write the moment when a user genuinely gets value. Avoid starting with revenue, traffic or engagement. Ask what successful customers actually accomplish."],
-      ["02","Generate candidate metrics","Turn that value into observable behaviours. A candidate should be measurable, understandable and sensitive to product decisions."],
-      ["03","Stress-test the metric","Check whether the metric can be gamed, whether it moves too slowly, and whether it could increase while customer experience gets worse."],
-      ["04","Map product drivers","Break the North Star into the controllable inputs that produce it. These are the levers individual teams can influence through product work."],
-      ["05","Add guardrails","Track quality, trust, economics and risk metrics that prevent teams from optimising the North Star at the expense of the product."],
-      ["06","Use it for decisions","When evaluating a roadmap item, ask which driver it should move, by how much, and what evidence supports that belief."]
-    ],
-    exampleTitle:"Example: Blinkit",
-    example:"Suppose the product's core value is helping customers get everyday needs quickly. A weak North Star would be app opens. A stronger candidate could be successful orders delivered within the promised experience. The next layer would be drivers such as search-to-order conversion, in-stock rate, delivery reliability and repeat ordering. The exact metric should be validated against the product's actual value proposition.",
-    application:["Start with customer value, not the metric you already have.","Separate the North Star from the inputs teams can directly move.","Use guardrails for reliability, trust, margin and experience quality.","Review whether the metric still represents value as the product expands."],
-    mistakes:["Choosing revenue or DAU simply because it is already on the executive dashboard.","Using a metric that is too broad for product teams to influence.","Creating a North Star with no driver tree, leaving teams unsure what to work on.","Optimising the number without monitoring quality or customer harm."],
-    interview:"If a PM says their North Star is monthly active users, challenge the definition of value. Ask what successful users are actually accomplishing, then build a candidate metric and driver tree from that behaviour.",
-    template:["Customer value statement","North Star Metric","Time window and unit","3 to 5 product drivers","2 to 4 guardrails","Evidence and assumptions"],
-    sourceLabel:"Amplitude North Star Playbook",
-    sourceUrl:"https://amplitude.com/books/north-star/about-north-star-framework"
-  },
-  {
-    id:"jtbd", title:"User Research", framework:"Jobs To Be Done",
-    description:"Understand the progress a user is trying to make, the forces behind the decision, and the outcome they consider successful.",
-    detail:"Jobs To Be Done shifts discovery from feature requests to the underlying progress people are trying to make in a particular situation. It is especially useful when users describe solutions rather than the problem they are solving.",
-    definition:"A job is the progress a person is trying to make in a given circumstance. The product is one possible way of getting that job done.",
-    steps:[
-      ["01","Find a real decision","Recruit people who recently chose, switched, abandoned or actively considered a solution. Recent behaviour is more useful than abstract opinions."],
-      ["02","Reconstruct the timeline","Walk backwards from the decision. What was happening before the search? What changed? What alternatives were considered?"],
-      ["03","Capture the forces","Look for the push from the current situation, the pull of the new solution, anxieties about changing and habits that keep the current behaviour in place."],
-      ["04","Write the job","Express the job as an outcome, not a feature. A useful structure is: When I am in [situation], I want to [motivation], so I can [desired outcome]."],
-      ["05","Map competing solutions","Include workarounds, manual processes, competitors and doing nothing. The real competition is whatever users currently hire to make progress."],
-      ["06","Design around the job","Prioritise the unmet part of the job rather than blindly reproducing the solution users initially requested."]
-    ],
-    exampleTitle:"Example: Groww",
-    example:"A user may say they want a better portfolio dashboard. The underlying job could be much broader: understand whether my investments are on track without having to become an expert. Research should reconstruct when that anxiety appears, what the user currently does, what information they trust and what would make the decision easier.",
-    application:["Interview around recent switching or decision moments.","Ask what happened before the user acted, not only what they like about the product.","Separate functional, emotional and social outcomes when they matter.","Use competing behaviours, not just named competitors, when defining the opportunity."],
-    mistakes:["Treating a job statement as a clever rewrite of a feature request.","Asking users what feature the team should build.","Ignoring the situation that triggers the job.","Assuming the job is identical across segments with different contexts or stakes."],
-    interview:"When asked to improve a product, first identify a high-value job. Ask who is struggling, in what situation, what they currently do, why that is inadequate and what outcome would make the problem disappear.",
-    template:["Target user and context","Trigger event","Current behaviour","Push factors","Pull factors","Anxieties and habits","Job statement","Desired outcome","Competing solutions"],
-    sourceLabel:"IdeaPlan JTBD Guide",
-    sourceUrl:"https://www.ideaplan.io/frameworks/jobs-to-be-done"
-  },
-  {
-    id:"playing-to-win", title:"Product Strategy", framework:"Playing to Win",
-    description:"Turn strategy into explicit choices about where to play, how to win, and what capabilities and systems make the choices real.",
-    detail:"Playing to Win is a choice-based strategy model. It forces a product team to make decisions rather than produce a list of ambitions. The five linked choices create a strategy that can guide trade-offs across product, market and execution.",
-    definition:"Strategy is a coordinated set of choices about the future, not a description of everything the company hopes to achieve.",
-    steps:[
-      ["01","Winning aspiration","Define what winning means in a way that is specific enough to guide decisions. It should describe the outcome the organisation is trying to create."],
-      ["02","Where to play","Choose the customers, needs, geographies, channels, categories or use cases where the company will concentrate its effort."],
-      ["03","How to win","State the advantage that should make customers choose you in that chosen arena. This is the core value proposition and source of advantage."],
-      ["04","Capabilities","Identify the capabilities that must reinforce the chosen way to win. These might include distribution, technology, supply, brand, data or operations."],
-      ["05","Management systems","Define the routines, metrics, governance and resource allocation mechanisms that make the strategy executable and repeatable."],
-      ["06","Make the trade-offs explicit","Write down what you will not prioritise. A strategy becomes useful when it changes decisions about where time and capital go."]
-    ],
-    exampleTitle:"Example: Zepto",
-    example:"A quick-commerce strategy cannot simply say 'deliver groceries fast'. The strategic choices might specify the target occasions and customer segments, the geographies where density makes the model work, the operating advantage that supports speed, and the capabilities required to maintain availability and economics. The important PM question is what Zepto chooses not to chase at the same time.",
-    application:["Use strategy to decide where scarce resources should concentrate.","Test whether the proposed advantage is actually difficult for competitors to reproduce.","Connect capabilities to the chosen way to win rather than listing generic strengths.","Use the choices to reject attractive opportunities that do not fit."],
-    mistakes:["Calling a goal such as 'be the market leader' a strategy.","Choosing every customer segment and geography at once.","Claiming differentiation without explaining why it is defensible.","Ignoring capabilities and operating systems required to deliver the promise."],
-    interview:"If asked whether a company should enter a new category, use the five choices. Clarify the winning aspiration, compare arenas, identify a credible way to win, test required capabilities, then state the trade-off.",
-    template:["Winning aspiration","Where to play","How to win","Required capabilities","Management systems","Explicit trade-offs"],
-    sourceLabel:"Playing to Win, A.G. Lafley and Roger Martin",
-    sourceUrl:"https://www.playingtowin.com/"
-  },
-  {
-    id:"aarrr", title:"Growth", framework:"AARRR", 
-    description:"Diagnose growth by mapping the user journey from acquisition through activation, retention, referral and revenue.",
-    detail:"AARRR turns the broad question 'How do we grow?' into a set of observable behaviours. It is most useful as a diagnostic model: find the stage where users fail to realise or repeat value, then investigate the causes before shipping tactics.",
-    definition:"AARRR stands for Acquisition, Activation, Retention, Referral and Revenue. Each stage represents a different growth question and requires its own definition and metric.",
-    steps:[
-      ["01","Acquisition","Measure how the right users discover and enter the product. Segment by channel and user quality rather than treating every signup as equal."],
-      ["02","Activation","Define the earliest meaningful value event. The key question is whether a new user experiences enough value to make continued use plausible."],
-      ["03","Retention","Measure whether users come back and continue receiving value. Use cohorts and behaviour, not only aggregate active-user counts."],
-      ["04","Referral","Understand whether existing users create incremental demand through sharing, recommendations, invites or network effects."],
-      ["05","Revenue","Connect user behaviour to sustainable monetisation. Revenue can come at different points in the journey depending on the business model."],
-      ["06","Find the bottleneck","Compare stage conversion, segment performance and cohort behaviour. Prioritise the constraint with the strongest evidence of leverage, not automatically the biggest percentage drop."]
-    ],
-    exampleTitle:"Example: CRED",
-    example:"Imagine CRED wants more high-quality members to become repeat users. Acquisition might track qualified signups, activation could be the first meaningful payment or reward interaction, retention could track repeat monthly behaviour, referral could measure qualified invites, and revenue could capture the monetisation outcome. The PM should investigate which transition is constraining growth before choosing a campaign or feature.",
-    application:["Define each stage with an observable event, not a vague label.","Use cohorts to distinguish temporary spikes from durable behaviour.","Segment by acquisition source, user type and activation behaviour.","Treat the framework as a diagnosis tool, not a checklist for shipping growth hacks."],
-    mistakes:["Calling app installs acquisition success without measuring user quality.","Defining activation as account creation when no value has been delivered.","Looking at aggregate retention instead of cohorts.","Assuming the largest funnel drop is automatically the highest-value opportunity."],
-    interview:"When growth is flat, map the full journey first. Ask where qualified users are lost, whether the issue is acquisition quality or product value, and which experiment could most cleanly distinguish the competing hypotheses.",
-    template:["Stage definition","Primary metric","Segment cuts","Current conversion","Largest uncertainty","Hypothesis","Experiment","Expected impact"],
-    sourceLabel:"AARRR overview",
-    sourceUrl:"https://ahrefs.com/blog/aarrr-metrics-framework/"
-  },
-  {
-    id:"double-diamond", title:"UX", framework:"Double Diamond",
-    description:"Separate problem discovery from solution development so teams do not optimise a solution before understanding the problem.",
-    detail:"The Double Diamond describes four phases: Discover, Define, Develop and Deliver. The two diamonds represent divergent exploration and convergent focus. It is deliberately a process model rather than a rigid checklist, so teams can move backwards when new evidence changes the problem definition.",
-    definition:"The first diamond helps the team understand and frame the problem. The second explores and tests possible solutions. Both involve opening up possibilities and then narrowing them down.",
-    steps:[
-      ["01","Discover","Observe users, interview them, review behavioural data and map the context around the problem. The goal is to replace assumptions with evidence."],
-      ["02","Define","Cluster findings, identify patterns, quantify where possible and write a focused problem statement. Decide what is in and out of scope."],
-      ["03","Develop","Generate multiple solution directions before converging. Use sketches, flows, prototypes and cross-functional critique to expose assumptions early."],
-      ["04","Deliver","Test promising solutions with real users, measure the intended outcome and reduce uncertainty before committing significant engineering effort."],
-      ["05","Loop back","If testing reveals that the problem was misunderstood, return to discovery or definition. Do not force a weak solution through delivery because the project has already started."],
-      ["06","Choose the right method","The framework does not dictate one research or design technique. Select interviews, analytics, usability tests, prototypes or experiments based on the uncertainty you need to resolve."]
-    ],
-    exampleTitle:"Example: Myntra checkout",
-    example:"If checkout completion falls, jumping straight to a redesigned checkout may solve the wrong problem. Discover might combine funnel data with user sessions and interviews. Define could reveal that delivery uncertainty, not form complexity, is the main blocker. Develop would test different ways of making delivery information clearer. Deliver would validate the chosen solution through usability testing and controlled measurement.",
-    application:["Use divergence when the problem or solution space is still uncertain.","Converge only after synthesising evidence and making the decision criteria explicit.","Prototype at the cheapest fidelity that can answer the current question.","Treat iteration as normal when evidence changes the problem definition."],
-    mistakes:["Starting with a UI redesign because the solution feels tangible.","Doing discovery without turning findings into a focused problem statement.","Generating one solution and calling it ideation.","Treating delivery as the end instead of testing whether the solution actually works."],
-    interview:"For a UX case, explicitly show the two diamonds. Explain what you would learn in Discover, how that changes the problem in Define, what alternatives you would explore in Develop, and how you would test the selected direction in Deliver.",
-    template:["Initial challenge","Evidence to gather","Key insights","Problem statement","Success criteria","Solution directions","Prototype","Test plan","Decision and next iteration"],
-    sourceLabel:"Design Council, The Double Diamond",
-    sourceUrl:"https://www.designcouncil.org.uk/resources/the-double-diamond/"
-  },
-  {
-    id:"rice", title:"Prioritization", framework:"RICE",
-    description:"Compare opportunities by Reach, Impact, Confidence and Effort, then use the score to make trade-offs visible rather than pretending they do not exist.",
-    detail:"RICE is a prioritization model that turns four assumptions into a comparable score. It is useful when a team has more plausible opportunities than it can execute, but it should support product judgment rather than replace it.",
-    definition:"RICE = Reach × Impact × Confidence ÷ Effort. The exact scales can be adapted, but the team should define them consistently before comparing ideas.",
-    formula:"Reach × Impact × Confidence ÷ Effort",
-    steps:[
-      ["01","Reach","Estimate how many users or events an initiative will affect in a defined time period. State the period explicitly so scores remain comparable."],
-      ["02","Impact","Estimate how strongly the initiative could move the target outcome. Use a consistent scale and explain what each level means for your team."],
-      ["03","Confidence","Reduce the score when evidence is weak. Confidence is a forcing function that makes uncertainty visible instead of letting optimistic assumptions dominate."],
-      ["04","Effort","Estimate the total team effort required across product, design, engineering and other critical dependencies. A low score is not useful if effort is understated."],
-      ["05","Calculate and compare","Apply the same definitions across the candidate set. The score creates a ranking, but large differences should trigger investigation rather than blind acceptance."],
-      ["06","Use judgment","Check strategic fit, dependencies, risk, learning value and sequencing. A lower RICE score can still win when it unlocks a critical capability or tests a major uncertainty."],
-      ["07","Revisit assumptions","After delivery, compare actual reach, impact and effort with the estimates. The goal is to improve the team's calibration, not simply defend the original ranking."]
-    ],
-    exampleTitle:"Worked example",
-    example:"Suppose three opportunities are being considered. Feature A could reach 20,000 users, has medium impact, 80% confidence and requires 4 effort units. Feature B could reach 8,000 users, has high impact, 50% confidence and requires 2 effort units. Feature C could reach 30,000 users, has low impact, 90% confidence and requires 8 effort units. Scoring makes the assumptions comparable, then the PM should pressure-test whether the numbers are credible and whether strategy or dependencies change the final decision.",
-    application:["Define the scoring scales before reviewing the backlog.","Use evidence to support Reach and Impact rather than assigning numbers by intuition alone.","Treat Confidence as uncertainty, not a reward for enthusiasm.","Use Effort as total delivery effort, including cross-functional work and dependencies.","Review the score alongside strategy, risk and sequencing."],
-    mistakes:["Comparing scores created with different time windows or scales.","Giving every idea high confidence because the team likes it.","Using false precision when the underlying evidence is weak.","Treating the final ranking as an automatic roadmap."],
-    interview:"In an interview prioritization case, define the objective first. Then establish the RICE scales, score a small set of opportunities, explain the biggest uncertainty in the ranking, and state what additional evidence could change your decision.",
-    template:["Objective metric","Reach and time window","Impact scale","Confidence and evidence","Total effort","RICE score","Strategic fit","Dependencies and risks","Decision"],
-    sourceLabel:"Atlassian, RICE prioritization",
-    sourceUrl:"https://www.atlassian.com/agile/product-management/prioritization-framework"
-  }
+  {id:"north-star",title:"Product Metrics",framework:"North Star Metric",description:"Connect user value to the metric that best represents the product's core value.",detail:"A North Star Metric gives the team one clear measure of customer value and helps connect product work to meaningful outcomes.",steps:[["01","Define the value moment","What meaningful outcome does the product repeatedly create for users?"],["02","Choose the metric","Pick a measurable behaviour that reflects that value, not a vanity signal."],["03","Add input metrics","Track the product behaviours that influence the North Star."],["04","Add guardrails","Make sure optimisation does not damage quality, trust or economics."]],use:"Use it when a product has many metrics and teams are struggling to align on what success actually means."},
+  {id:"jtbd",title:"User Research",framework:"Jobs To Be Done",description:"Understand the progress a user is trying to make, not just the feature they ask for.",detail:"Jobs To Be Done reframes research around the underlying progress users are trying to make in a situation.",steps:[["01","Situation","What was happening when the user started looking for a solution?"],["02","Motivation","What triggered the search or decision to act?"],["03","Desired progress","What were they ultimately trying to accomplish?"],["04","Outcome","What made the solution feel successful or unsuccessful?"]],use:"Use it when user requests are feature-led, contradictory, or when you need to understand why people choose, switch or abandon a product."},
+  {id:"playing-to-win",title:"Product Strategy",framework:"Playing to Win",description:"Turn strategy into explicit choices about where to play and how to win.",detail:"Playing to Win is a choice-based strategy framework that forces teams to define the market and advantage they are deliberately pursuing.",steps:[["01","Winning aspiration","What does winning look like?"],["02","Where to play","Which customers, markets, use cases or categories will you focus on?"],["03","How to win","What advantage will make customers choose you?"],["04","Capabilities","What must the organisation be unusually good at?"],["05","Management systems","What systems and measures keep the strategy executable?"]],use:"Use it when a product has too many possible directions and the team needs to make sharper strategic choices."},
+  {id:"aarrr",title:"Growth",framework:"AARRR",description:"Map the growth funnel from acquisition to retention, referral and revenue.",detail:"AARRR breaks growth into a sequence of user behaviours so you can diagnose where the funnel is actually constrained.",steps:[["01","Acquisition","How are users discovering and entering the product?"],["02","Activation","What first experience convinces them the product is valuable?"],["03","Retention","What brings them back and creates repeat value?"],["04","Referral","What makes existing users drive new demand?"],["05","Revenue","Where does sustained user value become sustainable business value?"]],use:"Use it when growth is a vague goal and you need to identify the specific stage of the funnel that deserves attention."},
+  {id:"double-diamond",title:"UX",framework:"Double Diamond",description:"Move from understanding the problem to testing the right solution without jumping too early to design.",detail:"The Double Diamond separates problem discovery from solution development, helping teams widen and narrow their thinking at the right moments.",steps:[["01","Discover","Explore users, context, behaviours and evidence."],["02","Define","Synthesize the evidence into a focused problem statement."],["03","Develop","Generate and explore multiple solution directions."],["04","Deliver","Prototype, test, learn and refine before committing."]],use:"Use it when teams are jumping into solutions before they have agreed on the real user problem."},
+  {id:"rice",title:"Prioritization",framework:"RICE",description:"Compare opportunities using Reach, Impact, Confidence and Effort.",detail:"RICE creates a consistent way to compare product opportunities while making assumptions and delivery cost visible.",steps:[["01","Reach","How many users or customers will this affect?"],["02","Impact","How much could it move the outcome that matters?"],["03","Confidence","How strong is the evidence behind the estimate?"],["04","Effort","How much team time and complexity will it take?"]],formula:"Reach × Impact × Confidence ÷ Effort",use:"Use it when there are more opportunities than capacity and you need a structured way to make trade-offs."}
 ];
 
 const POPULAR_SECTORS=[
@@ -342,72 +214,22 @@ function FrameworkDetailPage({framework,back,home}){
     <SiteNav onHome={home}/>
     <main className="simplePage frameworkDetailPage">
       <button className="textBack" onClick={back}>← Frameworks</button>
-      <span className="eyebrow">{framework.title.toUpperCase()} · FRAMEWORK</span>
+      <span className="eyebrow">PRODUCT FRAMEWORK</span>
       <h1>{framework.framework}</h1>
       <p className="pageLead">{framework.detail}</p>
-
-      <section className="frameworkDefinition">
-        <span className="frameworkLabel">THE IDEA</span>
-        <p>{framework.definition}</p>
-      </section>
-
-      {framework.formula&&<div className="frameworkDetailFormula"><span>RICE</span><b>=</b>{framework.formula}</div>}
-
-      <section className="frameworkDetailSection">
-        <div className="frameworkSectionIntro">
-          <span className="frameworkLabel">HOW TO USE IT</span>
-          <h2>From framework to product decision.</h2>
-          <p>Use the framework as a sequence of questions. The value comes from the reasoning behind each step, not from filling in a template mechanically.</p>
-        </div>
-        <div className="frameworkStepList">
-          {framework.steps.map(([n,label,text])=><article key={n} className="frameworkStep">
-            <span>{n}</span>
-            <div><h3>{label}</h3><p>{text}</p></div>
-          </article>)}
-        </div>
-      </section>
-
-      <section className="frameworkExample">
-        <span className="frameworkLabel">WORKED EXAMPLE</span>
-        <h2>{framework.exampleTitle}</h2>
-        <p>{framework.example}</p>
-      </section>
-
-      <section className="frameworkDetailSection twoFrameworkCols">
-        <div>
-          <span className="frameworkLabel">PM PLAYBOOK</span>
-          <h2>How to apply it well.</h2>
-          <ul className="frameworkBulletList">{framework.application.map(x=><li key={x}>{x}</li>)}</ul>
-        </div>
-        <div>
-          <span className="frameworkLabel">COMMON FAILURE MODES</span>
-          <h2>What to watch out for.</h2>
-          <ul className="frameworkBulletList">{framework.mistakes.map(x=><li key={x}>{x}</li>)}</ul>
-        </div>
-      </section>
-
-      <section className="frameworkInterview">
-        <span className="frameworkLabel">INTERVIEW APPLICATION</span>
-        <h2>How this framework helps you think in a PM interview.</h2>
-        <p>{framework.interview}</p>
-      </section>
-
-      <section className="frameworkTemplate">
-        <div>
-          <span className="frameworkLabel">USE THIS TEMPLATE</span>
-          <h2>Questions to write down before you decide.</h2>
-        </div>
-        <div className="templateList">{framework.template.map((x,i)=><div key={x}><span>{String(i+1).padStart(2,"0")}</span><strong>{x}</strong></div>)}</div>
-      </section>
-
-      <section className="frameworkSource">
-        <span className="frameworkLabel">FURTHER READING</span>
-        <a href={framework.sourceUrl} target="_blank" rel="noreferrer">{framework.sourceLabel} <span>↗</span></a>
-      </section>
+      {framework.formula&&<div className="frameworkDetailFormula">{framework.formula}</div>}
+      <div className="frameworkStepGrid">
+        {framework.steps.map(([n,label,text])=><div key={n}><span>{n}</span><h3>{label}</h3><p>{text}</p></div>)}
+      </div>
+      <div className="frameworkUse">
+        <span className="eyebrow">WHEN TO USE IT</span>
+        <h2>{framework.use}</h2>
+      </div>
     </main>
     <SiteFooter/>
   </div>
 }
+
 function FrameworksPage({back}){
   const openFramework=(id)=>{window.history.pushState({framework:id},"",`#framework-${id}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
   return <div className="platformPage">
