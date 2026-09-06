@@ -176,6 +176,4 @@ function CaseView({c,back}){
 
 function Section({title,children}){return <section className="caseSection"><div className="sectionTitle"><span>{title}</span></div>{children}</section>}
 
-function Badge({children,tone=""}){return <span className={"badge "+tone}>{children}</span>}
-
 createRoot(document.getElementById("root")).render(<App/>);
