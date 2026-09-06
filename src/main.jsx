@@ -43,7 +43,7 @@ function App(){
       <section className="searchStage">
         <div className="searchIntro">
           <span className="eyebrow">EXPLORE</span>
-          <h2>What do you want to study?</h2>
+          <h2>Explore a product</h2>
           <p>Search for a product or filter by sector. Results appear when you hit Enter.</p>
         </div>
         <form className="searchPanel" onSubmit={submitSearch}>
