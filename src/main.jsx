@@ -118,7 +118,7 @@ const CHALLENGES=[
 ];
 
 const FRAMEWORKS=[
-  ["Product Metrics","Connect user value to the metrics that matter."],["User Research","Turn observations into sharper product questions."],["Product Strategy","Choose where to play — and what not to build."],["Growth","Understand acquisition, activation, retention and loops."],["UX","Spot friction across the journey from intent to outcome."],["Prioritization","Make trade-offs explicit when everything feels important."]
+  ["Product Metrics","Connect user value to the metrics that matter."],["User Research","Turn observations into sharper product questions."],["Product Strategy","Choose where to play, and what not to build."],["Growth","Understand acquisition, activation, retention and loops."],["UX","Spot friction across the journey from intent to outcome."],["Prioritization","Make trade-offs explicit when everything feels important."]
 ];
 
 const POPULAR_SECTORS=[
@@ -138,6 +138,7 @@ function HomePage({openCase,openSector}){
   const finderSearch=()=>{if(finderProduct!=="All products"){const c=CASES.find(x=>x.name===finderProduct);if(c)openCase(c);}else if(finderSector!=="All")openSector(finderSector);else document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})};
   const featured=["Blinkit","Zepto","Groww","CRED","PhonePe"].map(n=>CASES.find(c=>c.name===n)).filter(Boolean);
   const productVisual=(c)=>CASE_VISUALS[c?.name]||null;
+  const openFramework=()=>{window.history.pushState({framework:"rice"},"","#framework-rice");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
   return <div className="homePage">
     <SiteNav onHome={()=>window.history.pushState({},"","#home")||window.dispatchEvent(new PopStateEvent("popstate"))}/>
     <main>
@@ -164,7 +165,7 @@ function HomePage({openCase,openSector}){
 
       <section className="statementSection sectionPad">
         <div className="statementKicker">THE CASECRAFT METHOD</div>
-        <div className="statementGrid"><h2>Great PMs don't just know frameworks.<br/><em>They know how to think.</em></h2><p>CaseCraft turns real products into practical product-thinking exercises — so you can learn how great products work, where they fall short, and what you would do differently.</p></div>
+        <div className="statementGrid"><h2>Great PMs don't just know frameworks.<br/><em>They know how to think.</em></h2><p>CaseCraft turns real products into practical product-thinking exercises, so you can learn how great products work, where they fall short, and what you would do differently.</p></div>
         <div className="methodCards">
           {[['01','DECONSTRUCT','Understand the product, users, business model and experience.'],['02','DISCOVER','Identify friction, gaps and opportunities.'],['03','DESIGN','Turn insights into product decisions and solutions.']].map(([n,t,d])=><div className="methodCard" key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div><b>↗</b></div>)}
         </div>
@@ -187,6 +188,15 @@ function HomePage({openCase,openSector}){
         <div className="sectorLogoGrid">{POPULAR_SECTORS.map(([name,brands,cls])=><button key={name} className={`sectorVisual ${cls}`} onClick={()=>openSector(name)}><div className="sectorLogoRow">{brands.map(b=><span key={b}><ProductLogo name={b}/></span>)}</div><div><strong>{name}</strong><small>{brands.join(" · ")}</small></div><b>↗</b></button>)}</div>
       </section>
 
+      <section className="frameworkSpotlight sectionPad">
+        <div className="sectionHeader"><div><span className="eyebrow">FRAMEWORK</span><h2>RICE</h2></div><button onClick={openFramework}>Learn framework <span>→</span></button></div>
+        <button className="frameworkSpotlightCard" onClick={openFramework}>
+          <div className="riceFormula"><span>Reach</span><b>×</b><span>Impact</span><b>×</b><span>Confidence</span><b>÷</b><span>Effort</span></div>
+          <div className="frameworkSpotlightCopy"><strong>Prioritize what to build next.</strong><p>A practical scoring model for comparing product opportunities when everything feels important.</p></div>
+          <span className="frameworkArrow">↗</span>
+        </button>
+      </section>
+
       <section className="insideSection sectionPad"><div className="insidePanel"><span className="eyebrow">WHAT YOU GET</span><h2>Everything you need to<br/><em>think like a PM.</em></h2><div className="insideFlow">{[['01','DECONSTRUCTIONS','How the product works'],['02','METRICS','What to measure'],['03','PM BETS','What to change'],['04','INTERVIEW','Questions to pressure-test thinking']].map(([n,x,d],i)=><div key={x}><span>{n}</span><strong>{x}</strong><small>{d}</small></div>)}</div></div></section>
 
 
@@ -204,6 +214,8 @@ function ChallengesPage({back,initialActive=null}){
  return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT CHALLENGES</span><h1>Think like the PM.</h1><p className="pageLead">Don't just read the answer. Make the decision.</p><div className="challengePageGrid">{CHALLENGES.map((c,i)=><button key={c.title} onClick={()=>start(i)} className="challengePageCard"><span>0{i+1}</span><small>{c.meta}</small><h2>{c.title}</h2><p>{c.question}</p><b>Start challenge →</b></button>)}</div></main><SiteFooter/></div>
 }
 
+function FrameworkDetailPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage frameworkDetailPage"><button className="textBack" onClick={back}>← Back</button><span className="eyebrow">PRODUCT FRAMEWORK</span><h1>RICE</h1><p className="pageLead">A prioritization framework for deciding which opportunities deserve attention first.</p><div className="riceDetailFormula"><span>Reach</span><b>×</b><span>Impact</span><b>×</b><span>Confidence</span><b>÷</b><span>Effort</span></div><div className="riceDetailGrid"><div><small>REACH</small><p>How many users or customers will this affect?</p></div><div><small>IMPACT</small><p>How much could it move the outcome that matters?</p></div><div><small>CONFIDENCE</small><p>How strong is the evidence behind your estimates?</p></div><div><small>EFFORT</small><p>How much team time and complexity will it take?</p></div></div><div className="frameworkUse"><span className="eyebrow">WHEN TO USE IT</span><h2>When you have more opportunities than capacity.</h2><p>RICE is useful for making trade-offs explicit and creating a consistent way to compare ideas. It is a starting point for discussion, not a replacement for product judgment.</p></div></main><SiteFooter/></div>}
+
 function FrameworksPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT FRAMEWORKS</span><h1>Tools to structure your thinking.</h1><p className="pageLead">Simple structures for sharper product conversations.</p><div className="frameworkPageGrid">{FRAMEWORKS.map((f,i)=><article key={f[0]} className="frameworkPageCard"><span>0{i+1}</span><h2>{f[0]}</h2><p>{f[1]}</p><div className="frameworkRule"></div><small>Coming into the case? Use this lens.</small></article>)}</div></main><SiteFooter/></div>}
 
 function AboutPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="aboutPage"><div className="aboutIntro"><span className="eyebrow">ABOUT</span><h1>CaseCraft is a place to practice product thinking.</h1><p>Built by Richi Kothari to turn interesting products into sharper PM questions, practical analysis and better conversations.</p></div><div className="aboutLinks"><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>↗</b></a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer"><span>More about Richi</span><b>↗</b></a></div></main><SiteFooter/></div>}
@@ -220,6 +232,7 @@ function App(){
  if(selectedSector)return <SectorView name={selectedSector} cases={CASES.filter(c=>(sectorGroups[selectedSector]||[]).includes(c.sector))} back={goHome} openCase={openCase}/>;
  if(route.startsWith("#challenge-")){const n=parseInt(route.replace("#challenge-",""),10)-1;return <ChallengesPage back={goHome} initialActive={Number.isFinite(n)&&CHALLENGES[n]?n:null}/>;}
  if(route==="#challenges")return <ChallengesPage back={goHome}/>;
+ if(route==="#framework-rice")return <FrameworkDetailPage back={goHome}/>;
  if(route==="#frameworks")return <FrameworksPage back={goHome}/>;
  if(route==="#about")return <AboutPage back={goHome}/>;
  return <HomePage openCase={openCase} openSector={openSector}/>;

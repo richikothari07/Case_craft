@@ -721,3 +721,25 @@ button{color:inherit}
 .heroNew h1 em{font-style:normal!important;font-weight:400!important}
 .heroNew h1{font-size:clamp(54px,6.5vw,92px)!important;line-height:.98!important}
 @media(max-width:640px){.heroNew h1{font-size:clamp(48px,13vw,72px)!important}}
+
+/* Compact framework spotlight */
+.frameworkSpotlight{padding-top:10px!important}
+.frameworkSpotlight .sectionHeader h2{font-size:clamp(32px,3.5vw,48px)!important}
+.frameworkSpotlightCard{position:relative;width:100%;display:grid;grid-template-columns:1.15fr .85fr auto;align-items:center;gap:30px;text-align:left;border:1px solid #292929;border-radius:20px;background:linear-gradient(120deg,#0d0d0d,#10110f);padding:30px 32px;color:#fff;cursor:pointer;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.frameworkSpotlightCard:hover{transform:translateY(-3px);border-color:#4a4a4a;background:#111}
+.riceFormula,.riceDetailFormula{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font:400 25px/1 "DM Serif Display",Georgia,serif}
+.riceFormula b,.riceDetailFormula b{font-family:Inter,system-ui,sans-serif;font-size:16px;color:#777;font-weight:400}
+.frameworkSpotlightCopy strong{font-size:16px;font-weight:600}
+.frameworkSpotlightCopy p{margin:7px 0 0;color:#999;font-size:12px;line-height:1.5;max-width:420px}
+.frameworkArrow{font-size:20px;color:#aaa}
+.frameworkDetailPage h1{font-size:clamp(72px,10vw,130px)!important}
+.riceDetailFormula{margin-top:60px;padding:30px;border:1px solid #292929;border-radius:20px;background:#0d0d0d;font-size:34px}
+.riceDetailGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.riceDetailGrid>div{border:1px solid #292929;background:#0d0d0d;border-radius:16px;padding:22px;min-height:145px}
+.riceDetailGrid small{font-size:9px;letter-spacing:.14em;color:#777}
+.riceDetailGrid p{font-size:13px;line-height:1.5;color:#aaa;margin:22px 0 0}
+.frameworkUse{margin-top:60px;padding-top:28px;border-top:1px solid #292929;max-width:760px}
+.frameworkUse h2{font:400 clamp(32px,4vw,54px)/1.05 "DM Serif Display",Georgia,serif;margin:16px 0}
+.frameworkUse p{color:#999;font-size:14px;line-height:1.7;max-width:620px}
+@media(max-width:900px){.frameworkSpotlightCard{grid-template-columns:1fr;gap:22px}.riceDetailGrid{grid-template-columns:1fr 1fr}.riceDetailFormula{font-size:28px}}
+@media(max-width:640px){.frameworkSpotlightCard{padding:24px}.riceFormula{font-size:21px;gap:9px}.riceDetailGrid{grid-template-columns:1fr}.riceDetailFormula{font-size:22px;padding:22px}.frameworkUse{margin-top:45px}}
