@@ -327,3 +327,42 @@ body{background:#0b0b0b;color:#fff}
 .caseShell{background:#fff;color:#111}
 .caseShell .wordmarkCase{color:#111!important}.caseShell .wordmarkCraft{color:#111!important;opacity:.58}
 footer{background:#0b0b0b;color:#888;border-color:#262626}
+
+
+/* Final dark homepage: high-contrast type + more visual popular-case cards */
+body{background:#0b0b0b;color:#fff}
+.topbar,.shell{background:#0b0b0b;color:#fff}
+.hero h1,.hero h1 em,.heroCopy,.heroEyebrow,.explorePrompt,.exploreHint,.sectionHead h2,.eyebrow,.marqueeHint,.marqueeText strong,.marqueeText span,.marqueeArrow,.selectRow label>span,.card h3,.card p,.cardFoot,.sector,.tagline,.muted{color:#fff!important}
+.heroCopy,.exploreHint,.marqueeHint,.marqueeText span,.muted{opacity:1}
+
+.marqueeCard{display:block;position:relative;padding:0!important;min-height:230px!important;border-radius:22px!important;overflow:hidden!important;background:var(--case-accent,#fff)!important;color:#111!important;border:1px solid rgba(255,255,255,.18)!important;text-align:left}
+.marqueeCard:hover{background:var(--case-accent,#fff)!important;filter:brightness(.98);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.42)}
+.marqueeVisual{position:absolute;inset:0 0 72px 0;overflow:hidden;background:#111}
+.marqueeVisual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 38%,rgba(0,0,0,.55) 100%)}
+.visualGlow{position:absolute;width:180px;height:180px;border-radius:50%;right:-30px;top:-35px;background:rgba(255,255,255,.24);filter:blur(2px)}
+.visualShape{position:absolute;border-radius:50%;filter:blur(.2px)}
+.visualShapeOne{width:150px;height:150px;left:-24px;bottom:-55px;background:rgba(255,255,255,.18)}
+.visualShapeTwo{width:105px;height:105px;right:24px;bottom:20px;background:rgba(0,0,0,.24);transform:rotate(18deg)}
+.visualGrid{position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.10) 1px,transparent 1px);background-size:34px 34px;transform:rotate(-8deg) scale(1.2);opacity:.55}
+.visual-blinkit{background:linear-gradient(135deg,#171717 0%,#f4c400 100%)}
+.visual-phonepe{background:linear-gradient(135deg,#24103e 0%,#5f259f 52%,#8f63d9 100%)}
+.visual-groww{background:linear-gradient(135deg,#063c30 0%,#00b386 58%,#55e2c1 100%)}
+.visual-zepto{background:linear-gradient(135deg,#24105b 0%,#6f35c9 58%,#a86dff 100%)}
+.visual-cred{background:linear-gradient(135deg,#202020 0%,#e7e7e7 100%)}
+.visual-blinkit .visualShapeTwo{border-radius:22px;width:125px;height:70px;right:38px;bottom:28px;transform:rotate(-18deg);background:rgba(20,20,20,.45)}
+.visual-phonepe .visualShapeTwo{border-radius:20px;width:76px;height:125px;right:38px;bottom:18px;transform:rotate(12deg);background:rgba(255,255,255,.2)}
+.visual-groww .visualShapeTwo{width:125px;height:125px;right:30px;bottom:15px;background:rgba(0,20,16,.28)}
+.visual-zepto .visualShapeTwo{border-radius:14px;width:105px;height:105px;right:38px;bottom:22px;transform:rotate(12deg);background:rgba(255,116,116,.35)}
+.visual-cred .visualShapeTwo{border-radius:12px;width:140px;height:78px;right:22px;bottom:26px;transform:rotate(-10deg);background:rgba(20,20,20,.38)}
+.marqueeInfo{position:absolute;left:0;right:0;bottom:0;height:72px;padding:10px 16px;display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;background:var(--case-accent,#fff);color:#111}
+.marqueeLogo{width:44px;height:44px;border-radius:12px;background:#fff!important;display:grid;place-items:center;border:1px solid rgba(0,0,0,.12)}
+.marqueeLogo img{width:29px;height:29px;object-fit:contain;filter:none!important}
+.marqueeLogo span{color:#111!important;font-family:"DM Serif Display",Georgia,serif;font-size:22px}
+.marqueeText{display:flex;flex-direction:column;gap:2px;min-width:0}
+.marqueeText strong{font-size:24px!important;line-height:1;color:#111!important}
+.marqueeText span{font-size:10px!important;line-height:1.2;color:#111!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.marqueeArrow{color:#111!important;font-size:21px}
+
+/* Make logo failures visibly graceful rather than blank */
+.marqueeLogo img[alt]{display:block}
+.cardLogo img{filter:none!important}

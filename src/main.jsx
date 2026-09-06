@@ -156,9 +156,17 @@ function App(){
         <div className="marqueeViewport">
           <div className="marqueeTrack">
             {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}} onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
-              <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>
-              <div className="marqueeText"><strong>{c.name}</strong><span>{c.tag}</span></div>
-              <span className="marqueeArrow">↗</span>
+              <div className={`marqueeVisual visual-${c.name.toLowerCase()}`} aria-hidden="true">
+                <div className="visualGlow"></div>
+                <div className="visualShape visualShapeOne"></div>
+                <div className="visualShape visualShapeTwo"></div>
+                <div className="visualGrid"></div>
+              </div>
+              <div className="marqueeInfo">
+                <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>
+                <div className="marqueeText"><strong>{c.name}</strong><span>{c.tag}</span></div>
+                <span className="marqueeArrow">↗</span>
+              </div>
             </button>)}
           </div>
         </div>
