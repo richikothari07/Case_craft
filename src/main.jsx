@@ -1,4 +1,3 @@
-// CaseCraft sync test v2.1
 import React, { useState, useMemo } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
@@ -252,7 +251,100 @@ const FRAMEWORKS=[
     template:["Objective metric","Reach and time window","Impact scale","Confidence and evidence","Total effort","RICE score","Strategic fit","Dependencies and risks","Decision"],
     sourceLabel:"Atlassian, RICE prioritization",
     sourceUrl:"https://www.atlassian.com/agile/product-management/prioritization-framework"
+  },
+  {
+    id:"rca", title:"Diagnosis", framework:"Root Cause Analysis",
+    description:"Move from a visible product symptom to the underlying cause before deciding what to build or change.",
+    detail:"Root Cause Analysis is a structured way to separate symptoms from causes. In product work, the goal is to identify the smallest set of validated causes that explain the observed problem, rather than jumping from a metric decline to a solution.",
+    definition:"RCA asks: what changed, where did it change, for whom, why might it have changed, and what evidence would prove or disprove each hypothesis?",
+    steps:[
+      ["01","Define the problem","State the symptom precisely. Include the metric, size of change, time period, baseline and affected population. 'Orders are down' is weaker than 'checkout conversion fell 8% week over week for Android users in Mumbai.'"],
+      ["02","Break it down","Segment the problem by funnel step, user type, geography, device, acquisition source, cohort and time. Look for where the change is concentrated."],
+      ["03","Generate hypotheses","List plausible causes without committing to one. Separate product, operational, technical, market and behavioural explanations."],
+      ["04","Trace the cause","Use techniques such as 5 Whys, issue trees, logs, funnel data, user research and operational data to move from correlation toward a causal explanation."],
+      ["05","Validate with evidence","For each hypothesis, identify the observation that should be true if it is correct. Look for disconfirming evidence, not only evidence that supports your favourite explanation."],
+      ["06","Identify the root cause","Choose the deepest actionable cause that explains the evidence. Avoid stopping at a vague label such as 'poor UX' or 'users are confused.'"],
+      ["07","Intervene and monitor","Design the smallest intervention that addresses the cause, then monitor the original symptom and guardrails to confirm that the diagnosis was correct."]
+    ],
+    exampleTitle:"Example: Blinkit conversion falls",
+    example:"Suppose Blinkit's checkout conversion falls 10%. Start with the funnel and discover that the decline is concentrated after users see delivery fees. Segment further and find that the change is strongest for smaller baskets. A deeper investigation could reveal that a minimum-order threshold was recently introduced. The root cause is not simply 'checkout UX'; it is a pricing or policy change creating unexpected cost at a specific point in the journey.",
+    application:["Quantify the symptom before explaining it.","Segment before brainstorming solutions.","Keep a visible hypothesis list and rank it by evidence and expected explanatory power.","Use qualitative research to understand why a behavioural pattern occurs, not to replace behavioural data.","Define what evidence would change your mind."],
+    mistakes:["Jumping straight to a redesign.","Stopping at the first plausible explanation.","Confusing correlation with causation.","Using 'users don't understand' as a root cause without identifying the actual interaction or context causing confusion.","Fixing the symptom while leaving the underlying process unchanged."],
+    interview:"For a product diagnosis question, start by defining the metric and scope. Segment the problem, form a few hypotheses, explain the evidence you would seek, then identify the root cause you would act on. The interviewer should be able to see your reasoning, not just your final answer.",
+    template:["Problem statement and baseline","Where the metric changed","Key segments","Hypothesis tree","Evidence for and against each hypothesis","Validated root cause","Intervention","Success and guardrail metrics"],
+    sourceLabel:"MindTools, Root Cause Analysis overview",
+    sourceUrl:"https://www.mindtools.com/a3mi00v/root-cause-analysis"
+  },
+  {
+    id:"circles", title:"Product Sense", framework:"CIRCLES",
+    description:"A structured way to answer product design questions without jumping straight into features.",
+    detail:"CIRCLES is an interview-oriented product design structure. It helps you clarify the problem, choose a target user, identify needs, define a solution and close with trade-offs and prioritization.",
+    definition:"CIRCLES stands for Comprehend, Identify the customer, Report the customer's needs, Cut through prioritization, List solutions, Evaluate trade-offs, and Summarize.",
+    steps:[
+      ["01","Comprehend","Clarify the product, objective, constraints, audience and success definition. Ask what decision the product needs to enable."],
+      ["02","Identify the customer","Choose a specific target segment. Explain why this user is the right starting point rather than designing for everyone."],
+      ["03","Report the needs","List the most important jobs, pain points and desired outcomes. Prioritise them instead of treating every need equally."],
+      ["04","Cut through prioritization","Select the highest-value problem using impact, frequency, strategic importance, feasibility and confidence. State what you are deliberately not solving."],
+      ["05","List solutions","Generate multiple solution directions before choosing one. Connect each solution directly to the prioritised need."],
+      ["06","Evaluate trade-offs","Discuss usability, technical complexity, adoption, business impact, risks and second-order effects. Explain why your preferred solution wins."],
+      ["07","Summarize","Close with the target user, problem, chosen solution, success metric and the next thing you would validate."]
+    ],
+    exampleTitle:"Example: Design a product for college students",
+    example:"Rather than proposing a generic student app, define a target user such as first-year students trying to navigate an unfamiliar campus. Identify the highest-value need, such as finding reliable information quickly, then compare solution directions such as a campus assistant, peer knowledge layer or structured onboarding. The strongest answer explains the choice and what you would measure after launch.",
+    application:["State assumptions so the interviewer can challenge them.","Spend enough time on the user and problem before listing features.","Keep the solution set small and distinct.","Tie every feature back to a prioritised need and measurable outcome.","End with what you would test next."],
+    mistakes:["Treating CIRCLES as a script rather than a thinking structure.","Choosing a broad audience with no prioritisation.","Listing ten features without a clear problem hierarchy.","Skipping trade-offs because the solution sounds intuitive."],
+    interview:"CIRCLES is most useful when the prompt is broad, such as 'Design a product for X.' It gives you a visible structure while leaving room for product judgment. You can move back to the customer or needs step if new information changes your direction.",
+    template:["Prompt and objective","Target customer","Top needs","Prioritised problem","Solution options","Chosen solution","Trade-offs","Success metric","Next validation"],
+    sourceLabel:"Exponent, CIRCLES framework overview",
+    sourceUrl:"https://www.tryexponent.com/blog/circles-method-product-design"
+  },
+  {
+    id:"kano", title:"Prioritization", framework:"Kano Model",
+    description:"Separate basic expectations from performance drivers and delight features when deciding what customers actually value.",
+    detail:"The Kano Model helps product teams understand how different feature types affect customer satisfaction. It is useful when a roadmap contains a mix of table-stakes capabilities, performance improvements and potentially delightful differentiators.",
+    definition:"Kano commonly distinguishes Must-be, Performance, Attractive, Indifferent and Reverse attributes. The categories describe the relationship between feature presence and customer satisfaction.",
+    steps:[
+      ["01","Define the outcome","Decide what satisfaction or product success means for the research. Avoid treating Kano as a substitute for a business objective."],
+      ["02","List candidate features","Create a focused set of product attributes to evaluate. Keep the list small enough that respondents can answer thoughtfully."],
+      ["03","Ask functional and dysfunctional questions","For each attribute, ask how the user would feel if it were present and how they would feel if it were absent. The pair helps reveal expectations rather than simple feature preference."],
+      ["04","Classify the attributes","Map responses into Kano categories. Look for patterns across the target segment rather than treating one respondent as definitive."],
+      ["05","Prioritise the portfolio","Protect Must-be needs, improve Performance attributes where they materially affect outcomes, and selectively test Attractive features that can differentiate the experience."],
+      ["06","Check segment differences","A feature can be Attractive for one segment and expected for another. Analyse important segments separately before making a roadmap decision."],
+      ["07","Revisit over time","Customer expectations change. Features that once delighted users can become basic expectations as the market matures."]
+    ],
+    exampleTitle:"Example: CRED payments",
+    example:"For a payments experience, reliable transaction completion is likely a basic expectation. Faster confirmation or clearer status could behave like performance attributes. A surprisingly useful financial insight might delight a segment. Kano helps distinguish these roles so a team does not spend its entire roadmap on novelty while basic trust remains unresolved.",
+    application:["Use Kano after identifying a meaningful product outcome.","Combine survey responses with behavioural and qualitative evidence.","Prioritise must-have reliability before chasing delight.","Look for differences between important customer segments.","Treat categories as directional signals, not permanent labels."],
+    mistakes:["Assuming every attractive feature should be built.","Using Kano without defining the target segment.","Ignoring basic quality because it is not exciting.","Treating survey classification as stronger evidence than actual behaviour."],
+    interview:"Kano is useful when an interviewer gives you a long list of possible features and asks what to build. Use it to explain which capabilities are expected, which improve satisfaction with performance, and which could create delight, then layer in business impact and feasibility.",
+    template:["Product outcome","Target segment","Candidate attributes","Functional response","Dysfunctional response","Kano category","Segment differences","Roadmap implication"],
+    sourceLabel:"Interaction Design Foundation, Kano Model",
+    sourceUrl:"https://www.interaction-design.org/literature/topics/kano-model"
+  },
+  {
+    id:"ost", title:"Discovery", framework:"Opportunity Solution Tree",
+    description:"Connect a desired product outcome to customer opportunities and multiple solution paths without locking onto the first idea.",
+    detail:"An Opportunity Solution Tree links an outcome to the customer opportunities that could influence it, then maps multiple solution ideas and experiments beneath each opportunity. It keeps discovery focused on outcomes while preserving room to explore alternatives.",
+    definition:"The tree moves from Outcome → Opportunities → Solutions → Experiments. The structure makes assumptions visible and discourages teams from treating the first feature idea as the problem definition.",
+    steps:[
+      ["01","Set the outcome","Choose one measurable outcome the team is trying to improve. Make it specific enough to tell whether the tree is producing useful opportunities."],
+      ["02","Discover opportunities","Use interviews, analytics, support data and observation to identify unmet needs or obstacles connected to the outcome."],
+      ["03","Cluster and prioritise","Group similar opportunities and select where to focus based on importance, evidence, strategic fit and the team's ability to influence the outcome."],
+      ["04","Generate multiple solutions","Create several ways to address the same opportunity. Avoid allowing one early idea to become the de facto roadmap."],
+      ["05","Design experiments","Choose the cheapest useful test for the biggest uncertainty. An experiment can be qualitative, quantitative, prototype-based or operational."],
+      ["06","Learn and prune","Use evidence to kill weak branches, deepen promising ones and update assumptions. The tree should evolve as you learn."],
+      ["07","Connect to delivery","Only after an opportunity and solution have enough evidence should the team turn the work into a delivery plan with success and guardrail metrics."]
+    ],
+    exampleTitle:"Example: Improve Myntra repeat purchase",
+    example:"Start with the outcome 'increase repeat purchase rate among active fashion shoppers.' Opportunities might include difficulty discovering relevant products, uncertainty about fit, or lack of a reason to return. Each opportunity can have multiple solutions. For fit uncertainty, options could include better size guidance, fit reviews or personalised recommendations. Experiments then test which direction actually reduces the uncertainty.",
+    application:["Keep the outcome measurable and stable while opportunities evolve.","Separate opportunities from solutions in team discussions.","Use research and data together to discover opportunities.","Explore more than one solution before committing.","Prune branches when evidence weakens the case."],
+    mistakes:["Calling features 'opportunities.'","Building a tree after the team has already decided the solution.","Filling the tree with speculative opportunities without evidence.","Treating the tree as a roadmap instead of a discovery tool."],
+    interview:"OST is powerful for open-ended product questions because it shows that you can move from an outcome to user problems and then to solutions without prematurely locking onto a feature. It also gives you a natural place to explain research and experimentation.",
+    template:["Desired outcome","Customer segment","Opportunity 1 / evidence","Opportunity 2 / evidence","Prioritised opportunity","Solution options","Key uncertainty","Experiment","Decision"],
+    sourceLabel:"Teresa Torres, Opportunity Solution Tree",
+    sourceUrl:"https://www.producttalk.org/opportunity-solution-tree/"
   }
+
 ];
 
 const POPULAR_SECTORS=[
