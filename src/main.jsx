@@ -62,7 +62,7 @@ const LOGOS = {
 };
 const CASE_ACCENTS = {Blinkit:'#f4c400',PhonePe:'#5f259f',Groww:'#00b386',Zepto:'#8b5cf6',CRED:'#f3f3f3',Swiggy:'#ff5a30',Zomato:'#ef4f5f',Razorpay:'#3395ff',Meesho:'#e82d7a',Nykaa:'#fc2779'};
 const CASE_VISUALS = {
-  Blinkit:'https://thegstco.com/cdn/shop/files/blinkit-dark-store-registration-in-jaipur-263247_1200x1200.png?v=1744482601',
+  Blinkit:'https://b.zmtcdn.com/data/blogs/1769574438_8d7697aec5a421aa8b38f082.jpg',
   PhonePe:'https://assets.entrepreneur.com/content/3x2/2000/20200124074341-PhonePe2.jpeg',
   Groww:'https://miracuves.com/wp-content/uploads/2025/11/groww-portfolio-dashboard-investment-summary-1024x683.webp',
   Zepto:'https://fastly.restofworld.org/uploads/2024/11/Screenshot-Zepto-20241108.jpg?crop=9%3A16&dpr=2&width=600',
@@ -210,7 +210,7 @@ function App(){
       <section className="sectorExplore">
         <div className="sectionHead compactHead">
           <div><span className="eyebrow">EXPLORE BY SECTOR</span><h2>Find your next case.</h2></div>
-          <span className="muted">{CASES.length} products</span>
+          
         </div>
         <div className="sectorGrid">
           {sectors.slice(1).map(s=><button key={s} onClick={()=>{setSector(s);setSelectedProduct("All products");setShowResults(true);window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})}}>{s}<span>↗</span></button>)}
@@ -307,13 +307,13 @@ function CaseView({c,back,next}){
       <div className="factsRow">{c.facts.map((f,i)=><div className="fact" key={i}>{f}</div>)}</div>
     </div>
 
-    <nav className="caseTabs" aria-label="Case study sections">
-      {tabs.map(tab=><button key={tab} className={activeTab===tab?"active":""} onClick={()=>jumpTo(tab)}>{tab}</button>)}
-    </nav>
     <div className="caseProgress" aria-label={`Case progress: ${progress}%`}>
       <div className="progressMeta"><span>CASE PROGRESS</span><span>{activeIndex+1} / {tabs.length}</span></div>
       <div className="progressTrack"><div className="progressFill" style={{width:`${progress}%`}} /></div>
     </div>
+    <nav className="caseTabs" aria-label="Case study sections">
+      {tabs.map(tab=><button key={tab} className={activeTab===tab?"active":""} onClick={()=>jumpTo(tab)}>{tab}</button>)}
+    </nav>
 
     <div className="caseContent">
       <Section id={tabId("Overview")} title="01 · Product thesis">
@@ -371,7 +371,7 @@ function CaseView({c,back,next}){
   </main>
   <footer>
   <div className="footerInner">
-    <div><strong>CaseCraft</strong><span>50 products. One goal: become better at seeing products through a PM lens.</span></div>
+    <div><strong>CaseCraft</strong><span>Become better at seeing products through a PM lens.</span></div>
     <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">Notion ↗</a></nav>
   </div>
 </footer>

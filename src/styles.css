@@ -427,3 +427,24 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
 .marqueeVisual .visualGlow,.marqueeVisual .visualShape,.marqueeVisual .visualGrid{display:none!important}
 @media(max-width:850px){.thinkingGrid{grid-template-columns:1fr}.sectorGrid{grid-template-columns:repeat(2,1fr)}.footerInner{display:block}.footerInner nav{margin-top:20px}}
 @media(max-width:520px){.sectorGrid{grid-template-columns:1fr}}
+
+
+/* Final case-study navigation: progress stays visible while reading */
+.caseProgress{
+  position:sticky!important;
+  top:76px!important;
+  z-index:19!important;
+  margin:0!important;
+  padding:8px 0 9px!important;
+  background:rgba(255,255,255,.98)!important;
+  border-bottom:1px solid #e5e5e5!important;
+  backdrop-filter:blur(10px);
+}
+.caseProgress .progressMeta{color:#111!important}
+.caseProgress .progressTrack{background:#e2e2e2!important}
+.caseProgress .progressFill{background:#111!important}
+.caseTabs{top:118px!important;z-index:18!important}
+@media(max-width:850px){
+  .caseProgress{top:60px!important}
+  .caseTabs{top:102px!important}
+}
