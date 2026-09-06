@@ -382,3 +382,22 @@ body,.topbar,.shell{background:#000!important;color:#fff!important}
 .marqueeInfo{background:var(--case-accent,#fff)!important;color:#111!important;height:76px!important}
 .marqueeLogo{background:#fff!important}
 .marqueeText strong{color:#111!important}.marqueeText span{color:#111!important;opacity:1!important}.marqueeArrow{color:#111!important}
+
+/* Product-led popular cases: real imagery, less abstract decoration */
+.marqueeCard{display:flex!important;flex-direction:column!important;justify-content:flex-end!important;padding:0!important;min-height:300px!important;height:300px!important;border-radius:24px!important;overflow:hidden!important;position:relative!important;background:#111!important}
+.marqueeVisual{position:absolute!important;inset:0 0 82px 0!important;height:auto!important;background-color:#151515!important;background-size:cover!important;background-position:center!important}
+.marqueeVisual:after{background:linear-gradient(180deg,rgba(0,0,0,.02) 15%,rgba(0,0,0,.10) 55%,rgba(0,0,0,.58) 100%)!important}
+.marqueeVisual .visualGlow,.marqueeVisual .visualShape,.marqueeVisual .visualGrid{display:none!important}
+.visualLabel{position:absolute;top:18px;left:18px;z-index:2;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.58);color:#fff!important;font:700 10px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.visual-blinkit,.visual-phonepe,.visual-groww,.visual-zepto,.visual-cred{background-color:#111!important}
+.marqueeInfo{position:absolute!important;left:0!important;right:0!important;bottom:0!important;height:82px!important;padding:14px 16px!important;display:grid!important;grid-template-columns:52px minmax(0,1fr) auto!important;align-items:center!important;gap:12px!important;background:var(--case-accent,#fff)!important;color:#111!important}
+.marqueeLogo{width:52px!important;height:52px!important;border-radius:14px!important;background:#fff!important;display:grid!important;place-items:center!important;overflow:hidden!important;flex:none!important}
+.marqueeLogo img{width:38px!important;height:38px!important;object-fit:contain!important;filter:none!important}
+.marqueeLogo span{color:#111!important;font-size:24px!important}
+.marqueeText{gap:3px!important;min-width:0!important}
+.marqueeText strong{font-size:25px!important;color:#111!important;line-height:1!important}
+.marqueeText span{font-size:11px!important;color:#111!important;opacity:.78!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.marqueeArrow{color:#111!important;font-size:21px!important}
+.marqueeCard:hover .marqueeVisual{transform:scale(1.035)!important;transition:transform .45s cubic-bezier(.2,.7,.2,1)!important}
+.marqueeVisual{transition:transform .45s cubic-bezier(.2,.7,.2,1)!important}
+@media(max-width:850px){.marqueeCard{min-height:270px!important;height:270px!important;width:270px!important;flex-basis:270px!important}.marqueeVisual{inset:0 0 78px 0!important}.marqueeInfo{height:78px!important}}

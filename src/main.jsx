@@ -62,11 +62,11 @@ const LOGOS = {
 };
 const CASE_ACCENTS = {Blinkit:'#f4c400',PhonePe:'#5f259f',Groww:'#00b386',Zepto:'#8b5cf6',CRED:'#f3f3f3',Swiggy:'#ff5a30',Zomato:'#ef4f5f',Razorpay:'#3395ff',Meesho:'#e82d7a',Nykaa:'#fc2779'};
 const CASE_VISUALS = {
-  Blinkit:'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80',
-  PhonePe:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80',
-  Groww:'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80',
-  Zepto:'https://images.unsplash.com/photo-1601598851547-4302969d8e1b?auto=format&fit=crop&w=900&q=80',
-  CRED:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=900&q=80'
+  Blinkit:'https://thegstco.com/cdn/shop/files/blinkit-dark-store-registration-in-jaipur-263247_1200x1200.png?v=1744482601',
+  PhonePe:'https://assets.entrepreneur.com/content/3x2/2000/20200124074341-PhonePe2.jpeg',
+  Groww:'https://miracuves.com/wp-content/uploads/2025/11/groww-portfolio-dashboard-investment-summary-1024x683.webp',
+  Zepto:'https://fastly.restofworld.org/uploads/2024/11/Screenshot-Zepto-20241108.jpg?crop=9%3A16&dpr=2&width=600',
+  CRED:'https://www.databricks.com/sites/default/files/2025-08/2025-07-cs-cred-header-960x540.png?v=1754412578'
 };
 const logoFor=(name)=>LOGOS[name]||null;
 function ProductLogo({name,className=''}){
