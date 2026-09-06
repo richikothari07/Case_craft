@@ -146,8 +146,7 @@ function HomePage({openCase,openSector}){
         <div className="heroGlow heroGlowA"></div><div className="heroGlow heroGlowB"></div>
                 <div className="heroInner">
           <span className="eyebrow heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
-          <h1>Think like a <em>Product Manager.</em></h1>
-          <p className="heroLead">Deconstruct products. Spot opportunities. Build better solutions.</p>
+          <h1>Think like a Product Manager.</h1>
           <p className="heroSub">Real-world product teardowns, frameworks and challenges designed to sharpen how you think about products.</p>
           <div className="heroActions"><button className="primaryCta" onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore Case Studies <span>→</span></button><button className="secondaryCta" onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Take a Product Challenge</button></div>
         </div>
@@ -182,13 +181,6 @@ function HomePage({openCase,openSector}){
       </section>
 
       <div className="proofStrip"><span>REAL PRODUCTS</span><span>EVIDENCE TRAIL</span><span>PM ANALYSIS</span><span>INTERVIEW QUESTIONS</span></div>
-
-      <section className="whySection sectionPad"><div className="whyGrid"><div><span className="eyebrow">WHY CASECRAFT?</span><h2>Not another product blog.</h2></div><div><h3>If you were the PM, what would you do?</h3><p>CaseCraft is built to make you question the product, not just consume the story.</p><div className="whyFlow"><span>OBSERVE</span><b>↓</b><span>UNDERSTAND</span><b>↓</b><span>CHALLENGE</span><b>↓</b><span>BUILD</span></div></div></div></section>
-
-      <section className="frameworkStrip sectionPad">
-        <div className="sectionHeader"><div><span className="eyebrow">PRODUCT FRAMEWORKS</span><h2>Tools to structure your thinking.</h2></div><button onClick={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>View frameworks <span>→</span></button></div>
-        <div className="frameworkGrid">{FRAMEWORKS.slice(0,6).map((f,i)=><button key={f[0]} onClick={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}><span>0{i+1}</span><strong>{f[0]}</strong><p>{f[1]}</p><b>↗</b></button>)}</div>
-      </section>
 
       <section className="popularSectorsNew sectionPad">
         <div className="sectionHeader"><div><span className="eyebrow">POPULAR SECTORS</span><h2>Explore by world.</h2></div></div>

@@ -716,3 +716,8 @@ button{color:inherit}
   .heroSub{font-size:13px!important}
   .sectionPad{padding:62px 0!important}
 }
+
+/* Homepage refinement: calmer hero typography */
+.heroNew h1 em{font-style:normal!important;font-weight:400!important}
+.heroNew h1{font-size:clamp(54px,6.5vw,92px)!important;line-height:.98!important}
+@media(max-width:640px){.heroNew h1{font-size:clamp(48px,13vw,72px)!important}}
