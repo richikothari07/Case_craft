@@ -306,7 +306,7 @@ function HomePage({openCase,openSector}){
       <section id="home-cases" className="featuredSection sectionPad">
         <div className="sectionHeader"><div><span className="eyebrow">FEATURED CASE STUDIES</span><h2>See the product. Then think deeper.</h2></div><button onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore all <span>→</span></button></div>
         <div className="featuredGrid">
-          {featured.slice(0,4).map((c,i)=><button key={c.name} className={`featuredCard ${i===0?'featuredLarge':''}`} onClick={()=>openCase(c)}>
+          {featured.slice(0,5).map((c,i)=><button key={c.name} className={`featuredCard ${i===0?'featuredLarge':''}`} onClick={()=>openCase(c)}>
             <div className="featuredImage" style={productVisual(c)?{backgroundImage:`linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.72)),url(${productVisual(c)})`}:{}}><span>{displaySector(c.sector)}</span></div>
             <div className="featuredInfo"><div><h3>{c.name}</h3><p>{c.summary}</p><small>{c.tag}</small></div><strong>Read case →</strong></div>
           </button>)}
@@ -341,63 +341,70 @@ function FrameworkDetailPage({framework,back,home}){
   return <div className="platformPage">
     <SiteNav onHome={home}/>
     <main className="simplePage frameworkDetailPage">
-      <button className="textBack" onClick={back}>← Frameworks</button>
-      <span className="eyebrow">{framework.title.toUpperCase()} · FRAMEWORK</span>
-      <h1>{framework.framework}</h1>
-      <p className="pageLead">{framework.detail}</p>
-
-      <section className="frameworkDefinition">
-        <span className="frameworkLabel">THE IDEA</span>
-        <p>{framework.definition}</p>
-      </section>
+      <div className="frameworkBackRow"><button className="textBack" onClick={back}>← Frameworks</button></div>
+      <div className="frameworkHero">
+        <div>
+          <span className="eyebrow">{framework.title.toUpperCase()} · FRAMEWORK</span>
+          <h1>{framework.framework}</h1>
+          <p className="pageLead">{framework.detail}</p>
+        </div>
+        <aside className="frameworkHeroCard">
+          <span className="frameworkLabel">THE IDEA</span>
+          <p>{framework.definition}</p>
+        </aside>
+      </div>
 
       {framework.formula&&<div className="frameworkDetailFormula"><span>RICE</span><b>=</b>{framework.formula}</div>}
 
-      <section className="frameworkDetailSection">
+      <section className="frameworkDetailSection frameworkHowSection">
         <div className="frameworkSectionIntro">
           <span className="frameworkLabel">HOW TO USE IT</span>
           <h2>From framework to product decision.</h2>
-          <p>Use the framework as a sequence of questions. The value comes from the reasoning behind each step, not from filling in a template mechanically.</p>
+          <p>Use the framework as a sequence of decisions. Each step should reduce a specific uncertainty, sharpen a trade-off or make the next product choice clearer.</p>
         </div>
-        <div className="frameworkStepList">
-          {framework.steps.map(([n,label,text])=><article key={n} className="frameworkStep">
-            <span>{n}</span>
-            <div><h3>{label}</h3><p>{text}</p></div>
+        <div className="frameworkStepGridDetailed">
+          {framework.steps.map(([n,label,text])=><article key={n} className="frameworkStepCard">
+            <div className="frameworkStepCardTop"><span>{n}</span><i>↘</i></div>
+            <h3>{label}</h3>
+            <p>{text}</p>
           </article>)}
         </div>
       </section>
 
       <section className="frameworkExample">
-        <span className="frameworkLabel">WORKED EXAMPLE</span>
+        <div className="exampleHeader"><span className="frameworkLabel">WORKED EXAMPLE</span><span className="exampleTag">{framework.title}</span></div>
         <h2>{framework.exampleTitle}</h2>
         <p>{framework.example}</p>
       </section>
 
       <section className="frameworkDetailSection twoFrameworkCols">
-        <div>
+        <div className="frameworkColumn">
           <span className="frameworkLabel">PM PLAYBOOK</span>
-          <h2>How to apply it well.</h2>
-          <ul className="frameworkBulletList">{framework.application.map(x=><li key={x}>{x}</li>)}</ul>
+          <h2>Apply it with judgment.</h2>
+          <ul className="frameworkBulletList">{framework.application.map((x,i)=><li key={x}><span>{String(i+1).padStart(2,"0")}</span>{x}</li>)}</ul>
         </div>
-        <div>
+        <div className="frameworkColumn">
           <span className="frameworkLabel">COMMON FAILURE MODES</span>
-          <h2>What to watch out for.</h2>
-          <ul className="frameworkBulletList">{framework.mistakes.map(x=><li key={x}>{x}</li>)}</ul>
+          <h2>Avoid the traps.</h2>
+          <ul className="frameworkBulletList">{framework.mistakes.map((x,i)=><li key={x}><span>{String(i+1).padStart(2,"0")}</span>{x}</li>)}</ul>
         </div>
       </section>
 
       <section className="frameworkInterview">
-        <span className="frameworkLabel">INTERVIEW APPLICATION</span>
-        <h2>How this framework helps you think in a PM interview.</h2>
+        <div>
+          <span className="frameworkLabel">INTERVIEW APPLICATION</span>
+          <h2>How to use it when the interviewer asks, “What would you do?”</h2>
+        </div>
         <p>{framework.interview}</p>
       </section>
 
       <section className="frameworkTemplate">
         <div>
           <span className="frameworkLabel">USE THIS TEMPLATE</span>
-          <h2>Questions to write down before you decide.</h2>
+          <h2>A worksheet you can actually use.</h2>
+          <p>Fill these in before making the decision. The structure forces assumptions into the open and makes your reasoning easier to communicate.</p>
         </div>
-        <div className="templateList">{framework.template.map((x,i)=><div key={x}><span>{String(i+1).padStart(2,"0")}</span><strong>{x}</strong></div>)}</div>
+        <div className="templateList">{framework.template.map((x,i)=><div key={x}><span>{String(i+1).padStart(2,"0")}</span><strong>{x}</strong><b>+</b></div>)}</div>
       </section>
 
       <section className="frameworkSource">
