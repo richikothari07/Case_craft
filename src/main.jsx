@@ -48,6 +48,20 @@ function displaySector(raw){
   return map[raw]||raw;
 }
 
+const LOGOS = {
+  Blinkit:"https://cdn.simpleicons.org/blinkit/173b31",
+  PhonePe:"https://cdn.simpleicons.org/phonepe/173b31",
+  Groww:"https://cdn.simpleicons.org/groww/173b31",
+  Zepto:"https://cdn.simpleicons.org/zepto/173b31",
+  CRED:"https://cdn.simpleicons.org/cred/173b31",
+  Swiggy:"https://cdn.simpleicons.org/swiggy/173b31",
+  Zomato:"https://cdn.simpleicons.org/zomato/173b31",
+  Razorpay:"https://cdn.simpleicons.org/razorpay/173b31",
+  Meesho:"https://cdn.simpleicons.org/meesho/173b31",
+  Nykaa:"https://cdn.simpleicons.org/nykaa/173b31"
+};
+const logoFor=(name)=>LOGOS[name]||null;
+
 function App(){
   const [sector,setSector]=useState("All");
   const [selected,setSelected]=useState(null);
@@ -124,15 +138,33 @@ function App(){
         <div className="heroMain">
           <span className="heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
           <h1>Understand why<br/><em>products win.</em></h1>
-          <p className="heroCopy">Explore how products are built, why they work, what drives their growth, and what a PM could improve.</p>
-          <button className="heroExplore" onClick={()=>document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}>Explore the library <span>↓</span></button>
+          <p className="heroCopy">In-depth case studies on the products shaping India.</p>
+          <button className="heroExplore" onClick={()=>document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}>Explore cases <span>↓</span></button>
         </div>
-        <div className="heroCanvas" aria-hidden="true">
-          <div className="heroOrb orbOne"></div><div className="heroOrb orbTwo"></div>
-          <div className="heroCanvasLabel labelOne">01 · PRODUCT</div>
-          <div className="heroCanvasLabel labelTwo">WHY IT WINS</div>
-          <div className="heroCanvasWord">CASE<br/><i>CRAFT</i></div>
-          <div className="heroCanvasLine"></div>
+      </section>
+
+      <section className="popularMarquee" aria-label="Popular product cases">
+        <div className="marqueeHeader">
+          <span className="eyebrow">POPULAR CASES</span>
+          <span className="marqueeHint">Move through the products</span>
+        </div>
+        <div className="marqueeViewport">
+          <div className="marqueeTrack">
+            {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
+              <div className="marqueeLogo">{logoFor(c.name)?<img src={logoFor(c.name)} alt=""/>:<span>{c.name[0]}</span>}</div>
+              <div className="marqueeText"><strong>{c.name}</strong><span>{c.tag}</span></div>
+              <span className="marqueeArrow">↗</span>
+            </button>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="logoStrip" aria-label="Featured products">
+        <span className="eyebrow">PRODUCTS IN CASECRAFT</span>
+        <div className="logoTrack">
+          {['Blinkit','PhonePe','Zepto','Zomato','CRED','Swiggy','Groww','Razorpay','Meesho','Nykaa'].map(name=><button key={name} className="brandLogo" onClick={()=>{const found=CASES.find(c=>c.name===name); if(found)openCase(found)}}>
+            {logoFor(name)?<img src={logoFor(name)} alt=""/>:<span>{name}</span>}
+          </button>)}
         </div>
       </section>
 
@@ -166,20 +198,6 @@ function App(){
         </section>
       )}
 
-      {!showResults && sector === "All" && (
-        <section className="quickSuggestions">
-          <div className="sectionHead compactHead">
-            <div><span className="eyebrow">START HERE</span><h2>Popular cases</h2></div>
-            <span className="muted">Pick a product to begin</span>
-          </div>
-          <div className="suggestionRow">
-            {popularCases.map(c=><button key={c.name} className="suggestionChip" onClick={()=>openCase(c)}>
-              <span>{c.name}</span><span>→</span>
-            </button>)}
-          </div>
-        </section>
-      )}
-
       {showResults && <section className="results">
         <div className="sectionHead">
           <div><span className="eyebrow">RESULTS</span><h2>{selectedProduct !== "All products" ? selectedProduct : `Product results`}</h2></div>
@@ -188,6 +206,7 @@ function App(){
         <div className="grid">
           {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
+            <div className="cardLogo">{logoFor(c.name)?<img src={logoFor(c.name)} alt=""/>:<span>{c.name[0]}</span>}</div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
             <p>{c.summary}</p>
