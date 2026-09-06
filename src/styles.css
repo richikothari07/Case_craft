@@ -91,3 +91,20 @@ footer{text-align:center;color:#85857e;font-size:10px;padding:28px;border-top:1p
 .caseContent{min-height:420px}
 .caseContent .caseSection{margin-top:0}
 @media(max-width:700px){.caseTabs{top:60px;margin-bottom:24px}.caseTabs button{padding:9px 11px;font-size:11px}.caseContent{min-height:300px}}
+
+
+/* CaseCraft geometric C mark */
+.brandmark{position:relative;display:inline-block;width:30px;height:30px;flex:0 0 30px;transform:skewY(-6deg)}
+.brandmark i,.brandmark b{position:absolute;display:block;border-radius:7px 7px 7px 2px;box-sizing:border-box}
+.brandmark i{inset:4px 0 0 8px;background:#315f4e;transform:skewY(6deg);clip-path:polygon(0 0,100% 0,100% 29%,43% 29%,43% 71%,100% 71%,100% 100%,0 100%)}
+.brandmark b{inset:0 9px 4px 0;background:#aebca8;transform:skewY(6deg);clip-path:polygon(0 0,100% 0,100% 28%,47% 28%,47% 72%,100% 72%,100% 100%,0 100%)}
+.brandmark:after{content:"";position:absolute;inset:6px 4px 5px 5px;background:#f5f4ee;z-index:3;border-radius:5px 5px 5px 2px;clip-path:polygon(0 0,100% 0,100% 27%,42% 27%,42% 73%,100% 73%,100% 100%,0 100%)}
+.topmeta{display:none}
+
+
+/* Refined CaseCraft logo */
+.brandmark{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;transform:none}
+.brandmark svg{width:32px;height:32px;display:block;overflow:visible}
+.brandmark .mark-back{fill:#e9e6d8}
+.brandmark .mark-mid{fill:#aebca8}
+.brandmark .mark-front{fill:#315f4e}

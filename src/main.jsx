@@ -6,13 +6,42 @@ const CASES = [{"name": "Blinkit", "sector": "Quick Commerce", "tag": "Instant c
 
 function Badge({children, tone=""}){ return <span className={"badge "+tone}>{children}</span> }
 
+function displaySector(raw){
+  const map={
+    "Quick Commerce":"Commerce & Retail","Quick Commerce / Grocery":"Commerce & Retail","E-commerce":"Commerce & Retail","E-commerce / Grocery":"Commerce & Retail","Fashion":"Commerce & Retail","Consumer Electronics":"Commerce & Retail","Beauty":"Commerce & Retail","Beauty & Lifestyle":"Commerce & Retail","Beauty / D2C":"Commerce & Retail","Eyewear":"Commerce & Retail","Kids & Parenting":"Commerce & Retail","Home & Sleep":"Commerce & Retail",
+    "Fintech":"Fintech & Financial Services","Fintech / Brokerage":"Fintech & Financial Services","Fintech / B2B SaaS":"Fintech & Financial Services","B2B Fintech":"Fintech & Financial Services","Wealthtech":"Fintech & Financial Services","Insurtech":"Fintech & Financial Services","Financial Services":"Fintech & Financial Services",
+    "Food & Convenience":"Food & Convenience","Food & Going Out":"Food & Convenience",
+    "Mobility":"Mobility, Travel & Logistics","Mobility / EV":"Mobility, Travel & Logistics","Travel":"Mobility, Travel & Logistics","Travel / Hospitality":"Mobility, Travel & Logistics","Logistics":"Mobility, Travel & Logistics",
+    "Healthtech":"Health & Wellness","Health / Fitness":"Health & Wellness",
+    "Developer SaaS":"Software & B2B","SaaS":"Software & B2B","B2B Marketplace":"Software & B2B",
+    "Edtech":"Education","Entertainment":"Media & Entertainment","Media & Entertainment":"Media & Entertainment",
+    "Real Estate":"Consumer, Home & Lifestyle","Home Services":"Consumer, Home & Lifestyle"
+  };
+  return map[raw]||raw;
+}
+
 function App(){
   const [sector,setSector]=useState("All");
   const [selected,setSelected]=useState(null);
   const [selectedProduct,setSelectedProduct]=useState("All products");
   const [showResults,setShowResults]=useState(false);
-  const sectors=["All",...Array.from(new Set(CASES.map(c=>c.sector)))];
-  const filtered=useMemo(()=>CASES.filter(c=>sector==="All"||c.sector===sector),[sector]);
+  const sectorGroups={
+    "Commerce & Retail":["Quick Commerce","Quick Commerce / Grocery","E-commerce","E-commerce / Grocery","Fashion","Consumer Electronics","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear","Kids & Parenting","Home & Sleep"],
+    "Fintech & Financial Services":["Fintech","Fintech / Brokerage","Fintech / B2B SaaS","B2B Fintech","Wealthtech","Insurtech","Financial Services"],
+    "Food & Convenience":["Food & Convenience","Food & Going Out"],
+    "Mobility, Travel & Logistics":["Mobility","Mobility / EV","Travel","Travel / Hospitality","Logistics"],
+    "Health & Wellness":["Healthtech","Health / Fitness"],
+    "Software & B2B":["Developer SaaS","SaaS","B2B Marketplace"],
+    "Education":["Edtech"],
+    "Media & Entertainment":["Entertainment","Media & Entertainment"],
+    "Consumer, Home & Lifestyle":["Real Estate","Home Services"]
+  };
+  const sectors=["All",...Object.keys(sectorGroups)];
+  const filtered=useMemo(()=>{
+    if(sector==="All") return CASES;
+    const members=sectorGroups[sector]||[];
+    return CASES.filter(c=>members.includes(c.sector));
+  },[sector]);
 
   if(selected){
     return <CaseView c={selected} back={()=>setSelected(null)} />;
@@ -20,8 +49,14 @@ function App(){
 
   return <div>
     <header className="topbar">
-      <div className="brand" onClick={()=>setSelected(null)}><span className="brandmark">C</span> CaseCraft</div>
-      <div className="topmeta">Indian Product Intelligence</div>
+      <div className="brand" onClick={()=>setSelected(null)}><span className="brandmark" aria-hidden="true">
+        <svg viewBox="0 0 42 42" role="presentation">
+          <path className="mark-back" d="M10 5c-3 1-5 4-5 7v18c0 4 2 7 5 8l7-4V9L10 5Z"/>
+          <path className="mark-mid" d="M18 2c-3 1-5 4-5 7v24c0 4 2 6 5 7l7-4V6l-7-4Z"/>
+          <path className="mark-front" d="M27 5c-3 1-5 4-5 7v8h-6v8h6v9c0 3 2 5 5 5l8-5V10c0-3-2-5-5-6l-3 1Z"/>
+        </svg>
+      </span><span>CaseCraft</span></div>
+      
     </header>
 
     <main className="shell">
@@ -50,12 +85,12 @@ function App(){
 
       {showResults && <section className="results">
         <div className="sectionHead">
-          <div><span className="eyebrow">RESULTS</span><h2>{selectedProduct !== "All products" ? selectedProduct : `${filtered.length} products`}</h2></div>
+          <div><span className="eyebrow">RESULTS</span><h2>{selectedProduct !== "All products" ? selectedProduct : `Product results`}</h2></div>
           <span className="muted">Select a case study to explore</span>
         </div>
         <div className="grid">
           {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>setSelected(c)}>
-            <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{c.sector}</span></div>
+            <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
             <p>{c.summary}</p>
@@ -87,12 +122,18 @@ function CaseView({c,back}){
  const tabs=["Overview","Why it wins","Product teardown","Growth loops","Metrics","PM bets","Interview","Evidence"];
  return <div>
   <header className="topbar">
-    <div className="brand" onClick={back}><span className="brandmark">C</span> CaseCraft</div>
+    <div className="brand" onClick={back}><span className="brandmark" aria-hidden="true">
+        <svg viewBox="0 0 42 42" role="presentation">
+          <path className="mark-back" d="M10 5c-3 1-5 4-5 7v18c0 4 2 7 5 8l7-4V9L10 5Z"/>
+          <path className="mark-mid" d="M18 2c-3 1-5 4-5 7v24c0 4 2 6 5 7l7-4V6l-7-4Z"/>
+          <path className="mark-front" d="M27 5c-3 1-5 4-5 7v8h-6v8h6v9c0 3 2 5 5 5l8-5V10c0-3-2-5-5-6l-3 1Z"/>
+        </svg>
+      </span><span>CaseCraft</span></div>
     <button className="back" onClick={back}>← Explore</button>
   </header>
   <main className="caseShell">
     <div className="caseHeader">
-      <Badge>{c.sector}</Badge>
+      <Badge>{displaySector(c.sector)}</Badge>
       <h1>{c.name}</h1>
       <p className="caseTag">{c.summary}</p>
       <div className="factsRow">{c.facts.map((f,i)=><div className="fact" key={i}><span>FACT</span>{f}</div>)}</div>
