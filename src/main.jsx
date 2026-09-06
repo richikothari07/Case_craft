@@ -25,6 +25,32 @@ function App(){
   const [selected,setSelected]=useState(null);
   const [selectedProduct,setSelectedProduct]=useState("All products");
   const [showResults,setShowResults]=useState(false);
+
+  React.useEffect(() => {
+    const handlePopState = () => {
+      setSelected(null);
+      setShowResults(false);
+      setSelectedProduct("All products");
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const openCase = (c) => {
+    window.history.pushState({ case: c.name }, "", `#case-${encodeURIComponent(c.name.toLowerCase())}`);
+    setSelected(c);
+    setShowResults(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const goHome = () => {
+    if (window.location.hash) window.history.back();
+    else {
+      setSelected(null);
+      setShowResults(false);
+      setSelectedProduct("All products");
+    }
+  };
   const sectorGroups={
     "Commerce & Retail":["Quick Commerce","Quick Commerce / Grocery","E-commerce","E-commerce / Grocery","Fashion","Consumer Electronics","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear","Kids & Parenting","Home & Sleep"],
     "Fintech & Financial Services":["Fintech","Fintech / Brokerage","Fintech / B2B SaaS","B2B Fintech","Wealthtech","Insurtech","Financial Services"],
@@ -44,7 +70,7 @@ function App(){
   },[sector]);
 
   if(selected){
-    return <CaseView c={selected} back={()=>setSelected(null)} />;
+    return <CaseView c={selected} back={goHome} />;
   }
 
   return <div>
@@ -73,7 +99,7 @@ function App(){
             setShowResults(true);
             if(selectedProduct !== "All products"){
               const found=CASES.find(c=>c.name===selectedProduct);
-              if(found)setSelected(found);
+              if(found)openCase(found);
             }
           }}>Search</button>
         </div>
