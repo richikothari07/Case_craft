@@ -542,3 +542,46 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
 .sector-fintech{color:#36d7ad}.sector-commerce{color:#ff4d9d}.sector-quick{color:#ffd21a}.sector-food{color:#ff7a45}.sector-tech{color:#55a7ff}.sector-mobility{color:#a66bff}
 @media(max-width:1000px){.hero{grid-template-columns:1fr!important}.heroVisual{min-height:380px}.popularSectorGrid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.heroVisual{min-height:330px}.heroBrand{transform:scale(.85)}.popularSectorGrid{grid-template-columns:repeat(2,1fr)}}
+
+/* V7 professional homepage treatment */
+.hero{grid-template-columns:minmax(0,1fr) minmax(420px,.9fr)!important;align-items:center!important;gap:58px!important;min-height:620px!important;padding:72px 0 70px!important}
+.heroVisual{position:relative!important;min-height:500px!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;display:grid!important;grid-template-columns:1.35fr .8fr!important;grid-template-rows:1fr .82fr!important;gap:14px!important;padding:8px!important}
+.heroMosaic{position:relative!important;overflow:hidden!important;border-radius:24px!important;background-size:cover!important;background-position:center!important;border:1px solid #2a2a2a!important;box-shadow:0 24px 55px rgba(0,0,0,.38)!important}
+.heroMosaic:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 40%,rgba(0,0,0,.66) 100%)!important}
+.heroMosaic span{position:absolute;z-index:2;left:18px;bottom:16px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.heroMosaicMain{grid-row:1 / span 2;min-height:480px!important}
+.heroMosaicTop{min-height:240px!important;background-position:center!important}
+.heroMosaicBottom{min-height:240px!important;background-position:center!important}
+.heroVisual .heroBrand,.heroVisual .heroVisualCore,.heroVisual .heroHalo{display:none!important}
+
+.popularMarquee{padding:36px 0 52px!important}
+.marqueeCard{min-height:330px!important;height:330px!important;border-radius:24px!important}
+.marqueeVisual{inset:0 0 82px 0!important;background-size:cover!important;background-position:center!important}
+.marqueeVisual:after{background:linear-gradient(180deg,rgba(0,0,0,.02) 30%,rgba(0,0,0,.64) 100%)!important}
+.marqueeInfo{height:82px!important;padding:14px 16px!important}
+
+.popularSectors{padding:62px 0 18px!important}
+.popularSectorsHead{margin-bottom:18px!important}
+.popularSectorsHead>span:last-child{font-size:11px!important;color:#888!important}
+.popularSectorGrid{grid-template-columns:repeat(3,1fr)!important;gap:12px!important}
+.popularSector{min-height:142px!important;padding:18px!important;border-radius:20px!important;background:#101010!important;border-color:#292929!important}
+.popularSector:hover{background:#151515!important;border-color:#484848!important}
+.sectorLogos{display:flex;align-items:center;gap:7px}
+.sectorLogos>span{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.sectorLogos img{width:24px;height:24px;object-fit:contain}
+.sectorLogos span>span{font-family:"DM Serif Display",Georgia,serif;font-size:18px;color:#111}
+.popularSector>span:nth-child(2){font-size:13px!important;max-width:180px!important;color:#fff!important}
+.popularSector b{color:#fff!important;opacity:.75}
+
+.caseValue{padding:28px 0 10px!important}
+.caseValueHead{margin-bottom:14px}
+.caseValueGrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #252525;border-radius:20px;overflow:hidden;background:#151515}
+.caseValueGrid>div{min-height:96px;padding:17px 18px;display:grid;grid-template-columns:34px 1fr;grid-template-rows:auto auto;column-gap:11px;align-items:center;border-right:1px solid #252525}
+.caseValueGrid>div:last-child{border-right:0}
+.valueIcon{grid-row:1 / span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#242424;color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em}
+.caseValueGrid strong{font-size:14px;color:#fff}
+.caseValueGrid small{font-size:10px;color:#888}
+
+.homeFooter{margin-top:62px!important}
+@media(max-width:1000px){.hero{grid-template-columns:1fr!important;min-height:0!important}.heroVisual{min-height:420px!important}.heroMosaicMain{min-height:420px!important}.popularSectorGrid{grid-template-columns:repeat(2,1fr)!important}.caseValueGrid{grid-template-columns:repeat(2,1fr)}.caseValueGrid>div:nth-child(2){border-right:0}.caseValueGrid>div:nth-child(-n+2){border-bottom:1px solid #252525}}
+@media(max-width:600px){.hero{padding:48px 0 52px!important}.heroVisual{min-height:340px!important;grid-template-columns:1.2fr .8fr!important;gap:9px!important}.heroMosaicMain{min-height:340px!important}.heroMosaicTop,.heroMosaicBottom{min-height:165px!important}.popularSectorGrid{grid-template-columns:1fr!important}.caseValueGrid{grid-template-columns:1fr}.caseValueGrid>div{border-right:0!important;border-bottom:1px solid #252525}.caseValueGrid>div:last-child{border-bottom:0}.marqueeCard{height:290px!important;min-height:290px!important}}

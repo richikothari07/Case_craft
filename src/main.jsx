@@ -60,14 +60,20 @@ const LOGOS = {
   Zomato:"https://www.google.com/s2/favicons?domain=zomato.com&sz=128",
   Razorpay:"https://www.google.com/s2/favicons?domain=razorpay.com&sz=128",
   Meesho:"https://www.google.com/s2/favicons?domain=meesho.com&sz=128",
-  Nykaa:"https://www.google.com/s2/favicons?domain=nykaa.com&sz=128"
+  Nykaa:"https://www.google.com/s2/favicons?domain=nykaa.com&sz=128",
+  Flipkart:"https://www.google.com/s2/favicons?domain=flipkart.com&sz=128",
+  Paytm:"https://www.google.com/s2/favicons?domain=paytm.com&sz=128",
+  boAt:"https://www.google.com/s2/favicons?domain=boat-lifestyle.com&sz=128",
+  Ather:"https://www.google.com/s2/favicons?domain=atherenergy.com&sz=128",
+  Rapido:"https://www.google.com/s2/favicons?domain=rapido.bike&sz=128",
+  Myntra:"https://www.google.com/s2/favicons?domain=myntra.com&sz=128"
 };
 const CASE_ACCENTS = {Blinkit:'#f4c400',PhonePe:'#5f259f',Groww:'#00b386',Zepto:'#8b5cf6',CRED:'#f3f3f3',Swiggy:'#ff5a30',Zomato:'#ef4f5f',Razorpay:'#3395ff',Meesho:'#e82d7a',Nykaa:'#fc2779'};
 const CASE_VISUALS = {
-  Blinkit:'/images/blinkit-editorial-v2.png',
+  Blinkit:'/images/blinkit-editorial-v3.png',
   PhonePe:'https://assets.entrepreneur.com/content/3x2/2000/20200124074341-PhonePe2.jpeg',
   Groww:'https://miracuves.com/wp-content/uploads/2025/11/groww-portfolio-dashboard-investment-summary-1024x683.webp',
-  Zepto:'/images/zepto-editorial.png',
+  Zepto:'/images/zepto-editorial-v2.png',
   CRED:'https://www.databricks.com/sites/default/files/2025-08/2025-07-cs-cred-header-960x540.png?v=1754412578'
 };
 const logoFor=(name)=>LOGOS[name]||null;
@@ -156,14 +162,14 @@ function App(){
           <button className="heroExplore" onClick={()=>document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}>Explore cases <span>↓</span></button>
         </div>
         <div className="heroVisual" aria-hidden="true">
-          <div className="heroHalo heroHaloOne"></div><div className="heroHalo heroHaloTwo"></div>
-          <div className="heroBrand heroBrandZepto"><ProductLogo name="Zepto"/><b>Zepto</b></div>
-          <div className="heroBrand heroBrandBlinkit"><ProductLogo name="Blinkit"/><b>Blinkit</b></div>
-          <div className="heroBrand heroBrandGroww"><ProductLogo name="Groww"/><b>Groww</b></div>
-          <div className="heroBrand heroBrandCred"><ProductLogo name="CRED"/><b>CRED</b></div>
-          <div className="heroBrand heroBrandPhone"><ProductLogo name="PhonePe"/><b>PhonePe</b></div>
-          <div className="heroVisualCore">
-            <span>CASE</span><strong>Craft</strong>
+          <div className="heroMosaic heroMosaicMain" style={{backgroundImage:`url(${CASE_VISUALS.Blinkit})`}}>
+            <span>Blinkit</span>
+          </div>
+          <div className="heroMosaic heroMosaicTop" style={{backgroundImage:`url(${CASE_VISUALS.Zepto})`}}>
+            <span>Zepto</span>
+          </div>
+          <div className="heroMosaic heroMosaicBottom" style={{backgroundImage:`url(${CASE_VISUALS.Groww})`}}>
+            <span>Groww</span>
           </div>
         </div>
       </section>
@@ -210,18 +216,29 @@ function App(){
       </section>
 
       <section className="popularSectors" aria-label="Popular sectors">
-        <div className="popularSectorsHead"><span className="eyebrow">POPULAR SECTORS</span><span>Explore →</span></div>
+        <div className="popularSectorsHead"><span className="eyebrow">POPULAR SECTORS</span><span>Explore all →</span></div>
         <div className="popularSectorGrid">
           {[
-            ['Fintech & Payments','₹','sector-fintech'],
-            ['E-commerce & Marketplaces','◈','sector-commerce'],
-            ['Quick Commerce','ϟ','sector-quick'],
-            ['Food & Dining','⌁','sector-food'],
-            ['Consumer Tech','▣','sector-tech'],
-            ['Mobility & EV','↗','sector-mobility']
-          ].map(([name,icon,cls])=><button key={name} className={`popularSector ${cls}`} onClick={()=>{setSector(name);setSelectedProduct("All products");setShowResults(true);window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})}}>
-            <span className="sectorIcon">{icon}</span><span>{name}</span><b>↗</b>
+            ['Fintech & Payments',['PhonePe','Groww','Paytm'],'sector-fintech'],
+            ['E-commerce & Marketplaces',['Flipkart','Myntra','Meesho'],'sector-commerce'],
+            ['Quick Commerce',['Blinkit','Zepto'],'sector-quick'],
+            ['Food & Dining',['Swiggy','Zomato'],'sector-food'],
+            ['Consumer Tech',['boAt','Noise'],'sector-tech'],
+            ['Mobility & EV',['Ather','Rapido'],'sector-mobility']
+          ].map(([name,brands,cls])=><button key={name} className={`popularSector ${cls}`} onClick={()=>{setSector(name);setSelectedProduct("All products");setShowResults(true);document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}}>
+            <div className="sectorLogos">{brands.map(b=><span key={b} title={b}><ProductLogo name={b}/></span>)}</div>
+            <span>{name}</span><b>↗</b>
           </button>)}
+        </div>
+      </section>
+
+      <section className="caseValue" aria-label="What each case includes">
+        <div className="caseValueHead"><span className="eyebrow">INSIDE EACH CASE</span></div>
+        <div className="caseValueGrid">
+          <div><span className="valueIcon">01</span><strong>Product</strong><small>How it works</small></div>
+          <div><span className="valueIcon">02</span><strong>Metrics</strong><small>What to measure</small></div>
+          <div><span className="valueIcon">03</span><strong>PM bets</strong><small>What I'd change</small></div>
+          <div><span className="valueIcon">04</span><strong>Interview</strong><small>Questions to think through</small></div>
         </div>
       </section>
 
