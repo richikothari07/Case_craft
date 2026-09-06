@@ -484,3 +484,29 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
 .homeFooter nav a:hover{text-decoration:underline}
 @media(max-width:900px){.logoWallTrack{grid-template-columns:repeat(5,1fr)}.homeFooter{grid-template-columns:1fr 1fr}.homeFooter nav{grid-column:1/-1}}
 @media(max-width:600px){.signalRow{grid-template-columns:1fr}.logoWallTrack{grid-template-columns:repeat(2,1fr)}.homeFooter{grid-template-columns:1fr}.homeFooter nav{grid-column:auto}}
+
+/* Homepage v5 — quieter, more visual */
+.hero{padding-bottom:58px!important}
+.heroEyebrow{font-size:9px!important}
+.heroCopy{max-width:560px!important}
+.controls{margin-top:8px!important}
+.signalSection{display:none!important}
+.logoWall{padding:52px 0 18px!important}
+.logoWallHead{justify-content:flex-start!important}
+.logoWallTrack{display:flex!important;gap:10px!important;overflow:hidden!important;margin-top:14px!important}
+.logoWallTrack button{min-width:132px!important;min-height:62px!important;flex:0 0 132px!important;border-radius:15px!important;display:flex!important;flex-direction:row!important;justify-content:flex-start!important;padding:10px 13px!important;gap:10px!important;background:#0b0b0b!important}
+.logoWallTrack button>span:last-child{font-size:11px!important;font-weight:600!important}
+.wallLogo{width:34px!important;height:34px!important;border-radius:10px!important;flex:0 0 34px!important}
+.wallLogo img{width:25px!important;height:25px!important}
+.sectorExplore{padding-top:42px!important}
+.sectorExplore .compactHead h2{display:none!important}
+.sectorGrid{grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+.sectorGrid button{min-height:58px!important;font-size:11px!important}
+.homeFooter{margin-top:54px!important;grid-template-columns:1fr auto!important}
+.homeFooterBrand span{display:none!important}
+.homeFooterAbout{align-items:flex-end!important}
+.homeFooterAbout .footerLabel{font-size:8px!important;letter-spacing:.14em!important}
+.homeFooterAbout strong{font-size:16px!important}
+.homeFooter nav{grid-column:1/-1!important;justify-content:flex-end!important;margin-top:2px!important}
+.marqueeHint{display:none!important}
+@media(max-width:900px){.sectorGrid{grid-template-columns:repeat(2,1fr)!important}.homeFooter{grid-template-columns:1fr!important}.homeFooterAbout{align-items:flex-start!important}.homeFooter nav{justify-content:flex-start!important}}

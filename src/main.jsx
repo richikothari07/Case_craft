@@ -62,7 +62,7 @@ const LOGOS = {
 };
 const CASE_ACCENTS = {Blinkit:'#f4c400',PhonePe:'#5f259f',Groww:'#00b386',Zepto:'#8b5cf6',CRED:'#f3f3f3',Swiggy:'#ff5a30',Zomato:'#ef4f5f',Razorpay:'#3395ff',Meesho:'#e82d7a',Nykaa:'#fc2779'};
 const CASE_VISUALS = {
-  Blinkit:'https://www.itln.in/h-upload/2025/01/06/77199-6.webp',
+  Blinkit:'/images/blinkit-editorial-v2.png',
   PhonePe:'https://assets.entrepreneur.com/content/3x2/2000/20200124074341-PhonePe2.jpeg',
   Groww:'https://miracuves.com/wp-content/uploads/2025/11/groww-portfolio-dashboard-investment-summary-1024x683.webp',
   Zepto:'/images/zepto-editorial.png',
@@ -196,17 +196,8 @@ function App(){
         </div>
       </section>
 
-      <section className="signalSection" aria-label="What each case covers">
-        <div className="signalHeader"><span className="eyebrow">THE PM LENS</span><span>Think · Measure · Improve</span></div>
-        <div className="signalRow">
-          <div><b>01</b><strong>Think</strong></div>
-          <div><b>02</b><strong>Measure</strong></div>
-          <div><b>03</b><strong>Improve</strong></div>
-        </div>
-      </section>
-
       <section className="logoWall" aria-label="Products covered">
-        <div className="logoWallHead"><span className="eyebrow">PRODUCTS WE COVER</span><span>and many more</span></div>
+        <div className="logoWallHead"><span className="eyebrow">A FEW OF THE PRODUCTS</span></div>
         <div className="logoWallTrack">
           {['Groww','Zepto','CRED','Blinkit','Zomato','Swiggy','PhonePe','Paytm','Razorpay','Nykaa'].map(name=>{ const c=CASES.find(x=>x.name===name); return c ? <button key={name} onClick={()=>openCase(c)} aria-label={`Open ${name} case`}><span className="wallLogo"><ProductLogo name={name}/></span><span>{name}</span></button> : null; })}
         </div>
@@ -255,7 +246,7 @@ function App(){
 
       <footer className="homeFooter">
         <div className="homeFooterBrand"><strong>CaseCraft</strong><span>Product thinking, deconstructed.</span></div>
-        <div className="homeFooterAbout"><span className="footerLabel">BUILT BY</span><strong>Richi Kothari</strong><span>Investment Analyst → Product</span></div>
+        <div className="homeFooterAbout"><span className="footerLabel">ABOUT</span><strong>Richi Kothari</strong></div>
         <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">About me ↗</a></nav>
       </footer>
     </main>
