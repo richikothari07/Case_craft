@@ -154,23 +154,12 @@ function App(){
     </header>
 
     <main className="shell">
-      <section className="hero">
+      <section className="hero heroCentered">
         <div className="heroMain">
           <span className="heroEyebrow">PRODUCT THINKING, DECONSTRUCTED</span>
           <h1>Understand why<br/><em>products win.</em></h1>
           <p className="heroCopy">In-depth case studies on the products shaping India.</p>
           <button className="heroExplore" onClick={()=>document.querySelector('.controls')?.scrollIntoView({behavior:'smooth'})}>Explore cases <span>↓</span></button>
-        </div>
-        <div className="heroVisual" aria-hidden="true">
-          <div className="heroMosaic heroMosaicMain" style={{backgroundImage:`url(${CASE_VISUALS.Blinkit})`}}>
-            <span>Blinkit</span>
-          </div>
-          <div className="heroMosaic heroMosaicTop" style={{backgroundImage:`url(${CASE_VISUALS.Zepto})`}}>
-            <span>Zepto</span>
-          </div>
-          <div className="heroMosaic heroMosaicBottom" style={{backgroundImage:`url(${CASE_VISUALS.Groww})`}}>
-            <span>Groww</span>
-          </div>
         </div>
       </section>
 

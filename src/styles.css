@@ -585,3 +585,30 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
 .homeFooter{margin-top:62px!important}
 @media(max-width:1000px){.hero{grid-template-columns:1fr!important;min-height:0!important}.heroVisual{min-height:420px!important}.heroMosaicMain{min-height:420px!important}.popularSectorGrid{grid-template-columns:repeat(2,1fr)!important}.caseValueGrid{grid-template-columns:repeat(2,1fr)}.caseValueGrid>div:nth-child(2){border-right:0}.caseValueGrid>div:nth-child(-n+2){border-bottom:1px solid #252525}}
 @media(max-width:600px){.hero{padding:48px 0 52px!important}.heroVisual{min-height:340px!important;grid-template-columns:1.2fr .8fr!important;gap:9px!important}.heroMosaicMain{min-height:340px!important}.heroMosaicTop,.heroMosaicBottom{min-height:165px!important}.popularSectorGrid{grid-template-columns:1fr!important}.caseValueGrid{grid-template-columns:1fr}.caseValueGrid>div{border-right:0!important;border-bottom:1px solid #252525}.caseValueGrid>div:last-child{border-bottom:0}.marqueeCard{height:290px!important;min-height:290px!important}}
+
+
+/* Final homepage hero: centered, no collage */
+.heroCentered{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:560px!important;
+  padding:88px 0 92px!important;
+  text-align:center!important;
+  grid-template-columns:none!important;
+}
+.heroCentered .heroMain{
+  width:100%!important;
+  max-width:980px!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+}
+.heroCentered .heroCopy{max-width:680px!important}
+.heroCentered .heroExplore{margin-top:18px!important}
+.heroCentered .heroVisual{display:none!important}
+@media(max-width:850px){
+  .heroCentered{min-height:480px!important;padding:70px 0 76px!important}
+  .heroCentered h1{font-size:clamp(58px,13vw,104px)!important}
+}
