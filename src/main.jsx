@@ -8,23 +8,14 @@ function Badge({children, tone=""}){ return <span className={"badge "+tone}>{chi
 
 function displaySector(raw){
   const map={
-    "Quick Commerce":"Quick Commerce","Quick Commerce / Grocery":"Quick Commerce",
-    "E-commerce":"E-commerce & Marketplaces","E-commerce / Grocery":"E-commerce & Marketplaces",
-    "Fashion":"Fashion & Beauty","Beauty":"Fashion & Beauty","Beauty & Lifestyle":"Fashion & Beauty","Beauty / D2C":"Fashion & Beauty","Eyewear":"Fashion & Beauty",
-    "Consumer Electronics":"Consumer Tech",
-    "Kids & Parenting":"E-commerce & Marketplaces","Home & Sleep":"Home & Local Services",
-    "Fintech":"Fintech & Payments","Fintech / B2B SaaS":"Fintech & Payments","B2B Fintech":"Fintech & Payments","Financial Services":"Fintech & Payments",
-    "Fintech / Brokerage":"Investing & Insurance","Wealthtech":"Investing & Insurance","Insurtech":"Investing & Insurance",
-    "Food & Convenience":"Food & Dining","Food & Going Out":"Food & Dining",
-    "Mobility":"Mobility & EV","Mobility / EV":"Mobility & EV",
-    "Travel":"Travel & Hospitality","Travel / Hospitality":"Travel & Hospitality",
-    "Logistics":"Logistics",
+    "Quick Commerce":"Commerce & Retail","Quick Commerce / Grocery":"Commerce & Retail","E-commerce":"Commerce & Retail","E-commerce / Grocery":"Commerce & Retail","Fashion":"Commerce & Retail","Consumer Electronics":"Commerce & Retail","Beauty":"Commerce & Retail","Beauty & Lifestyle":"Commerce & Retail","Beauty / D2C":"Commerce & Retail","Eyewear":"Commerce & Retail","Kids & Parenting":"Commerce & Retail","Home & Sleep":"Commerce & Retail",
+    "Fintech":"Fintech & Financial Services","Fintech / Brokerage":"Fintech & Financial Services","Fintech / B2B SaaS":"Fintech & Financial Services","B2B Fintech":"Fintech & Financial Services","Wealthtech":"Fintech & Financial Services","Insurtech":"Fintech & Financial Services","Financial Services":"Fintech & Financial Services",
+    "Food & Convenience":"Food & Convenience","Food & Going Out":"Food & Convenience",
+    "Mobility":"Mobility, Travel & Logistics","Mobility / EV":"Mobility, Travel & Logistics","Travel":"Mobility, Travel & Logistics","Travel / Hospitality":"Mobility, Travel & Logistics","Logistics":"Mobility, Travel & Logistics",
     "Healthtech":"Health & Wellness","Health / Fitness":"Health & Wellness",
-    "Developer SaaS":"SaaS & Developer Tools","SaaS":"SaaS & Developer Tools",
-    "B2B Marketplace":"B2B Marketplaces",
-    "Edtech":"Education",
-    "Entertainment":"Media & Entertainment","Media & Entertainment":"Media & Entertainment",
-    "Real Estate":"Home & Local Services","Home Services":"Home & Local Services"
+    "Developer SaaS":"Software & B2B","SaaS":"Software & B2B","B2B Marketplace":"Software & B2B",
+    "Edtech":"Education","Entertainment":"Media & Entertainment","Media & Entertainment":"Media & Entertainment",
+    "Real Estate":"Consumer, Home & Lifestyle","Home Services":"Consumer, Home & Lifestyle"
   };
   return map[raw]||raw;
 }
@@ -35,22 +26,15 @@ function App(){
   const [selectedProduct,setSelectedProduct]=useState("All products");
   const [showResults,setShowResults]=useState(false);
   const sectorGroups={
-    "Quick Commerce":["Quick Commerce","Quick Commerce / Grocery"],
-    "E-commerce & Marketplaces":["E-commerce","E-commerce / Grocery","Kids & Parenting"],
-    "Fashion & Beauty":["Fashion","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear"],
-    "Consumer Tech":["Consumer Electronics"],
-    "Fintech & Payments":["Fintech","Fintech / B2B SaaS","B2B Fintech","Financial Services"],
-    "Investing & Insurance":["Fintech / Brokerage","Wealthtech","Insurtech"],
-    "Food & Dining":["Food & Convenience","Food & Going Out"],
-    "Mobility & EV":["Mobility","Mobility / EV"],
-    "Travel & Hospitality":["Travel","Travel / Hospitality"],
-    "Logistics":["Logistics"],
+    "Commerce & Retail":["Quick Commerce","Quick Commerce / Grocery","E-commerce","E-commerce / Grocery","Fashion","Consumer Electronics","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear","Kids & Parenting","Home & Sleep"],
+    "Fintech & Financial Services":["Fintech","Fintech / Brokerage","Fintech / B2B SaaS","B2B Fintech","Wealthtech","Insurtech","Financial Services"],
+    "Food & Convenience":["Food & Convenience","Food & Going Out"],
+    "Mobility, Travel & Logistics":["Mobility","Mobility / EV","Travel","Travel / Hospitality","Logistics"],
     "Health & Wellness":["Healthtech","Health / Fitness"],
-    "SaaS & Developer Tools":["Developer SaaS","SaaS"],
-    "B2B Marketplaces":["B2B Marketplace"],
+    "Software & B2B":["Developer SaaS","SaaS","B2B Marketplace"],
     "Education":["Edtech"],
     "Media & Entertainment":["Entertainment","Media & Entertainment"],
-    "Home & Local Services":["Real Estate","Home Services","Home & Sleep"]
+    "Consumer, Home & Lifestyle":["Real Estate","Home Services"]
   };
   const sectors=["All",...Object.keys(sectorGroups)];
   const filtered=useMemo(()=>{
@@ -59,35 +43,8 @@ function App(){
     return CASES.filter(c=>members.includes(c.sector));
   },[sector]);
 
-  React.useEffect(() => {
-    const handlePopState = () => {
-      setSelected(null);
-      setShowResults(false);
-      setSelectedProduct("All products");
-    };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
-  const openCase = (c) => {
-    window.history.pushState({ case: c.name }, "", `#case-${encodeURIComponent(c.name.toLowerCase())}`);
-    setSelected(c);
-    setShowResults(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const goHome = () => {
-    if (window.location.hash) {
-      window.history.back();
-    } else {
-      setSelected(null);
-      setShowResults(false);
-      setSelectedProduct("All products");
-    }
-  };
-
   if(selected){
-    return <CaseView c={selected} back={goHome} />;
+    return <CaseView c={selected} back={()=>setSelected(null)} />;
   }
 
   return <div>
@@ -116,7 +73,7 @@ function App(){
             setShowResults(true);
             if(selectedProduct !== "All products"){
               const found=CASES.find(c=>c.name===selectedProduct);
-              if(found)openCase(found);
+              if(found)setSelected(found);
             }
           }}>Search</button>
         </div>
@@ -128,7 +85,7 @@ function App(){
           <span className="muted">Select a case study to explore</span>
         </div>
         <div className="grid">
-          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>openCase(c)}>
+          {filtered.map((c,i)=><article className="card" key={c.name} onClick={()=>setSelected(c)}>
             <div className="cardTop"><Badge>{String(i+1).padStart(2,"0")}</Badge><span className="sector">{displaySector(c.sector)}</span></div>
             <h3>{c.name}</h3>
             <p className="tagline">{c.tag}</p>
