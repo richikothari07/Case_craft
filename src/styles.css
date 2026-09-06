@@ -234,3 +234,44 @@ footer{color:#7b847d;border-color:#dfe2da}
 .cardLogo span{width:34px;height:34px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-family:"DM Serif Display",Georgia,serif;font-size:20px}
 @media(prefers-reduced-motion:reduce){.marqueeTrack{animation:none}}
 @media(max-width:850px){.marqueeHeader{padding:0 18px}.marqueeTrack{padding-left:18px}.marqueeCard{width:250px;min-height:138px;flex-basis:250px}.logoStrip{display:block}.logoTrack{margin-top:16px;overflow-x:auto;padding-bottom:8px}.hero{padding:42px 0 52px;min-height:0}.heroCopy{font-size:15px}}
+
+/* Final monochrome CaseCraft theme */
+:root{--bg:#ffffff;--paper:#ffffff;--ink:#111111;--muted:#6b6b6b;--line:#dddddd;--accent:#111111;--soft:#f3f3f3;--sage:#bdbdbd}
+body{background:#fff;color:#111}
+.topbar{background:rgba(255,255,255,.94);border-bottom-color:#e2e2e2}
+.wordmarkCase,.wordmarkCraft{color:#111111!important}
+.wordmarkCraft{opacity:.58}
+.heroEyebrow,.eyebrow,.selectRow label>span,.tagline,.analysisBox>span,.metricTree>span,.evidenceNote b,.loop>span,.improveGrid span,.metricType,.tearMetric span{color:#111!important}
+.hero h1 em{color:#666}
+.heroCopy,.exploreHint,.card p:not(.tagline),.caseTag{color:#5f5f5f}
+.heroExplore,.searchButton{background:#111;color:#fff}
+.controls{background:#fff;border-color:#dedede;box-shadow:0 16px 45px rgba(0,0,0,.045)}
+.selectRow select{background:#fafafa;border-color:#d7d7d7}
+.popularMarquee{background:#111;color:#fff}
+.marqueeHeader .eyebrow{color:#fff!important}
+.marqueeHint{color:rgba(255,255,255,.58)}
+.marqueeCard{background:#1f1f1f;color:#fff;border-color:#3a3a3a}
+.marqueeCard:hover{background:#2a2a2a}
+.marqueeLogo{background:#fff}
+.marqueeLogo img,.cardLogo img{filter:grayscale(1) contrast(1.1)}
+.marqueeLogo span{color:#111}
+.marqueeText span{color:rgba(255,255,255,.62)}
+.marqueeArrow{color:#fff}
+.card,.fact,.moat,.loop,.metric,.improve,.questions>div,.tradeoff{border-color:#dedede;background:#fff}
+.card:hover{border-color:#bdbdbd;box-shadow:0 22px 42px rgba(0,0,0,.08)}
+.cardFoot{border-color:#e2e2e2;color:#111}
+.cardLogo span{background:#f0f0f0;color:#111}
+.caseTabs{background:rgba(255,255,255,.95);border-color:#dedede}
+.caseTabs button.active{background:#111;color:#fff}
+.progressFill{background:#111}
+.proposition,.metricTree{background:#111;border-color:#111}
+.caseSection{border-color:#dedede}
+footer{color:#777;border-color:#dedede}
+.heroCanvas{background:linear-gradient(145deg,#f4f4f4,#e7e7e7);border-color:#ddd;box-shadow:0 28px 70px rgba(0,0,0,.07)}
+.heroCanvas:before,.heroCanvas:after{border-color:rgba(0,0,0,.1)}
+.orbOne{background:rgba(190,190,190,.72)}
+.orbTwo{background:rgba(70,70,70,.88)}
+.heroCanvasLabel{color:#111;background:rgba(255,255,255,.7);border-color:#ddd}
+.heroCanvasWord{color:#111}
+.heroCanvasWord i{color:#777}
+.heroCanvasLine{background:rgba(0,0,0,.18)}

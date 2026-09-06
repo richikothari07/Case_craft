@@ -159,15 +159,6 @@ function App(){
         </div>
       </section>
 
-      <section className="logoStrip" aria-label="Featured products">
-        <span className="eyebrow">PRODUCTS IN CASECRAFT</span>
-        <div className="logoTrack">
-          {['Blinkit','PhonePe','Zepto','Zomato','CRED','Swiggy','Groww','Razorpay','Meesho','Nykaa'].map(name=><button key={name} className="brandLogo" onClick={()=>{const found=CASES.find(c=>c.name===name); if(found)openCase(found)}}>
-            {logoFor(name)?<img src={logoFor(name)} alt=""/>:<span>{name}</span>}
-          </button>)}
-        </div>
-      </section>
-
       <section className="controls">
         <p className="explorePrompt">Explore a product</p>
         <p className="exploreHint">Choose a product or browse by sector.</p>
