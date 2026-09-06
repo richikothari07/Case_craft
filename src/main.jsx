@@ -65,7 +65,7 @@ const CASE_VISUALS = {
   Blinkit:'https://www.itln.in/h-upload/2025/01/06/77199-6.webp',
   PhonePe:'https://assets.entrepreneur.com/content/3x2/2000/20200124074341-PhonePe2.jpeg',
   Groww:'https://miracuves.com/wp-content/uploads/2025/11/groww-portfolio-dashboard-investment-summary-1024x683.webp',
-  Zepto:'https://fastly.restofworld.org/uploads/2024/11/Screenshot-Zepto-20241108.jpg?crop=9%3A16&dpr=2&width=600',
+  Zepto:'/images/zepto-editorial.png',
   CRED:'https://www.databricks.com/sites/default/files/2025-08/2025-07-cs-cred-header-960x540.png?v=1754412578'
 };
 const logoFor=(name)=>LOGOS[name]||null;
@@ -196,14 +196,19 @@ function App(){
         </div>
       </section>
 
-      <section className="thinkingSection">
-        <div className="sectionHead compactHead">
-          <div><span className="eyebrow">WHAT YOU'LL FIND</span><h2>See products through a PM lens.</h2></div>
+      <section className="signalSection" aria-label="What each case covers">
+        <div className="signalHeader"><span className="eyebrow">THE PM LENS</span><span>Think · Measure · Improve</span></div>
+        <div className="signalRow">
+          <div><b>01</b><strong>Think</strong></div>
+          <div><b>02</b><strong>Measure</strong></div>
+          <div><b>03</b><strong>Improve</strong></div>
         </div>
-        <div className="thinkingGrid">
-          <article><span>01</span><h3>Product thinking</h3><p>Understand the problem, the user journey, and the choices that make a product work.</p></article>
-          <article><span>02</span><h3>Metrics</h3><p>Connect product behaviour to the metrics that actually matter for the business.</p></article>
-          <article><span>03</span><h3>PM bets</h3><p>Challenge the product with practical improvements, trade-offs, and measurable outcomes.</p></article>
+      </section>
+
+      <section className="logoWall" aria-label="Products covered">
+        <div className="logoWallHead"><span className="eyebrow">PRODUCTS WE COVER</span><span>and many more</span></div>
+        <div className="logoWallTrack">
+          {['Groww','Zepto','CRED','Blinkit','Zomato','Swiggy','PhonePe','Paytm','Razorpay','Nykaa'].map(name=>{ const c=CASES.find(x=>x.name===name); return c ? <button key={name} onClick={()=>openCase(c)} aria-label={`Open ${name} case`}><span className="wallLogo"><ProductLogo name={name}/></span><span>{name}</span></button> : null; })}
         </div>
       </section>
 
@@ -247,6 +252,12 @@ function App(){
           </article>)}
         </div>
       </section>}
+
+      <footer className="homeFooter">
+        <div className="homeFooterBrand"><strong>CaseCraft</strong><span>Product thinking, deconstructed.</span></div>
+        <div className="homeFooterAbout"><span className="footerLabel">BUILT BY</span><strong>Richi Kothari</strong><span>Investment Analyst → Product</span></div>
+        <nav><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer">About me ↗</a></nav>
+      </footer>
     </main>
   </div>
 }

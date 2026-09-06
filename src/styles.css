@@ -457,3 +457,30 @@ footer{background:#000!important;color:#fff!important;border-color:#222!importan
 .footerLabel{font-size:8px!important;letter-spacing:.14em;font-weight:800}
 .footerAbout span:last-child{font-size:10px!important;opacity:.72!important}
 @media(max-width:700px){.footerInner{display:grid!important;grid-template-columns:1fr;gap:24px}.footerInner nav{margin-top:0!important}}
+
+/* Homepage refinement: lighter text density + product/logo wall */
+.signalSection{padding:34px 0 12px!important;border-top:1px solid #1d1d1d!important}
+.signalHeader,.logoWallHead{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.signalHeader>span:last-child,.logoWallHead>span:last-child{font-size:11px!important;color:#fff!important;opacity:.72!important}
+.signalRow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:18px;background:#222;border:1px solid #222;border-radius:18px;overflow:hidden}
+.signalRow>div{background:#0a0a0a;padding:20px 22px;display:flex;align-items:baseline;gap:14px}
+.signalRow b{font:700 10px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;color:#fff;opacity:.5}
+.signalRow strong{font:400 28px/1.05 "DM Serif Display",Georgia,serif;color:#fff}
+.logoWall{padding:42px 0 12px!important}
+.logoWallTrack{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;margin-top:16px}
+.logoWallTrack button{min-width:0;min-height:74px;padding:12px 8px;border:1px solid #242424;border-radius:16px;background:#080808;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.logoWallTrack button:hover{transform:translateY(-3px);border-color:#555;background:#111}
+.wallLogo{width:30px;height:30px;border-radius:9px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.wallLogo img{width:22px;height:22px;object-fit:contain}
+.wallLogo span{color:#111;font-size:14px!important}
+.logoWallTrack button>span:last-child{font-size:10px!important;color:#fff!important;white-space:nowrap}
+.homeFooter{margin:54px calc(50% - 50vw) 0!important;padding:28px max(24px,calc((100vw - var(--max))/2)) 32px!important;border-top:1px solid #242424!important;display:grid!important;grid-template-columns:1fr auto auto!important;gap:40px;align-items:end}
+.homeFooterBrand,.homeFooterAbout{display:flex;flex-direction:column;gap:6px}
+.homeFooterBrand strong{font:400 27px/1 "DM Serif Display",Georgia,serif;color:#fff}
+.homeFooterBrand span,.homeFooterAbout span{font-size:10px;color:#fff!important;opacity:.75!important}
+.homeFooterAbout strong{font-size:18px;color:#fff}
+.homeFooter nav{display:flex;gap:18px}
+.homeFooter nav a{color:#fff;text-decoration:none;font-size:11px;font-weight:600}
+.homeFooter nav a:hover{text-decoration:underline}
+@media(max-width:900px){.logoWallTrack{grid-template-columns:repeat(5,1fr)}.homeFooter{grid-template-columns:1fr 1fr}.homeFooter nav{grid-column:1/-1}}
+@media(max-width:600px){.signalRow{grid-template-columns:1fr}.logoWallTrack{grid-template-columns:repeat(2,1fr)}.homeFooter{grid-template-columns:1fr}.homeFooter nav{grid-column:auto}}
