@@ -8,14 +8,42 @@ function Badge({children, tone=""}){ return <span className={"badge "+tone}>{chi
 
 function displaySector(raw){
   const map={
-    "Quick Commerce":"Commerce & Retail","Quick Commerce / Grocery":"Commerce & Retail","E-commerce":"Commerce & Retail","E-commerce / Grocery":"Commerce & Retail","Fashion":"Commerce & Retail","Consumer Electronics":"Commerce & Retail","Beauty":"Commerce & Retail","Beauty & Lifestyle":"Commerce & Retail","Beauty / D2C":"Commerce & Retail","Eyewear":"Commerce & Retail","Kids & Parenting":"Commerce & Retail","Home & Sleep":"Commerce & Retail",
-    "Fintech":"Fintech & Financial Services","Fintech / Brokerage":"Fintech & Financial Services","Fintech / B2B SaaS":"Fintech & Financial Services","B2B Fintech":"Fintech & Financial Services","Wealthtech":"Fintech & Financial Services","Insurtech":"Fintech & Financial Services","Financial Services":"Fintech & Financial Services",
-    "Food & Convenience":"Food & Convenience","Food & Going Out":"Food & Convenience",
-    "Mobility":"Mobility, Travel & Logistics","Mobility / EV":"Mobility, Travel & Logistics","Travel":"Mobility, Travel & Logistics","Travel / Hospitality":"Mobility, Travel & Logistics","Logistics":"Mobility, Travel & Logistics",
-    "Healthtech":"Health & Wellness","Health / Fitness":"Health & Wellness",
-    "Developer SaaS":"Software & B2B","SaaS":"Software & B2B","B2B Marketplace":"Software & B2B",
-    "Edtech":"Education","Entertainment":"Media & Entertainment","Media & Entertainment":"Media & Entertainment",
-    "Real Estate":"Consumer, Home & Lifestyle","Home Services":"Consumer, Home & Lifestyle"
+    "Quick Commerce":"Quick Commerce",
+    "Quick Commerce / Grocery":"Quick Commerce",
+    "E-commerce":"E-commerce & Marketplaces",
+    "E-commerce / Grocery":"E-commerce & Marketplaces",
+    "Fashion":"Fashion & Beauty",
+    "Beauty":"Fashion & Beauty",
+    "Beauty & Lifestyle":"Fashion & Beauty",
+    "Beauty / D2C":"Fashion & Beauty",
+    "Consumer Electronics":"Consumer Tech",
+    "Eyewear":"Fashion & Beauty",
+    "Kids & Parenting":"E-commerce & Marketplaces",
+    "Home & Sleep":"Home & Local Services",
+    "Fintech":"Fintech & Payments",
+    "Fintech / Brokerage":"Investing & Insurance",
+    "Fintech / B2B SaaS":"Fintech & Payments",
+    "B2B Fintech":"Fintech & Payments",
+    "Wealthtech":"Investing & Insurance",
+    "Insurtech":"Investing & Insurance",
+    "Financial Services":"Fintech & Payments",
+    "Food & Convenience":"Food & Dining",
+    "Food & Going Out":"Food & Dining",
+    "Mobility":"Mobility & EV",
+    "Mobility / EV":"Mobility & EV",
+    "Travel":"Travel & Hospitality",
+    "Travel / Hospitality":"Travel & Hospitality",
+    "Logistics":"Logistics",
+    "Healthtech":"Health & Wellness",
+    "Health / Fitness":"Health & Wellness",
+    "Developer SaaS":"SaaS & Developer Tools",
+    "SaaS":"SaaS & Developer Tools",
+    "B2B Marketplace":"B2B Marketplaces",
+    "Edtech":"Education",
+    "Entertainment":"Media & Entertainment",
+    "Media & Entertainment":"Media & Entertainment",
+    "Real Estate":"Home & Local Services",
+    "Home Services":"Home & Local Services"
   };
   return map[raw]||raw;
 }
@@ -52,15 +80,22 @@ function App(){
     }
   };
   const sectorGroups={
-    "Commerce & Retail":["Quick Commerce","Quick Commerce / Grocery","E-commerce","E-commerce / Grocery","Fashion","Consumer Electronics","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear","Kids & Parenting","Home & Sleep"],
-    "Fintech & Financial Services":["Fintech","Fintech / Brokerage","Fintech / B2B SaaS","B2B Fintech","Wealthtech","Insurtech","Financial Services"],
-    "Food & Convenience":["Food & Convenience","Food & Going Out"],
-    "Mobility, Travel & Logistics":["Mobility","Mobility / EV","Travel","Travel / Hospitality","Logistics"],
+    "Quick Commerce":["Quick Commerce","Quick Commerce / Grocery"],
+    "E-commerce & Marketplaces":["E-commerce","E-commerce / Grocery","Kids & Parenting"],
+    "Fashion & Beauty":["Fashion","Beauty","Beauty & Lifestyle","Beauty / D2C","Eyewear"],
+    "Consumer Tech":["Consumer Electronics"],
+    "Fintech & Payments":["Fintech","Fintech / B2B SaaS","B2B Fintech","Financial Services"],
+    "Investing & Insurance":["Fintech / Brokerage","Wealthtech","Insurtech"],
+    "Food & Dining":["Food & Convenience","Food & Going Out"],
+    "Mobility & EV":["Mobility","Mobility / EV"],
+    "Travel & Hospitality":["Travel","Travel / Hospitality"],
+    "Logistics":["Logistics"],
     "Health & Wellness":["Healthtech","Health / Fitness"],
-    "Software & B2B":["Developer SaaS","SaaS","B2B Marketplace"],
+    "SaaS & Developer Tools":["Developer SaaS","SaaS"],
+    "B2B Marketplaces":["B2B Marketplace"],
     "Education":["Edtech"],
     "Media & Entertainment":["Entertainment","Media & Entertainment"],
-    "Consumer, Home & Lifestyle":["Real Estate","Home Services"]
+    "Home & Local Services":["Real Estate","Home Services","Home & Sleep"]
   };
   const sectors=["All",...Object.keys(sectorGroups)];
   const filtered=useMemo(()=>{
