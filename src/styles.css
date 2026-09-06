@@ -743,3 +743,48 @@ button{color:inherit}
 .frameworkUse p{color:#999;font-size:14px;line-height:1.7;max-width:620px}
 @media(max-width:900px){.frameworkSpotlightCard{grid-template-columns:1fr;gap:22px}.riceDetailGrid{grid-template-columns:1fr 1fr}.riceDetailFormula{font-size:28px}}
 @media(max-width:640px){.frameworkSpotlightCard{padding:24px}.riceFormula{font-size:21px;gap:9px}.riceDetailGrid{grid-template-columns:1fr}.riceDetailFormula{font-size:22px;padding:22px}.frameworkUse{margin-top:45px}}
+
+/* Frameworks page refresh: one consistent sans-serif system, equal card geometry, clear framework links */
+.frameworksPage,
+.frameworkDetailPage{font-family:"Inter",Arial,sans-serif;color:#fff}
+.frameworksPage h1,
+.frameworkDetailPage h1{font-family:"Inter",Arial,sans-serif;font-weight:600;letter-spacing:-.055em;line-height:.98;color:#fff}
+.frameworksPage .pageLead,
+.frameworkDetailPage .pageLead{color:#fff;max-width:650px}
+.frameworksPage .eyebrow,
+.frameworkDetailPage .eyebrow{color:#fff}
+.frameworkPageGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:64px;align-items:stretch}
+.frameworkPageCard{appearance:none;width:100%;min-height:360px;margin:0;padding:24px;background:#0b0b0b;border:1px solid #2b2b2b;border-radius:18px;color:#fff;text-align:left;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease;box-sizing:border-box}
+.frameworkPageCard:hover{transform:translateY(-4px);border-color:#666;background:#101010}
+.frameworkCardTop{display:flex;align-items:center;justify-content:space-between;min-height:18px}
+.frameworkCardTop span{font:600 10px/1 "Inter",Arial,sans-serif;letter-spacing:.14em;color:#fff}
+.frameworkCardTop b{font:400 17px/1 "Inter",Arial,sans-serif;color:#fff}
+.frameworkCardBody{padding-top:58px;flex:1}
+.frameworkCardBody small{display:block;font:600 9px/1 "Inter",Arial,sans-serif;letter-spacing:.15em;color:#fff;margin-bottom:14px}
+.frameworkCardBody h2{margin:0;font:600 clamp(25px,2.2vw,34px)/1.05 "Inter",Arial,sans-serif;letter-spacing:-.045em;color:#fff}
+.frameworkCardBody strong{display:block;margin-top:13px;font:600 13px/1.3 "Inter",Arial,sans-serif;color:#fff}
+.frameworkCardBody p{margin:10px 0 0;max-width:330px;font:400 13px/1.6 "Inter",Arial,sans-serif;color:#fff}
+.frameworkCardBottom{display:flex;align-items:center;justify-content:space-between;padding-top:17px;margin-top:24px;border-top:1px solid #2b2b2b;font:600 11px/1 "Inter",Arial,sans-serif;color:#fff}
+.frameworkCardBottom span{font-size:15px;font-weight:400}
+.frameworkStepGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:58px}
+.frameworkStepGrid>div{min-height:185px;padding:22px;border:1px solid #2b2b2b;border-radius:16px;background:#0b0b0b;box-sizing:border-box}
+.frameworkStepGrid span{font:600 10px/1 "Inter",Arial,sans-serif;letter-spacing:.13em;color:#fff}
+.frameworkStepGrid h3{margin:42px 0 9px;font:600 17px/1.15 "Inter",Arial,sans-serif;letter-spacing:-.025em;color:#fff}
+.frameworkStepGrid p{margin:0;font:400 12px/1.55 "Inter",Arial,sans-serif;color:#fff}
+.frameworkDetailFormula{margin-top:58px;padding:28px 30px;border:1px solid #2b2b2b;border-radius:16px;background:#0b0b0b;font:600 clamp(24px,3vw,38px)/1.1 "Inter",Arial,sans-serif;color:#fff;letter-spacing:-.035em}
+.frameworkDetailPage .frameworkUse{max-width:850px;margin-top:58px;padding-top:28px;border-top:1px solid #2b2b2b}
+.frameworkDetailPage .frameworkUse h2{margin:15px 0 0;font:600 clamp(27px,3.5vw,46px)/1.08 "Inter",Arial,sans-serif;letter-spacing:-.04em;color:#fff}
+.frameworkDetailPage .textBack{font-family:"Inter",Arial,sans-serif;color:#fff}
+
+@media(max-width:900px){
+  .frameworkPageGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .frameworkStepGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  .frameworkPageGrid{grid-template-columns:1fr;margin-top:48px}
+  .frameworkPageCard{min-height:320px}
+  .frameworkCardBody{padding-top:45px}
+  .frameworkStepGrid{grid-template-columns:1fr;margin-top:42px}
+  .frameworkStepGrid>div{min-height:155px}
+  .frameworkStepGrid h3{margin-top:28px}
+}

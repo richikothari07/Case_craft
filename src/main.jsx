@@ -118,7 +118,12 @@ const CHALLENGES=[
 ];
 
 const FRAMEWORKS=[
-  ["Product Metrics","Connect user value to the metrics that matter."],["User Research","Turn observations into sharper product questions."],["Product Strategy","Choose where to play, and what not to build."],["Growth","Understand acquisition, activation, retention and loops."],["UX","Spot friction across the journey from intent to outcome."],["Prioritization","Make trade-offs explicit when everything feels important."]
+  {id:"north-star",title:"Product Metrics",framework:"North Star Metric",description:"Connect user value to the metric that best represents the product's core value.",detail:"A North Star Metric gives the team one clear measure of customer value and helps connect product work to meaningful outcomes.",steps:[["01","Define the value moment","What meaningful outcome does the product repeatedly create for users?"],["02","Choose the metric","Pick a measurable behaviour that reflects that value, not a vanity signal."],["03","Add input metrics","Track the product behaviours that influence the North Star."],["04","Add guardrails","Make sure optimisation does not damage quality, trust or economics."]],use:"Use it when a product has many metrics and teams are struggling to align on what success actually means."},
+  {id:"jtbd",title:"User Research",framework:"Jobs To Be Done",description:"Understand the progress a user is trying to make, not just the feature they ask for.",detail:"Jobs To Be Done reframes research around the underlying progress users are trying to make in a situation.",steps:[["01","Situation","What was happening when the user started looking for a solution?"],["02","Motivation","What triggered the search or decision to act?"],["03","Desired progress","What were they ultimately trying to accomplish?"],["04","Outcome","What made the solution feel successful or unsuccessful?"]],use:"Use it when user requests are feature-led, contradictory, or when you need to understand why people choose, switch or abandon a product."},
+  {id:"playing-to-win",title:"Product Strategy",framework:"Playing to Win",description:"Turn strategy into explicit choices about where to play and how to win.",detail:"Playing to Win is a choice-based strategy framework that forces teams to define the market and advantage they are deliberately pursuing.",steps:[["01","Winning aspiration","What does winning look like?"],["02","Where to play","Which customers, markets, use cases or categories will you focus on?"],["03","How to win","What advantage will make customers choose you?"],["04","Capabilities","What must the organisation be unusually good at?"],["05","Management systems","What systems and measures keep the strategy executable?"]],use:"Use it when a product has too many possible directions and the team needs to make sharper strategic choices."},
+  {id:"aarrr",title:"Growth",framework:"AARRR",description:"Map the growth funnel from acquisition to retention, referral and revenue.",detail:"AARRR breaks growth into a sequence of user behaviours so you can diagnose where the funnel is actually constrained.",steps:[["01","Acquisition","How are users discovering and entering the product?"],["02","Activation","What first experience convinces them the product is valuable?"],["03","Retention","What brings them back and creates repeat value?"],["04","Referral","What makes existing users drive new demand?"],["05","Revenue","Where does sustained user value become sustainable business value?"]],use:"Use it when growth is a vague goal and you need to identify the specific stage of the funnel that deserves attention."},
+  {id:"double-diamond",title:"UX",framework:"Double Diamond",description:"Move from understanding the problem to testing the right solution without jumping too early to design.",detail:"The Double Diamond separates problem discovery from solution development, helping teams widen and narrow their thinking at the right moments.",steps:[["01","Discover","Explore users, context, behaviours and evidence."],["02","Define","Synthesize the evidence into a focused problem statement."],["03","Develop","Generate and explore multiple solution directions."],["04","Deliver","Prototype, test, learn and refine before committing."]],use:"Use it when teams are jumping into solutions before they have agreed on the real user problem."},
+  {id:"rice",title:"Prioritization",framework:"RICE",description:"Compare opportunities using Reach, Impact, Confidence and Effort.",detail:"RICE creates a consistent way to compare product opportunities while making assumptions and delivery cost visible.",steps:[["01","Reach","How many users or customers will this affect?"],["02","Impact","How much could it move the outcome that matters?"],["03","Confidence","How strong is the evidence behind the estimate?"],["04","Effort","How much team time and complexity will it take?"]],formula:"Reach × Impact × Confidence ÷ Effort",use:"Use it when there are more opportunities than capacity and you need a structured way to make trade-offs."}
 ];
 
 const POPULAR_SECTORS=[
@@ -138,7 +143,6 @@ function HomePage({openCase,openSector}){
   const finderSearch=()=>{if(finderProduct!=="All products"){const c=CASES.find(x=>x.name===finderProduct);if(c)openCase(c);}else if(finderSector!=="All")openSector(finderSector);else document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})};
   const featured=["Blinkit","Zepto","Groww","CRED","PhonePe"].map(n=>CASES.find(c=>c.name===n)).filter(Boolean);
   const productVisual=(c)=>CASE_VISUALS[c?.name]||null;
-  const openFramework=()=>{window.history.pushState({framework:"rice"},"","#framework-rice");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
   return <div className="homePage">
     <SiteNav onHome={()=>window.history.pushState({},"","#home")||window.dispatchEvent(new PopStateEvent("popstate"))}/>
     <main>
@@ -188,15 +192,6 @@ function HomePage({openCase,openSector}){
         <div className="sectorLogoGrid">{POPULAR_SECTORS.map(([name,brands,cls])=><button key={name} className={`sectorVisual ${cls}`} onClick={()=>openSector(name)}><div className="sectorLogoRow">{brands.map(b=><span key={b}><ProductLogo name={b}/></span>)}</div><div><strong>{name}</strong><small>{brands.join(" · ")}</small></div><b>↗</b></button>)}</div>
       </section>
 
-      <section className="frameworkSpotlight sectionPad">
-        <div className="sectionHeader"><div><span className="eyebrow">FRAMEWORK</span><h2>RICE</h2></div><button onClick={openFramework}>Learn framework <span>→</span></button></div>
-        <button className="frameworkSpotlightCard" onClick={openFramework}>
-          <div className="riceFormula"><span>Reach</span><b>×</b><span>Impact</span><b>×</b><span>Confidence</span><b>÷</b><span>Effort</span></div>
-          <div className="frameworkSpotlightCopy"><strong>Prioritize what to build next.</strong><p>A practical scoring model for comparing product opportunities when everything feels important.</p></div>
-          <span className="frameworkArrow">↗</span>
-        </button>
-      </section>
-
       <section className="insideSection sectionPad"><div className="insidePanel"><span className="eyebrow">WHAT YOU GET</span><h2>Everything you need to<br/><em>think like a PM.</em></h2><div className="insideFlow">{[['01','DECONSTRUCTIONS','How the product works'],['02','METRICS','What to measure'],['03','PM BETS','What to change'],['04','INTERVIEW','Questions to pressure-test thinking']].map(([n,x,d],i)=><div key={x}><span>{n}</span><strong>{x}</strong><small>{d}</small></div>)}</div></div></section>
 
 
@@ -214,9 +209,51 @@ function ChallengesPage({back,initialActive=null}){
  return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT CHALLENGES</span><h1>Think like the PM.</h1><p className="pageLead">Don't just read the answer. Make the decision.</p><div className="challengePageGrid">{CHALLENGES.map((c,i)=><button key={c.title} onClick={()=>start(i)} className="challengePageCard"><span>0{i+1}</span><small>{c.meta}</small><h2>{c.title}</h2><p>{c.question}</p><b>Start challenge →</b></button>)}</div></main><SiteFooter/></div>
 }
 
-function FrameworkDetailPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage frameworkDetailPage"><button className="textBack" onClick={back}>← Back</button><span className="eyebrow">PRODUCT FRAMEWORK</span><h1>RICE</h1><p className="pageLead">A prioritization framework for deciding which opportunities deserve attention first.</p><div className="riceDetailFormula"><span>Reach</span><b>×</b><span>Impact</span><b>×</b><span>Confidence</span><b>÷</b><span>Effort</span></div><div className="riceDetailGrid"><div><small>REACH</small><p>How many users or customers will this affect?</p></div><div><small>IMPACT</small><p>How much could it move the outcome that matters?</p></div><div><small>CONFIDENCE</small><p>How strong is the evidence behind your estimates?</p></div><div><small>EFFORT</small><p>How much team time and complexity will it take?</p></div></div><div className="frameworkUse"><span className="eyebrow">WHEN TO USE IT</span><h2>When you have more opportunities than capacity.</h2><p>RICE is useful for making trade-offs explicit and creating a consistent way to compare ideas. It is a starting point for discussion, not a replacement for product judgment.</p></div></main><SiteFooter/></div>}
+function FrameworkDetailPage({framework,back,home}){
+  return <div className="platformPage">
+    <SiteNav onHome={home}/>
+    <main className="simplePage frameworkDetailPage">
+      <button className="textBack" onClick={back}>← Frameworks</button>
+      <span className="eyebrow">PRODUCT FRAMEWORK</span>
+      <h1>{framework.framework}</h1>
+      <p className="pageLead">{framework.detail}</p>
+      {framework.formula&&<div className="frameworkDetailFormula">{framework.formula}</div>}
+      <div className="frameworkStepGrid">
+        {framework.steps.map(([n,label,text])=><div key={n}><span>{n}</span><h3>{label}</h3><p>{text}</p></div>)}
+      </div>
+      <div className="frameworkUse">
+        <span className="eyebrow">WHEN TO USE IT</span>
+        <h2>{framework.use}</h2>
+      </div>
+    </main>
+    <SiteFooter/>
+  </div>
+}
 
-function FrameworksPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT FRAMEWORKS</span><h1>Tools to structure your thinking.</h1><p className="pageLead">Simple structures for sharper product conversations.</p><div className="frameworkPageGrid">{FRAMEWORKS.map((f,i)=><article key={f[0]} className="frameworkPageCard"><span>0{i+1}</span><h2>{f[0]}</h2><p>{f[1]}</p><div className="frameworkRule"></div><small>Coming into the case? Use this lens.</small></article>)}</div></main><SiteFooter/></div>}
+function FrameworksPage({back}){
+  const openFramework=(id)=>{window.history.pushState({framework:id},"",`#framework-${id}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
+  return <div className="platformPage">
+    <SiteNav onHome={back}/>
+    <main className="simplePage frameworksPage">
+      <span className="eyebrow">PRODUCT FRAMEWORKS</span>
+      <h1>Tools to structure your thinking.</h1>
+      <p className="pageLead">One practical framework for each product-thinking lens.</p>
+      <div className="frameworkPageGrid">
+        {FRAMEWORKS.map((f,i)=><button key={f.id} className="frameworkPageCard" onClick={()=>openFramework(f.id)}>
+          <div className="frameworkCardTop"><span>0{i+1}</span><b>↗</b></div>
+          <div className="frameworkCardBody">
+            <small>FRAMEWORK</small>
+            <h2>{f.framework}</h2>
+            <strong>{f.title}</strong>
+            <p>{f.description}</p>
+          </div>
+          <div className="frameworkCardBottom">Open framework <span>→</span></div>
+        </button>)}
+      </div>
+    </main>
+    <SiteFooter/>
+  </div>
+}
 
 function AboutPage({back}){return <div className="platformPage"><SiteNav onHome={back}/><main className="aboutPage"><div className="aboutIntro"><span className="eyebrow">ABOUT</span><h1>CaseCraft is a place to practice product thinking.</h1><p>Built by Richi Kothari to turn interesting products into sharper PM questions, practical analysis and better conversations.</p></div><div className="aboutLinks"><a href="https://www.linkedin.com/in/richi-kothari-78b1aa180" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>↗</b></a><a href="https://free-avocado-92e.notion.site/Hi-I-m-Richi-Kothari-a974c3ec38dd839ba783817f06bb3999" target="_blank" rel="noreferrer"><span>More about Richi</span><b>↗</b></a></div></main><SiteFooter/></div>}
 
@@ -232,7 +269,11 @@ function App(){
  if(selectedSector)return <SectorView name={selectedSector} cases={CASES.filter(c=>(sectorGroups[selectedSector]||[]).includes(c.sector))} back={goHome} openCase={openCase}/>;
  if(route.startsWith("#challenge-")){const n=parseInt(route.replace("#challenge-",""),10)-1;return <ChallengesPage back={goHome} initialActive={Number.isFinite(n)&&CHALLENGES[n]?n:null}/>;}
  if(route==="#challenges")return <ChallengesPage back={goHome}/>;
- if(route==="#framework-rice")return <FrameworkDetailPage back={goHome}/>;
+ if(route.startsWith("#framework-")){
+   const id=route.replace("#framework-","");
+   const framework=FRAMEWORKS.find(f=>f.id===id);
+   if(framework)return <FrameworkDetailPage framework={framework} back={()=>{window.history.pushState({},"","#frameworks");setRoute("#frameworks");window.scrollTo({top:0})}} home={goHome}/>;
+ }
  if(route==="#frameworks")return <FrameworksPage back={goHome}/>;
  if(route==="#about")return <AboutPage back={goHome}/>;
  return <HomePage openCase={openCase} openSector={openSector}/>;
