@@ -61,6 +61,13 @@ const LOGOS = {
   Nykaa:"https://www.google.com/s2/favicons?domain=nykaa.com&sz=128"
 };
 const CASE_ACCENTS = {Blinkit:'#f4c400',PhonePe:'#5f259f',Groww:'#00b386',Zepto:'#8b5cf6',CRED:'#f3f3f3',Swiggy:'#ff5a30',Zomato:'#ef4f5f',Razorpay:'#3395ff',Meesho:'#e82d7a',Nykaa:'#fc2779'};
+const CASE_VISUALS = {
+  Blinkit:'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80',
+  PhonePe:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80',
+  Groww:'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80',
+  Zepto:'https://images.unsplash.com/photo-1601598851547-4302969d8e1b?auto=format&fit=crop&w=900&q=80',
+  CRED:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=900&q=80'
+};
 const logoFor=(name)=>LOGOS[name]||null;
 function ProductLogo({name,className=''}){
   const [failed,setFailed]=React.useState(false);
@@ -156,11 +163,12 @@ function App(){
         <div className="marqueeViewport">
           <div className="marqueeTrack">
             {[...popularCases,...popularCases].map((c,i)=><button key={`${c.name}-${i}`} className="marqueeCard" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}} onClick={()=>openCase(c)} aria-label={`Open ${c.name} case study`}>
-              <div className={`marqueeVisual visual-${c.name.toLowerCase()}`} aria-hidden="true">
+              <div className={`marqueeVisual visual-${c.name.toLowerCase()}`} aria-hidden="true" style={CASE_VISUALS[c.name] ? {backgroundImage:`linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.62)),url(${CASE_VISUALS[c.name]})`} : undefined}>
                 <div className="visualGlow"></div>
                 <div className="visualShape visualShapeOne"></div>
                 <div className="visualShape visualShapeTwo"></div>
                 <div className="visualGrid"></div>
+                <span className="visualLabel">{c.name}</span>
               </div>
               <div className="marqueeInfo">
                 <div className="marqueeLogo" style={{"--case-accent":CASE_ACCENTS[c.name]||"#ffffff"}}><ProductLogo name={c.name}/></div>

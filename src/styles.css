@@ -366,3 +366,19 @@ body{background:#0b0b0b;color:#fff}
 /* Make logo failures visibly graceful rather than blank */
 .marqueeLogo img[alt]{display:block}
 .cardLogo img{filter:none!important}
+
+
+/* Final visual popular-case treatment */
+body,.topbar,.shell{background:#000!important;color:#fff!important}
+.hero h1,.hero h1 em,.heroCopy,.heroEyebrow,.explorePrompt,.exploreHint,.sectionHead h2,.eyebrow,.marqueeHint,.marqueeText strong,.marqueeText span,.marqueeArrow,.selectRow label>span,.card h3,.card p,.cardFoot,.sector,.tagline,.muted{color:#fff!important}
+.heroCopy,.exploreHint,.marqueeHint,.marqueeText span,.muted{opacity:1!important}
+.popularMarquee{background:#000!important;color:#fff!important;border-color:#222!important}
+.marqueeCard{background:var(--case-accent,#fff)!important;position:relative;min-height:250px!important;overflow:hidden!important;border-radius:22px!important;color:#111!important}
+.marqueeVisual{position:absolute!important;inset:0 0 76px 0!important;background-color:#222!important;background-size:cover!important;background-position:center!important}
+.marqueeVisual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.72) 100%)!important}
+.visualGrid{opacity:.12!important}
+.visualGlow,.visualShapeOne,.visualShapeTwo{opacity:.22!important}
+.visualLabel{position:absolute;left:18px;bottom:15px;z-index:2;color:#fff;font-family:"DM Serif Display",Georgia,serif;font-size:34px;line-height:1;letter-spacing:-.03em;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.marqueeInfo{background:var(--case-accent,#fff)!important;color:#111!important;height:76px!important}
+.marqueeLogo{background:#fff!important}
+.marqueeText strong{color:#111!important}.marqueeText span{color:#111!important;opacity:1!important}.marqueeArrow{color:#111!important}
