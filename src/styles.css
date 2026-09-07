@@ -1110,3 +1110,108 @@ button{color:inherit}
   .metric{gap:12px!important}
   .improveGrid{gap:10px!important}
 }
+
+/* Final case-study typography pass: clearer, more editorial, and no green numbering */
+.caseShell{
+  max-width:1080px;
+  padding-left:32px;
+  padding-right:32px;
+}
+.caseHeader h1{
+  font-family:"DM Serif Display",Georgia,serif!important;
+  font-weight:400!important;
+  font-size:clamp(64px,7.2vw,94px)!important;
+  line-height:.92!important;
+  letter-spacing:-.045em!important;
+  margin:20px 0 18px!important;
+}
+.caseTag{
+  font-family:"DM Sans",Inter,system-ui,sans-serif!important;
+  font-size:18px!important;
+  line-height:1.6!important;
+  color:#333!important;
+  max-width:820px!important;
+}
+.fact{
+  font-size:13px!important;
+  line-height:1.55!important;
+  color:#30302c!important;
+}
+.caseSection{padding:72px 0!important}
+.sectionTitle{
+  font-family:"DM Serif Display",Georgia,serif!important;
+  font-weight:400!important;
+  font-size:28px!important;
+  line-height:1.05!important;
+  letter-spacing:-.025em!important;
+  color:#111!important;
+  margin-bottom:28px!important;
+}
+.proposition{
+  font-family:"DM Sans",Inter,system-ui,sans-serif!important;
+  font-size:22px!important;
+  line-height:1.55!important;
+  padding:30px 32px!important;
+}
+.proposition strong{font-weight:600!important}
+.caseSection h4{
+  font-family:"DM Sans",Inter,system-ui,sans-serif!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+  margin-bottom:10px!important;
+}
+.caseSection p,.caseSection li{
+  font-family:"DM Sans",Inter,system-ui,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.65!important;
+}
+.caseSection li{margin:9px 0!important}
+/* Numbered elements use the same neutral ink as the theme, not the old green accent */
+.moat>span,.tradeoff>span,.questions span,
+.metricType,.loop>span,.improveGrid span,
+.tearMetric span,.analysisBox>span,.metricTree>span,
+.evidenceNote b{
+  color:#111!important;
+}
+.moat>span,.tradeoff>span,.questions span{
+  font-family:"DM Serif Display",Georgia,serif!important;
+  font-size:22px!important;
+  font-weight:400!important;
+  line-height:1!important;
+}
+.moat p,.tradeoff p,.questions p,.loop p,.metric p,.improveGrid p,.tear p{
+  font-size:14px!important;
+  line-height:1.65!important;
+}
+.tear h4{font-size:16px!important}
+.tearQuestion{font-size:12px!important;line-height:1.5!important}
+.tearMetric{font-size:12px!important}
+.loop h4,.metric h4,.improve h4{font-size:18px!important}
+.metricType,.loop>span,.improveGrid span,.tearMetric span,.analysisBox>span,.metricTree>span,.evidenceNote b{
+  font-size:10px!important;
+  letter-spacing:.12em!important;
+}
+.analysisBox,.metricTree,.evidenceNote{padding:20px 22px!important}
+.analysisBox p,.metricTree p,.evidenceNote{font-size:13px!important;line-height:1.65!important}
+.caseTabs button{font-size:13px!important}
+.progressMeta{font-size:9px!important}
+.caseEndNav h3{font-size:28px!important}
+
+@media(max-width:700px){
+  .caseShell{padding-left:18px!important;padding-right:18px!important}
+  .caseHeader h1{font-size:clamp(50px,14vw,72px)!important;line-height:.94!important}
+  .caseTag{font-size:16px!important;line-height:1.6!important}
+  .factsRow{gap:8px!important}
+  .fact{font-size:13px!important;padding:14px!important}
+  .caseSection{padding:52px 0!important}
+  .sectionTitle{font-size:24px!important;line-height:1.08!important;margin-bottom:22px!important}
+  .proposition{font-size:18px!important;line-height:1.55!important;padding:23px!important}
+  .caseSection h4{font-size:15px!important}
+  .caseSection p,.caseSection li{font-size:14px!important;line-height:1.65!important}
+  .moat>span,.tradeoff>span,.questions span{font-size:20px!important}
+  .moat p,.tradeoff p,.questions p,.loop p,.metric p,.improveGrid p,.tear p{font-size:13.5px!important;line-height:1.65!important}
+  .tear h4{font-size:15px!important}
+  .tearQuestion{font-size:11.5px!important}
+  .loop h4,.metric h4,.improve h4{font-size:17px!important}
+  .caseTabs button{font-size:12px!important}
+}
