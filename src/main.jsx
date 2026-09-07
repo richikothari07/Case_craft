@@ -112,14 +112,141 @@ function SiteNav({onHome}){
 }
 
 const CHALLENGES=[
-  {title:"Conversion has plateaued.",meta:"Product sense · Diagnosis",question:"What would you investigate first?",options:["Increase acquisition spend","Break conversion into the funnel and segment it","Redesign the entire homepage","Add more discounts"],answer:1,explain:"Start by locating the break: funnel step, segment, device, geography and cohort. Diagnose before prescribing."},
-  {title:"Retention is falling.",meta:"Metrics · Retention",question:"Which signal would you look at first?",options:["Total downloads","Cohort retention by activation behaviour","Social media followers","Average session length alone"],answer:1,explain:"Cohort retention tied to activation helps distinguish an acquisition-quality problem from a product-value problem."},
-  {title:"Growth is strong. Margins are shrinking.",meta:"Strategy · Economics",question:"What is the best first move?",options:["Immediately cut growth","Map contribution by customer, order and channel","Launch a new category","Raise prices for everyone"],answer:1,explain:"Map the economics before acting. Growth can hide mix, incentive, fulfilment or servicing problems."}
+  {
+    title:"Blinkit orders are down 15%.",
+    meta:"RCA · Intermediate · 10 min",
+    question:"What should you investigate first?",
+    options:[
+      "Launch a 20% discount to win back customers",
+      "Break orders into users × order frequency and segment the decline",
+      "Redesign the checkout experience",
+      "Increase performance marketing spend"
+    ],
+    answer:1,
+    explain:"Start with diagnosis, not a solution. Decompose orders into active/transacting users and frequency, then segment by city, cohort, platform and journey stage. This tells you where the decline actually lives before you form a root-cause hypothesis."
+  },
+  {
+    title:"Groww has strong acquisition, weak 30-day retention.",
+    meta:"Metrics · Intermediate · 10 min",
+    question:"Which analysis is most useful first?",
+    options:[
+      "Compare total downloads month over month",
+      "Compare 30-day retention cohorts by activation behaviour",
+      "Track social-media engagement",
+      "Increase the number of onboarding screens"
+    ],
+    answer:1,
+    explain:"Cohort retention tells you whether the problem is persistent and whether users who reach a meaningful activation event retain better. Then investigate which activation behaviours differ between retained and churned cohorts."
+  },
+  {
+    title:"Swiggy wants to increase order frequency.",
+    meta:"Growth · Intermediate · 10 min",
+    question:"Which experiment is the strongest starting point?",
+    options:[
+      "Send the same daily discount to every user",
+      "Add more restaurants to the homepage",
+      "Identify users with a declining order cadence and test timely re-order prompts",
+      "Increase the number of push notifications for everyone"
+    ],
+    answer:2,
+    explain:"Frequency is a behavioural problem. First identify when users who normally order stop doing so, then test a relevant intervention around that moment. A targeted re-order prompt is more diagnostic than blanket promotions or notifications."
+  },
+  {
+    title:"A new feature has 4 possible roadmap slots.",
+    meta:"RICE · Intermediate · 12 min",
+    question:"What should you do before calculating the RICE score?",
+    options:[
+      "Give every initiative the same Impact score",
+      "Define the outcome, scoring period and assumptions behind Reach and Impact",
+      "Choose the feature with the highest executive visibility",
+      "Ignore Confidence because it is subjective"
+    ],
+    answer:1,
+    explain:"RICE is only useful when the inputs have a shared definition. Set the time horizon, define what Impact means, estimate Reach consistently and make Confidence explicit. Otherwise the final number creates false precision."
+  },
+  {
+    title:"Users abandon an insurance application halfway through.",
+    meta:"UX · Intermediate · 10 min",
+    question:"What is the best first step?",
+    options:[
+      "Remove half the fields immediately",
+      "Interview only users who completed the application",
+      "Map the journey and identify the highest-friction step using behavioural data",
+      "Add a chatbot to every screen"
+    ],
+    answer:2,
+    explain:"Combine the journey with evidence. Find the exact step where abandonment concentrates, then understand why users struggle there. Removing fields before knowing whether they are necessary can create compliance, trust or data-quality problems."
+  },
+  {
+    title:"CRED's engagement is falling among existing users.",
+    meta:"Product Sense · Intermediate · 10 min",
+    question:"Which question is most important before proposing a feature?",
+    options:[
+      "What feature do competitors have that CRED does not?",
+      "What valuable job did these users previously accomplish, and where did that behaviour break?",
+      "How can we add more notifications?",
+      "Which new category should CRED launch?"
+    ],
+    answer:1,
+    explain:"Start with the user's job and the changed behaviour. Determine what users used to accomplish, how often, and what changed. This prevents copying competitor features or adding engagement mechanics without restoring real value."
+  },
+  {
+    title:"Zepto's conversion is flat despite more traffic.",
+    meta:"Diagnosis · Intermediate · 10 min",
+    question:"Which cut of the data is most likely to reveal a useful signal?",
+    options:[
+      "Average session length only",
+      "Traffic source × new/returning user × conversion funnel stage",
+      "Total app ratings",
+      "Number of employees"
+    ],
+    answer:1,
+    explain:"Flat conversion with rising traffic can hide a mix shift. Break the funnel by acquisition source and user type, then locate the step where performance changed. Averages alone can conceal a low-intent traffic increase."
+  },
+  {
+    title:"A product team has 20 customer requests.",
+    meta:"Prioritization · Intermediate · 12 min",
+    question:"Which approach produces the strongest roadmap discussion?",
+    options:[
+      "Build the requests from the loudest customers first",
+      "Rank requests by engineering preference",
+      "Group requests by underlying problem, estimate value and effort, then make explicit trade-offs",
+      "Build the ten easiest requests"
+    ],
+    answer:2,
+    explain:"Requests are inputs, not priorities. Group them by underlying need, quantify who is affected and what outcome could improve, then compare against effort and strategic fit. The goal is a defensible set of trade-offs, not a popularity contest."
+  },
+  {
+    title:"A marketplace has more sellers but fewer successful transactions.",
+    meta:"Marketplace · Advanced · 15 min",
+    question:"What would you investigate first?",
+    options:[
+      "Add even more sellers",
+      "Compare buyer demand, seller quality and match/conversion rates across the funnel",
+      "Increase seller acquisition incentives",
+      "Redesign the logo"
+    ],
+    answer:1,
+    explain:"More supply does not automatically create more successful matches. Diagnose the marketplace funnel: qualified demand, relevant supply, discovery, contact/checkout and fulfilment. Look for a quality or matching problem rather than assuming the answer is more inventory."
+  },
+  {
+    title:"You are asked to improve a food-delivery app for college students.",
+    meta:"CIRCLES · Advanced · 15 min",
+    question:"What should you do first in a product-sense interview?",
+    options:[
+      "Immediately list five features",
+      "Clarify the target user, context and goal before defining solutions",
+      "Choose a competitor and copy its strongest feature",
+      "Start by designing the UI"
+    ],
+    answer:1,
+    explain:"A strong product-sense answer starts by defining the user and problem. Clarify the target segment, context, needs and success criteria, then prioritise the most important pain point before generating solutions."
+  }
 ];
 
 const FRAMEWORKS=[
   {
-    id:"north-star", title:"Product Metrics", framework:"North Star Metric",
+    id:"north-star", type:"Metrics & Growth", title:"Product Metrics", framework:"North Star Metric",
     description:"Align product teams around one measurable expression of customer value, then trace the inputs that move it.",
     detail:"The North Star framework connects customer value to a single outcome metric and a set of product drivers. The goal is not to reduce measurement to one number. It is to create a shared direction while keeping the supporting system of inputs and guardrails visible.",
     definition:"A good North Star Metric represents value delivered to customers, is meaningfully influenced by the product, and can act as a useful leading indicator of sustainable business performance.",
@@ -141,7 +268,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://amplitude.com/books/north-star/about-north-star-framework"
   },
   {
-    id:"jtbd", title:"User Research", framework:"Jobs To Be Done",
+    id:"jtbd", type:"Research & Discovery", title:"User Research", framework:"Jobs To Be Done",
     description:"Understand the progress a user is trying to make, the forces behind the decision, and the outcome they consider successful.",
     detail:"Jobs To Be Done shifts discovery from feature requests to the underlying progress people are trying to make in a particular situation. It is especially useful when users describe solutions rather than the problem they are solving.",
     definition:"A job is the progress a person is trying to make in a given circumstance. The product is one possible way of getting that job done.",
@@ -163,7 +290,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.ideaplan.io/frameworks/jobs-to-be-done"
   },
   {
-    id:"playing-to-win", title:"Product Strategy", framework:"Playing to Win",
+    id:"playing-to-win", type:"Strategy & Prioritization", title:"Product Strategy", framework:"Playing to Win",
     description:"Turn strategy into explicit choices about where to play, how to win, and what capabilities and systems make the choices real.",
     detail:"Playing to Win is a choice-based strategy model. It forces a product team to make decisions rather than produce a list of ambitions. The five linked choices create a strategy that can guide trade-offs across product, market and execution.",
     definition:"Strategy is a coordinated set of choices about the future, not a description of everything the company hopes to achieve.",
@@ -185,7 +312,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.playingtowin.com/"
   },
   {
-    id:"aarrr", title:"Growth", framework:"AARRR", 
+    id:"aarrr", type:"Metrics & Growth", title:"Growth", framework:"AARRR", 
     description:"Diagnose growth by mapping the user journey from acquisition through activation, retention, referral and revenue.",
     detail:"AARRR turns the broad question 'How do we grow?' into a set of observable behaviours. It is most useful as a diagnostic model: find the stage where users fail to realise or repeat value, then investigate the causes before shipping tactics.",
     definition:"AARRR stands for Acquisition, Activation, Retention, Referral and Revenue. Each stage represents a different growth question and requires its own definition and metric.",
@@ -207,7 +334,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://ahrefs.com/blog/aarrr-metrics-framework/"
   },
   {
-    id:"double-diamond", title:"UX", framework:"Double Diamond",
+    id:"double-diamond", type:"UX & Design", title:"UX", framework:"Double Diamond",
     description:"Separate problem discovery from solution development so teams do not optimise a solution before understanding the problem.",
     detail:"The Double Diamond describes four phases: Discover, Define, Develop and Deliver. The two diamonds represent divergent exploration and convergent focus. It is deliberately a process model rather than a rigid checklist, so teams can move backwards when new evidence changes the problem definition.",
     definition:"The first diamond helps the team understand and frame the problem. The second explores and tests possible solutions. Both involve opening up possibilities and then narrowing them down.",
@@ -229,7 +356,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.designcouncil.org.uk/resources/the-double-diamond/"
   },
   {
-    id:"rice", title:"Prioritization", framework:"RICE",
+    id:"rice", type:"Strategy & Prioritization", title:"Prioritization", framework:"RICE",
     description:"Compare opportunities by Reach, Impact, Confidence and Effort, then use the score to make trade-offs visible rather than pretending they do not exist.",
     detail:"RICE is a prioritization model that turns four assumptions into a comparable score. It is useful when a team has more plausible opportunities than it can execute, but it should support product judgment rather than replace it.",
     definition:"RICE = Reach × Impact × Confidence ÷ Effort. The exact scales can be adapted, but the team should define them consistently before comparing ideas.",
@@ -253,7 +380,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.atlassian.com/agile/product-management/prioritization-framework"
   },
   {
-    id:"rca", title:"Diagnosis", framework:"Root Cause Analysis",
+    id:"rca", type:"Diagnosis & Product Sense", title:"Diagnosis", framework:"Root Cause Analysis",
     description:"Move from a visible product symptom to the underlying cause before deciding what to build or change.",
     detail:"Root Cause Analysis is a structured way to separate symptoms from causes. In product work, the goal is to identify the smallest set of validated causes that explain the observed problem, rather than jumping from a metric decline to a solution.",
     definition:"RCA asks: what changed, where did it change, for whom, why might it have changed, and what evidence would prove or disprove each hypothesis?",
@@ -276,7 +403,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.mindtools.com/a3mi00v/root-cause-analysis"
   },
   {
-    id:"circles", title:"Product Sense", framework:"CIRCLES",
+    id:"circles", type:"Diagnosis & Product Sense", title:"Product Sense", framework:"CIRCLES",
     description:"A structured way to answer product design questions without jumping straight into features.",
     detail:"CIRCLES is an interview-oriented product design structure. It helps you clarify the problem, choose a target user, identify needs, define a solution and close with trade-offs and prioritization.",
     definition:"CIRCLES stands for Comprehend, Identify the customer, Report the customer's needs, Cut through prioritization, List solutions, Evaluate trade-offs, and Summarize.",
@@ -299,7 +426,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.tryexponent.com/blog/circles-method-product-design"
   },
   {
-    id:"kano", title:"Prioritization", framework:"Kano Model",
+    id:"kano", type:"Strategy & Prioritization", title:"Prioritization", framework:"Kano Model",
     description:"Separate basic expectations from performance drivers and delight features when deciding what customers actually value.",
     detail:"The Kano Model helps product teams understand how different feature types affect customer satisfaction. It is useful when a roadmap contains a mix of table-stakes capabilities, performance improvements and potentially delightful differentiators.",
     definition:"Kano commonly distinguishes Must-be, Performance, Attractive, Indifferent and Reverse attributes. The categories describe the relationship between feature presence and customer satisfaction.",
@@ -322,7 +449,7 @@ const FRAMEWORKS=[
     sourceUrl:"https://www.interaction-design.org/literature/topics/kano-model"
   },
   {
-    id:"ost", title:"Discovery", framework:"Opportunity Solution Tree",
+    id:"ost", type:"Research & Discovery", title:"Discovery", framework:"Opportunity Solution Tree",
     description:"Connect a desired product outcome to customer opportunities and multiple solution paths without locking onto the first idea.",
     detail:"An Opportunity Solution Tree links an outcome to the customer opportunities that could influence it, then maps multiple solution ideas and experiments beneath each opportunity. It keeps discovery focused on outcomes while preserving room to explore alternatives.",
     definition:"The tree moves from Outcome → Opportunities → Solutions → Experiments. The structure makes assumptions visible and discourages teams from treating the first feature idea as the problem definition.",
@@ -376,7 +503,6 @@ function HomePage({openCase,openSector}){
           <p className="heroSub">Real-world product teardowns, frameworks and challenges designed to sharpen how you think about products.</p>
           <div className="heroActions"><button className="primaryCta" onClick={()=>document.getElementById("home-cases")?.scrollIntoView({behavior:"smooth"})}>Explore Case Studies <span>→</span></button><button className="secondaryCta" onClick={()=>{window.history.pushState({},"","#challenges");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}>Take a Product Challenge</button></div>
         </div>
-        <div className="heroBottom"><span>REAL PRODUCTS</span><span>PM ANALYSIS</span><span>EVIDENCE-LED</span><span>INTERVIEW READY</span></div>
       </section>
 
       <section className="caseFinder sectionPad" aria-label="Explore cases">
@@ -391,9 +517,6 @@ function HomePage({openCase,openSector}){
       <section className="statementSection sectionPad">
         <div className="statementKicker">THE CASECRAFT METHOD</div>
         <div className="statementGrid"><h2>Great PMs don't just know frameworks.<br/><em>They know how to think.</em></h2><p>CaseCraft turns real products into practical product-thinking exercises, so you can learn how great products work, where they fall short, and what you would do differently.</p></div>
-        <div className="methodCards">
-          {[['01','DECONSTRUCT','Understand the product, users, business model and experience.'],['02','DISCOVER','Identify friction, gaps and opportunities.'],['03','DESIGN','Turn insights into product decisions and solutions.']].map(([n,t,d])=><div className="methodCard" key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div><b>↗</b></div>)}
-        </div>
       </section>
 
       <section id="home-cases" className="featuredSection sectionPad">
@@ -413,7 +536,7 @@ function HomePage({openCase,openSector}){
         <div className="sectorLogoGrid">{POPULAR_SECTORS.map(([name,brands,cls])=><button key={name} className={`sectorVisual ${cls}`} onClick={()=>openSector(name)}><div className="sectorLogoRow">{brands.map(b=><span key={b}><ProductLogo name={b}/></span>)}</div><div><strong>{name}</strong><small>{brands.join(" · ")}</small></div><b>↗</b></button>)}</div>
       </section>
 
-      <section className="insideSection sectionPad"><div className="insidePanel"><span className="eyebrow">WHAT YOU GET</span><h2>Everything you need to<br/><em>think like a PM.</em></h2><div className="insideFlow">{[['01','DECONSTRUCTIONS','How the product works'],['02','METRICS','What to measure'],['03','PM BETS','What to change'],['04','INTERVIEW','Questions to pressure-test thinking']].map(([n,x,d],i)=><div key={x}><span>{n}</span><strong>{x}</strong><small>{d}</small></div>)}</div></div></section>
+      <section className="insideSection sectionPad"><div className="insidePanel"><span className="eyebrow">WHAT YOU GET</span><h2>Everything you need to<br/><em>think like a PM.</em></h2><div className="insideFlow">{[['01','Deconstructions','How the product works'],['02','Metrics','What to measure'],['03','PM Bets','What to change'],['04','Interview','Questions to pressure-test thinking']].map(([n,x,d],i)=><div key={x}><span>{n}</span><strong>{x}</strong><small>{d}</small></div>)}</div></div></section>
 
 
     </main>
@@ -427,7 +550,7 @@ function ChallengesPage({back,initialActive=null}){
  const [active,setActive]=useState(initialActive); const [picked,setPicked]=useState(null);
  const start=(i)=>{setActive(i);setPicked(null);window.history.pushState({challenge:i},"",`#challenge-${i+1}`)};
  if(active!==null){const c=CHALLENGES[active]; return <div className="platformPage"><SiteNav onHome={back}/><main className="challengePage"><button className="textBack" onClick={()=>{setActive(null);window.history.pushState({},"","#challenges")}}>← Challenges</button><span className="eyebrow">CHALLENGE 0{active+1}</span><h1>{c.title}</h1><p className="pageLead">{c.question}</p><div className="answerGrid">{c.options.map((o,i)=><button className={picked===i?`answer ${i===c.answer?'correct':'wrong'}`:'answer'} onClick={()=>setPicked(i)} key={o}><span>{String.fromCharCode(65+i)}</span>{o}</button>)}</div>{picked!==null&&<div className={`answerResult ${picked===c.answer?'correct':'wrong'}`}><strong>{picked===c.answer?'Good call.':'Not quite.'}</strong><p>{c.explain}</p></div>}</main></div>}
- return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT CHALLENGES</span><h1>Think like the PM.</h1><p className="pageLead">Don't just read the answer. Make the decision.</p><div className="challengePageGrid">{CHALLENGES.map((c,i)=><button key={c.title} onClick={()=>start(i)} className="challengePageCard"><span>0{i+1}</span><small>{c.meta}</small><h2>{c.title}</h2><p>{c.question}</p><b>Start challenge →</b></button>)}</div></main><SiteFooter/></div>
+ return <div className="platformPage"><SiteNav onHome={back}/><main className="simplePage"><span className="eyebrow">PRODUCT CHALLENGES</span><h1>Make the call.</h1><p className="pageLead">Real product problems. Your decision.</p><div className="challengePageGrid">{CHALLENGES.map((c,i)=><button key={c.title} onClick={()=>start(i)} className="challengePageCard"><span>0{i+1}</span><small>{c.meta}</small><h2>{c.title}</h2><p>{c.question}</p><b>Start challenge →</b></button>)}</div></main><SiteFooter/></div>
 }
 
 function FrameworkDetailPage({framework,back,home}){
@@ -509,23 +632,49 @@ function FrameworkDetailPage({framework,back,home}){
   </div>
 }
 function FrameworksPage({back}){
-  const openFramework=(id)=>{window.history.pushState({framework:id},"",`#framework-${id}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
+  const groups=[
+    ["Strategy & Prioritization","Decide what to build, where to focus, and how to make trade-offs."],
+    ["Research & Discovery","Understand users, jobs, opportunities, and the problems worth solving."],
+    ["Metrics & Growth","Find what matters, understand the funnel, and measure durable growth."],
+    ["Diagnosis & Product Sense","Break down ambiguous problems and find the right product decision."],
+    ["UX & Design","Move from user problems to clearer experiences and better solutions."],
+  ];
+  const count=(type)=>FRAMEWORKS.filter(f=>f.type===type).length;
+  const openType=(type)=>{window.history.pushState({frameworkType:type},"",`#framework-type-${encodeURIComponent(type.toLowerCase())}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
   return <div className="platformPage">
     <SiteNav onHome={back}/>
     <main className="simplePage frameworksPage">
       <span className="eyebrow">PRODUCT FRAMEWORKS</span>
       <h1>Tools to structure your thinking.</h1>
-      <p className="pageLead">One practical framework for each product-thinking lens.</p>
-      <div className="frameworkPageGrid">
-        {FRAMEWORKS.map((f,i)=><button key={f.id} className="frameworkPageCard" onClick={()=>openFramework(f.id)}>
-          <div className="frameworkCardTop"><span>0{i+1}</span><b>↗</b></div>
-          <div className="frameworkCardBody">
-            <small>FRAMEWORK</small>
-            <h2>{f.framework}</h2>
-            <strong>{f.title}</strong>
-            <p>{f.description}</p>
-          </div>
-          <div className="frameworkCardBottom">Open framework <span>→</span></div>
+      <p className="pageLead">Choose a type of product problem, then pick the framework that fits.</p>
+      <div className="frameworkTypeGrid">
+        {groups.map(([type,desc],i)=><button key={type} className="frameworkTypeCard" onClick={()=>openType(type)}>
+          <div className="frameworkTypeTop"><span>{String(i+1).padStart(2,'0')}</span><b>↗</b></div>
+          <div><h2>{type}</h2><p>{desc}</p></div>
+          <strong>{count(type)} {count(type)===1?'framework':'frameworks'} <span>→</span></strong>
+        </button>)}
+      </div>
+    </main>
+    <SiteFooter/>
+  </div>
+}
+
+function FrameworkTypePage({type,back}){
+  const frameworks=FRAMEWORKS.filter(f=>f.type===type);
+  const openFramework=(id)=>{window.history.pushState({framework:id},"",`#framework-${id}`);window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})};
+  return <div className="platformPage">
+    <SiteNav onHome={()=>{window.history.pushState({},"","#frameworks");window.dispatchEvent(new PopStateEvent("popstate"));window.scrollTo({top:0})}}/>
+    <main className="simplePage frameworksPage">
+      <button className="textBack" onClick={back}>← Back to framework types</button>
+      <span className="eyebrow">{type.toUpperCase()}</span>
+      <h1>Choose a framework.</h1>
+      <p className="pageLead">Pick a framework to learn how to structure this kind of product problem.</p>
+      <div className="frameworkTypeFrameworkGrid">
+        {frameworks.map((f,i)=><button key={f.id} className="frameworkMiniCard" onClick={()=>openFramework(f.id)}>
+          <div><span>{String(i+1).padStart(2,'0')}</span><b>↗</b></div>
+          <h3>{f.framework}</h3>
+          <p>{f.description}</p>
+          <strong>Learn framework <span>→</span></strong>
         </button>)}
       </div>
     </main>
@@ -547,6 +696,12 @@ function App(){
  if(selectedSector)return <SectorView name={selectedSector} cases={CASES.filter(c=>(sectorGroups[selectedSector]||[]).includes(c.sector))} back={goHome} openCase={openCase}/>;
  if(route.startsWith("#challenge-")){const n=parseInt(route.replace("#challenge-",""),10)-1;return <ChallengesPage back={goHome} initialActive={Number.isFinite(n)&&CHALLENGES[n]?n:null}/>;}
  if(route==="#challenges")return <ChallengesPage back={goHome}/>;
+ if(route.startsWith("#framework-type-")){
+   const typeSlug=decodeURIComponent(route.replace("#framework-type-","")).toLowerCase();
+   const typeMap={"strategy & prioritization":"Strategy & Prioritization","research & discovery":"Research & Discovery","metrics & growth":"Metrics & Growth","diagnosis & product sense":"Diagnosis & Product Sense","ux & design":"UX & Design"};
+   const type=typeMap[typeSlug];
+   if(type)return <FrameworkTypePage type={type} back={()=>{window.history.pushState({},"","#frameworks");setRoute("#frameworks");window.scrollTo({top:0})}}/>;
+ }
  if(route.startsWith("#framework-")){
    const id=route.replace("#framework-","");
    const framework=FRAMEWORKS.find(f=>f.id===id);

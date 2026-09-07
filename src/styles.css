@@ -662,7 +662,7 @@ button{color:inherit}
 @media(max-width:900px){.siteLinks{gap:16px}.heroBottom{gap:15px}.statementGrid{grid-template-columns:1fr;gap:25px}.methodCards,.challengeRow,.challengePageGrid,.frameworkPageGrid{grid-template-columns:1fr}.featuredGrid{grid-template-columns:1fr 1fr}.featuredLarge{grid-row:auto;grid-column:span 2}.featuredLarge .featuredImage{height:300px}.sectorLogoGrid{grid-template-columns:1fr 1fr}.frameworkGrid{grid-template-columns:1fr 1fr}.frameworkGrid button:nth-child(3n){border-right:1px solid #292929}.frameworkGrid button:nth-child(2n){border-right:0}.frameworkGrid button:nth-child(n+5){border-bottom:0}.frameworkGrid button:nth-child(4){border-bottom:1px solid #292929}.insideFlow{grid-template-columns:1fr 1fr}.insideFlow>div:nth-child(2){border-right:0}.insideFlow>div{padding-bottom:18px}.siteFooter{grid-template-columns:1fr 1fr}.footerCredit{justify-self:end}.siteFooter nav{grid-column:1 / -1}.aboutPage{grid-template-columns:1fr;gap:55px}.weekOverlay{right:5%;max-width:350px}}
 @media(max-width:640px){.siteNav{min-height:68px}.mobileMenu{display:block}.siteLinks{display:none;position:absolute;left:12px;right:12px;top:74px;padding:15px;flex-direction:column;align-items:stretch;gap:3px;border:1px solid #292929;border-radius:17px;background:#0a0a0a}.siteLinks.isOpen{display:flex}.siteLinks button{padding:13px;text-align:left}.siteLinks .navCta{text-align:center;margin:5px 0 0}.heroNew{min-height:calc(82vh - 68px)}.heroInner{padding:80px 0 95px}.heroNew h1{font-size:clamp(58px,17vw,92px)}.heroLead{font-size:19px}.heroSub{font-size:13px}.heroBottom{width:90%;justify-content:center;flex-wrap:wrap;white-space:normal;bottom:20px}.fragment{display:none}.sectionPad{width:min(100% - 32px,1240px);padding:78px 0}.sectionHeader{align-items:start;flex-direction:column;gap:12px}.sectionHeader h2{font-size:38px}.featuredGrid{grid-template-columns:1fr}.featuredLarge{grid-column:auto}.featuredImage,.featuredLarge .featuredImage{height:280px}.featuredInfo{min-height:115px}.weekVisual{min-height:510px;background-position:40% center}.weekOverlay{left:24px;right:24px;top:auto;bottom:28px;transform:none}.weekVisual:after{background:linear-gradient(180deg,rgba(0,0,0,.05) 20%,rgba(0,0,0,.9) 75%)}.challengeRow,.sectorLogoGrid{grid-template-columns:1fr}.frameworkGrid{grid-template-columns:1fr}.frameworkGrid button,.frameworkGrid button:nth-child(n){border-right:0;border-bottom:1px solid #292929}.frameworkGrid button:last-child{border-bottom:0}.insidePanel{padding:35px 24px}.insideFlow{grid-template-columns:1fr 1fr}.insideFlow>div{border-right:1px solid #292929!important;border-bottom:1px solid #292929;padding-left:0}.insideFlow>div:nth-child(2n){border-right:0!important}.insideFlow>div:nth-last-child(-n+2){border-bottom:0}.finalCtaInner{padding:65px 20px}.finalCtaInner h2{font-size:50px}.finalCtaInner .heroActions{flex-direction:column}.finalCtaInner .primaryCta,.finalCtaInner .secondaryCta{width:100%}.siteFooter{grid-template-columns:1fr;gap:27px}.footerCredit{justify-self:start;flex-wrap:wrap}.siteFooter nav{grid-column:auto}.simplePage,.aboutPage{width:min(100% - 32px,1160px);padding-top:80px}.simplePage h1,.aboutIntro h1{font-size:clamp(55px,15vw,85px)}.challengePageGrid,.frameworkPageGrid{margin-top:50px}.answerGrid{margin-top:35px}.aboutPage{padding-bottom:100px}}
 
-.caseFinder{padding-top:58px;padding-bottom:62px}.finderTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.finderTop>span:last-child{font-size:10px;color:#666}.finderControls{display:grid;grid-template-columns:1fr 1fr auto;gap:9px}.finderControls label{display:block}.finderControls label>span{display:block;font-size:8px;letter-spacing:.15em;color:#666;margin:0 0 7px}.finderControls select{width:100%;box-sizing:border-box;background:#0c0c0c;border:1px solid #292929;color:#eee;border-radius:13px;padding:14px 15px;font-size:12px;outline:none}.finderControls select:focus{border-color:#555}.finderControls>button{align-self:end;border:1px solid #eee;background:#f4f4ef;color:#080808;border-radius:13px;padding:14px 22px;font-weight:700;font-size:12px;cursor:pointer;min-width:125px}.finderControls>button span{margin-left:7px}
+.caseFinder{padding-top:58px;padding-bottom:62px}.finderTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.finderTop>span:last-child{font-size:12px;color:#fff}.finderControls{display:grid;grid-template-columns:1fr 1fr auto;gap:9px}.finderControls label{display:block}.finderControls label>span{display:block;font-size:10px;letter-spacing:.15em;color:#666;margin:0 0 7px}.finderControls select{width:100%;box-sizing:border-box;background:#0c0c0c;border:1px solid #292929;color:#eee;border-radius:13px;padding:14px 15px;font-size:14px;outline:none}.finderControls select:focus{border-color:#555}.finderControls>button{align-self:end;border:1px solid #eee;background:#f4f4ef;color:#080808;border-radius:13px;padding:14px 22px;font-weight:700;font-size:13px;cursor:pointer;min-width:125px}.finderControls>button span{margin-left:7px}
 .proofStrip{width:min(1240px,calc(100% - 48px));margin:0 auto;padding:17px 0;border-top:1px solid #202020;border-bottom:1px solid #202020;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}.proofStrip span{font-size:9px;letter-spacing:.14em;color:#686868;border-right:1px solid #222}.proofStrip span:last-child{border-right:0}
 .whySection{border-top:1px solid #171717;border-bottom:1px solid #171717}.whyGrid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}.whyGrid h2{font:400 clamp(48px,6vw,78px)/.9 "DM Serif Display",Georgia,serif;letter-spacing:-.045em;margin:13px 0 0}.whyGrid h3{font:400 clamp(30px,3vw,44px)/1 "DM Serif Display",Georgia,serif;margin:0}.whyGrid p{font-size:13px;line-height:1.55;color:#888;max-width:430px;margin:14px 0 28px}.whyFlow{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.whyFlow span{font-size:9px;letter-spacing:.13em;border:1px solid #2b2b2b;padding:9px 11px;border-radius:9px;color:#aaa}.whyFlow b{font-size:10px;color:#555}
 .insideFlow small{display:block;color:#666;font-size:9px;margin-top:7px;line-height:1.35}.insideFlow>div{padding-bottom:18px}
@@ -934,4 +934,52 @@ button{color:inherit}
   .twoFrameworkCols,.frameworkInterview,.frameworkTemplate{margin-top:60px}
   .frameworkInterview h2,.frameworkTemplate h2{font-size:37px}
   .exampleHeader{align-items:flex-start;flex-direction:column;gap:10px}
+}
+
+/* Editorial typography consistency for What You Get */
+.insideFlow>div strong{font:400 22px/1.05 "DM Serif Display",Georgia,serif;letter-spacing:-.025em;color:#f1f1ed;text-transform:none}
+.insideFlow>div small{font-size:12px;line-height:1.5;color:#9b9b98}
+@media(max-width:640px){.insideFlow>div strong{font-size:20px}.insideFlow>div small{font-size:12px}}
+
+/* Framework library: browse by problem type, then open a framework */
+.frameworkTypeGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:56px}
+.frameworkTypeCard{appearance:none;min-height:230px;padding:26px;background:#0b0b0b;border:1px solid #292929;border-radius:18px;color:#fff;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease;box-sizing:border-box}
+.frameworkTypeCard:hover,.frameworkTypeCard.active{transform:translateY(-3px);border-color:#666;background:#101010}
+.frameworkTypeTop{display:flex;align-items:center;justify-content:space-between}
+.frameworkTypeTop span{font:600 11px/1 "DM Sans",Inter,sans-serif;letter-spacing:.13em;color:#fff}
+.frameworkTypeTop b{font:400 22px/1 "DM Sans",Inter,sans-serif;color:#fff}
+.frameworkTypeCard h2{margin:44px 0 9px;font:400 clamp(26px,2.2vw,34px)/1.04 "DM Serif Display",Georgia,serif;letter-spacing:-.03em;color:#fff}
+.frameworkTypeCard p{margin:0;max-width:360px;font:400 13px/1.6 "DM Sans",Inter,sans-serif;color:#bdbdb9}
+.frameworkTypeCard>strong{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:16px;border-top:1px solid #292929;font:600 12px/1 "DM Sans",Inter,sans-serif;color:#fff}
+.frameworkTypeCard>strong span{font-size:16px;font-weight:400}
+.frameworkTypeOpen{margin-top:28px;padding:28px;border:1px solid #292929;border-radius:18px;background:#0b0b0b}
+.frameworkTypeOpenHeader{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding-bottom:24px;border-bottom:1px solid #292929}
+.frameworkTypeOpenHeader h2{margin:12px 0 0;font:400 clamp(32px,4vw,52px)/1.02 "DM Serif Display",Georgia,serif;letter-spacing:-.035em;color:#fff}
+.frameworkTypeOpenHeader>span{font:500 12px/1 "DM Sans",Inter,sans-serif;color:#aaa}
+.frameworkTypeFrameworkGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.frameworkMiniCard{appearance:none;min-height:190px;padding:22px;border:1px solid #292929;border-radius:15px;background:#101010;color:#fff;text-align:left;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.frameworkMiniCard:hover{transform:translateY(-2px);border-color:#555;background:#141414}
+.frameworkMiniCard>div{display:flex;justify-content:space-between;align-items:center}
+.frameworkMiniCard>div span{font:600 10px/1 "DM Sans",Inter,sans-serif;letter-spacing:.14em;color:#777}
+.frameworkMiniCard>div b{font:400 17px/1 "DM Sans",Inter,sans-serif;color:#fff}
+.frameworkMiniCard h3{margin:42px 0 8px;font:400 29px/1.02 "DM Serif Display",Georgia,serif;letter-spacing:-.03em;color:#fff}
+.frameworkMiniCard p{margin:0;max-width:500px;font:400 13px/1.6 "DM Sans",Inter,sans-serif;color:#bdbdb9}
+.frameworkMiniCard strong{margin-top:auto;padding-top:18px;font:600 11px/1 "DM Sans",Inter,sans-serif;color:#fff}
+.frameworkMiniCard strong span{margin-left:8px;font-size:15px;font-weight:400}
+
+/* Challenge hero: short, direct headline */
+.challengePage h1{font-family:"DM Serif Display",Georgia,serif;font-weight:400;letter-spacing:-.045em}
+
+@media(max-width:900px){
+ .frameworkTypeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+ .frameworkTypeGrid{grid-template-columns:1fr;margin-top:44px}
+ .frameworkTypeCard{min-height:205px;padding:22px}
+ .frameworkTypeCard h2{margin-top:34px}
+ .frameworkTypeOpen{padding:20px;margin-top:20px}
+ .frameworkTypeOpenHeader{display:block}
+ .frameworkTypeOpenHeader>span{display:block;margin-top:12px}
+ .frameworkTypeFrameworkGrid{grid-template-columns:1fr}
+ .frameworkMiniCard{min-height:180px}
 }
